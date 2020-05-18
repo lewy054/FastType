@@ -32,7 +32,6 @@ def main():
 @app.route('/home')
 @login_required
 def renderHome():
-    print('test')
     if True:
         return render_template('home.html')
     else:

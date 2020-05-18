@@ -1,13 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
+import Login from './components/Login'
 import './css/index.css';
-import Login from './Login';
-
-ReactDOM.render(
-  <React.StrictMode>
-    <Login />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
 
 
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <Login />
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
