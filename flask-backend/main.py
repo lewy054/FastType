@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, flash, redirect, send_from_directory, url_for, jsonify, Response, session
 from flask_cors import CORS, cross_origin
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+import database as db
+import json
 
 
 app = Flask("__main__")
@@ -40,22 +42,50 @@ def renderHome():
 
 @app.route('/signIn', methods=['GET', 'POST'])
 def signIn():
-    #database = rasberryDatabase.rasberryDatabase()
+    print("test")
+    database = db.Database()
     if request.method == 'POST':
         username = request.get_json()["username"]
         password = request.get_json()["password"]
         if username == None or password == None:
+            print("nope")
             return 'Incorrect username or password', 401
-        #logged = database.select_user_login_database(username, password)
-        logged = True
+        logged = database.login_user(username, password)
         if logged:
-            #login_user(User(database.user_data[2]))
-            login_user(User(32))
+            login_user(User(database.user_data[1]))
+            print("ok")
             return 'OK', 200
         else:
+            print("nope1")
             return 'Incorrect username or password', 401
     else:
+        print("else")
         return render_template('index.html')
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    print("inside register")
+    database = db.Database()
+    data = request.get_json()
+    data = json.loads(json.dumps(data))
+    if request.method == 'POST':
+        name = data["username"]
+        email = data["email"]
+        password = data["password"]
+        passwordConfirm = data["confPass"]
+        print(name)
+        print(email)
+        print(password)
+        print(password)
+        if name == None or name == "" or password == None or password == "" or email == None or email == "" or passwordConfirm == None or passwordConfirm == "":
+            return 'Fill all fields'
+        if not password == passwordConfirm:
+            return 'Passwords do not match'
+        return database.register_user(name, password, email)
+    else:
+        print("nope1")
+        return "something is missing"
 
 
 @login_manager.user_loader

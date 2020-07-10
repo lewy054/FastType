@@ -10,25 +10,63 @@ body {
   background-size: cover;
 }
 
-.box {
-  width: 300px;
-  padding: 40px;
-  position: absolute;
+.container {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  position: absolute;
+  filter: alpha(opacity=85);
   border-radius: 24px;
   background: #146cfa;
   text-align: center;
   zoom: 1;
-  filter: alpha(opacity=85);
   opacity: 0.85;
+  width: 400px;
+}
+
+.container button[type="card"] {
+  padding: 10px;
+  display: inline-block;
+  width: 50%;
+  cursor: pointer;
+  border: transparent;
+}
+
+button[name="loginClicked"] {
+  color: black;
+  border-radius: 24px 0 0 0;
+  background-color: yellow;
+  outline: none;
+}
+
+button[name="registerClicked"] {
+  color: black;
+  border-radius: 0 24px 0 0;
+  background-color: yellow;
+  outline: none;
+}
+
+button[name="register"]{
+  border-radius: 0 24px 0 0;
+  background: #146cfa;
+  color: white;
+  transform: translate(0%, -20%);
+}
+
+button[name="login"]{
+  border-radius: 24px 0 0 0;
+  background: #146cfa;
+  color: white;
+  transform: translate(0%, -20%);
+}
+
+.box {
+  padding: 40px;
 }
 
 .box input[type="text"],
 .box input[type="password"] {
-  border: 0;
-  background: none;
+  background: transparent;
   display: block;
   margin: 20px auto;
   text-align: center;
@@ -42,18 +80,15 @@ body {
 }
 
 ::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: lightgray;
-  opacity: 1; /* Firefox */
-}
-
-:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: lightgray;
+  opacity: 1;
 }
 
 ::-ms-input-placeholder {
-  /* Microsoft Edge */
+  color: lightgray;
+}
+
+:-ms-input-placeholder {
   color: lightgray;
 }
 
@@ -64,12 +99,12 @@ body {
 
 .box input[type="text"]:focus,
 .box input[type="password"]:focus {
+  background: always;
   border-color: yellow;
 }
 
 .box button[type="submit"] {
-  border: 0;
-  background: none;
+  background: transparent;
   display: block;
   margin: 20px auto;
   text-align: center;
@@ -82,7 +117,7 @@ body {
   cursor: pointer;
 }
 
-.box button[type="submit"]:hover {
+.container button[type="submit"]:hover {
   background-color: yellow;
   color: black;
 }
