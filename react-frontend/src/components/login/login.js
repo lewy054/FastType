@@ -1,9 +1,9 @@
 import React from 'react';
-import '../css/Login.css';
+import '../css/login.css';
 
 export default class Login extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       username: "",
       password: "",
