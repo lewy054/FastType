@@ -12,9 +12,9 @@ export default class SideBar extends React.Component {
         this.closeSideBar();
         this.props.onPageChange('home');
     }
-    profileClick = () => {
+    practiceClick = () => {
         this.closeSideBar();
-        this.props.onPageChange('profile');
+        this.props.onPageChange('practice');
     }
     aboutClick = () => {
         this.closeSideBar();
@@ -26,7 +26,7 @@ export default class SideBar extends React.Component {
                 <div className="sidebar">
                     <ul className="navigation_list">
                         <li onClick={this.homeClick}><i className="fas fa-home"></i>Home</li>
-                        <li onClick={this.profileClick}><i className="fas fa-user"></i>Profile</li>
+                        <li onClick={this.practiceClick}><i className="fas fa-user"></i>Practice</li>
                         <li onClick={this.aboutClick}><i className="fas fa-address-card"></i>About</li>
                     </ul>
                 </div>

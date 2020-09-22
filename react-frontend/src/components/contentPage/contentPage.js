@@ -3,9 +3,9 @@ import NavBar from '../navBar/navBar';
 import SideBar from '../sideBar/sideBar'
 import './contentPage.css'
 
-import HomePage from '../homePage/homePage';
-import AboutPage from '../aboutPage/aboutPage';
-import ProfilePage from '../profilePage/profilePage';
+import HomePage from './homePage/homePage';
+import AboutPage from './aboutPage/aboutPage';
+import PracticePage from './practice/practice';
 
 export default class ContentPage extends React.Component {
     constructor() {
@@ -23,12 +23,11 @@ export default class ContentPage extends React.Component {
     }
 
     showPage = () => {
-        console.log('test');
         switch (this.state.page) {
             case 'home':
                 return <HomePage/>
-            case 'profile':
-                return <ProfilePage/>
+            case 'practice':
+                return <PracticePage/>
             case 'about':
                 return <AboutPage/>
             default:
