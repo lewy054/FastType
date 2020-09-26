@@ -1,47 +1,58 @@
 [
     {
-        "title" : "Lesson 1",
-        "description": "test1",
+        "id": 0,
+        "title": "Lesson 1",
+        "description": "fjfj",
+        "lessonType": "previewLesson",
         "image" : "Image",
-        "text" : "ddddddddd"
+        "text" : "fjfj"
     },
     {
+        "id": 1,
         "title" : "Lesson 2",
-        "description": "test2",
+        "description": "f j f j",
+        "lessonType": "previewLesson",
         "image" : "Image",
-        "text" : "jjjjjjjjjj"
+        "text" : "f j f j"
     },
     {
+        "id": 2,
         "title" : "Lesson 3",
         "description": "test3",
+        "lessonType": "practiceLesson",
         "image" : "Image",
         "text" : "jjjjjjjjjj"
     },
     {
+        "id": 3,
         "title" : "Lesson 4",
         "description": "test4",
         "image" : "Image",
         "text" : "jjjjjjjjjj"
     },
     {
+        "id": 4,
         "title" : "Lesson 5",
         "description": "test5",
         "image" : "Image",
         "text" : "jjjjjjjjjj"
     },
     {
+        "id": 5,
         "title" : "Lesson 6",
         "description": "test6",
         "image" : "Image",
         "text" : "jjjjjjjjjj"
     },
     {
+        "id": 6,
         "title" : "Lesson 7",
         "description": "test7",
         "image" : "Image",
         "text" : "jjjjjjjjjj"
     },
     {
+        "id": 7,
         "title" : "Lesson 8",
         "description": "test8",
         "image" : "Image",

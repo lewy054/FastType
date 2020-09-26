@@ -6,6 +6,11 @@ import Button from 'react-bootstrap/Button';
 
 export default class LessonCard extends React.Component {
 
+    startClick = () => {
+        const lessonData = [this.props.lessonType, this.props.lessonId];
+        this.props.onLessonSelect(lessonData);
+    }
+
     render() {
         return (
             <Card style={{ width: '20rem' }}>
@@ -13,11 +18,11 @@ export default class LessonCard extends React.Component {
                 <Card.Body>
                     <Card.Title>{this.props.lessonName}</Card.Title>
                     <Card.Text>
-                    {this.props.lessonDescription}
+                        {this.props.lessonDescription}
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                    <Button variant="primary">Start</Button>
+                    <Button variant="primary" onClick={this.startClick}>Start</Button>
                 </Card.Footer>
             </Card>
         )
