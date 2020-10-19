@@ -2,8 +2,9 @@
   text-align: center;
   font-size: 14px;
   font-family: sans-serif;
-  bottom: 0;
+  bottom: 10%;
   position: absolute;
+  display: block;
 }
 
 .keyboard__row {

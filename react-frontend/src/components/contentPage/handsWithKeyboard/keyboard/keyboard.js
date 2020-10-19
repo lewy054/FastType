@@ -7,7 +7,6 @@ export default class Keyboard extends React.Component {
         function size() {
             var size = keyboard.parentNode.clientWidth / 90;
             keyboard.style.fontSize = size + 'px';
-            console.log(size);
         }
 
         var keyboard = document.querySelector('.keyboard');

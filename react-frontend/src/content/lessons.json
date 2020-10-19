@@ -19,9 +19,9 @@
         "id": 2,
         "title" : "Lesson 3",
         "description": "test3",
-        "lessonType": "practiceLesson",
+        "lessonType": "previewLesson",
         "image" : "Image",
-        "text" : "jjjjjjjjjj"
+        "text" : "asdfghjkl"
     },
     {
         "id": 3,

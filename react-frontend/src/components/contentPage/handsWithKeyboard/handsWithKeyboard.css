@@ -1,0 +1,12 @@
+.leftHand {
+  /* float: left; */
+  bottom: 10%;
+}
+
+.rightHand {
+  /* float: left; */
+  bottom: 10%;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+

@@ -1,73 +1,80 @@
 import React from 'react';
 import lessons from '../../../../content/lessons.json';
-import Keyboard from '../../keyboard/keyboard';
+import HandsWithKeyboard from '../../handsWithKeyboard/handsWithKeyboard';
 import './previewLesson.css';
 
 
-let lessonText;
-let j;
+let lessonText = '';
+let loadedLessonText = '';
 let lessonLen;
 
-const toggleAnimation = () => {
-    if (j < lessonLen) {
-        let div = document.getElementById(j);
-        div.classList.toggle('click');
-    }
-}
-
-const toggleAnimationBad = () => {
-    if (j < lessonLen) {
-        let div = document.getElementById(j);
-        div.classList.toggle('clickedWrong');
-    }
-}
 
 export default class PreviewLesson extends React.Component {
     constructor() {
         super();
         this.state = {
+            j: 0,
         }
-        j = 0;
     }
 
     renderButtons = () => {
         let buttons = [];
 
-        for (let i = 0; i < lessonText.length; i++) {
-            buttons.push(<div id={i} className="button" style={{ backgroundColor: this.state.backgroundcolor }} data-char={lessonText.charAt(i)} key={i}>{lessonText.charAt(i)}</div>)
+        for (let i = 0; i < loadedLessonText.length; i++) {
+            buttons.push(<div id={i} className="button" style={{ backgroundColor: this.state.backgroundcolor }} data-char={loadedLessonText.charAt(i)} key={i}>{loadedLessonText.charAt(i)}</div>)
         }
         return buttons;
     }
 
+    getLetter() {
+        return lessonText[0];
+    }
 
+    toggleAnimation = () => {
+        if (this.state.j < lessonLen) {
+            let div = document.getElementById(this.state.j);
+            div.classList.toggle('click');
+        }
+    }
+
+    toggleAnimationBad = () => {
+        if (this.state.j < lessonLen) {
+            let div = document.getElementById(this.state.j);
+            div.classList.toggle('clickedWrong');
+        }
+    }
 
     componentDidMount() {
-        toggleAnimation();
-        document.onkeydown = function (e) {
+        this.toggleAnimation();
+        document.onkeydown = (e) => {
             if (lessonText.length !== 0) {
-                let div = document.getElementById(j);
+                let div = document.getElementById(this.state.j);
+                console.log(e.key);
+                console.log(lessonText[0]);
                 if (e.key === lessonText[0]) {
                     lessonText = lessonText.substring(1);
                     console.log("dobre")
-                    div = document.getElementById(j);
+                    div = document.getElementById(this.state.j);
 
                     if (div.classList.contains('clickedWrong')) {
-                        toggleAnimationBad();
+                        this.toggleAnimationBad();
                     }
                     if (div.classList.contains('click')) {
-                        toggleAnimation();
+                        this.toggleAnimation();
                     }
 
                     div.style.backgroundColor = '#00ad3d';
-                    j++;
+                    this.setState({
+                        j: this.state.j + 1
+                    })
                 }
                 else {
                     console.log("zle");
                     if (!div.classList.contains('clickedWrong')) {
-                        toggleAnimationBad();
+                        this.toggleAnimationBad();
                     }
                 }
-                toggleAnimation();
+                this.toggleAnimation();
             }
             if (lessonText.length === 0) {
                 console.log('koniec');
@@ -76,8 +83,10 @@ export default class PreviewLesson extends React.Component {
     }
 
     render() {
-        lessonText = lessons[this.props.lessonId]["text"];
-        lessonLen = lessonText.length;
+        loadedLessonText = lessons[this.props.lessonId]["text"];
+        lessonLen = loadedLessonText.length;
+        lessonText = loadedLessonText.slice(this.state.j);
+
         return (
             <div>
                 <div className="buttons">
@@ -85,7 +94,8 @@ export default class PreviewLesson extends React.Component {
                         {this.renderButtons()}
                     </div>
                 </div>
-                <Keyboard />
+                <p className="whichFinger">Naciskaj ten przycisk jakiś se palcem</p>
+                <HandsWithKeyboard letter={this.getLetter()} />
             </div>
         )
     }
