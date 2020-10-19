@@ -49,8 +49,10 @@ export default class PreviewLesson extends React.Component {
         document.onkeydown = (e) => {
             if (lessonText.length !== 0) {
                 let div = document.getElementById(this.state.j);
+                if(e.key === 'Shift'){
+                    return;
+                }
                 console.log(e.key);
-                console.log(lessonText[0]);
                 if (e.key === lessonText[0]) {
                     lessonText = lessonText.substring(1);
                     console.log("dobre")
