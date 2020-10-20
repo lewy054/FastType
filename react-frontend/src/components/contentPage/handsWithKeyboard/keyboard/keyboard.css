@@ -2,7 +2,6 @@
   text-align: center;
   font-size: 14px;
   font-family: sans-serif;
-  bottom: 10%;
   position: absolute;
   display: block;
 }
@@ -36,9 +35,14 @@
   border-bottom-color: #999;
 }
 
-.keyboard__row > div[data-pressed],
-.keyboard__row > div:active {
+.button--active {
   background: #aaa;
+  top: 0.2em;
+  box-shadow: 0 0 0 0.05em black;
+}
+
+.button--active--correct {
+  background: #4287f5;
   top: 0.2em;
   box-shadow: 0 0 0 0.05em black;
 }

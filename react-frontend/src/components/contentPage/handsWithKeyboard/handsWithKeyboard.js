@@ -6,10 +6,18 @@ import RightHand from './rightHand/rightHand';
 import './handsWithKeyboard.css'
 
 
+let rightShift;
+let leftShift;
 export default class HandsWithKeyboard extends React.Component {
-    state = {
-        letter: '',
+    constructor() {
+        super();
+        leftShift = false;
+        rightShift = false;
+        this.state = {
+            letter: '',
+        }
     }
+
 
     static getDerivedStateFromProps(props, state) {
         if (props.letter !== state.letter) {
@@ -21,7 +29,8 @@ export default class HandsWithKeyboard extends React.Component {
     }
 
     whichFingerLeftHand = () => {
-        switch (this.props.letter) {
+        leftShift = false;
+        switch (this.state.letter) {
             case ' ':
                 return 'thumb'
             case '$':
@@ -67,7 +76,8 @@ export default class HandsWithKeyboard extends React.Component {
             case 'A':
             case 'Q':
             case 'Z':
-            //capital letters from the right hand(shift)
+                return 'little'
+            //chars from the right hand(shift)
             case 'Y':
             case 'U':
             case 'H':
@@ -79,6 +89,22 @@ export default class HandsWithKeyboard extends React.Component {
             case 'O':
             case 'L':
             case 'P':
+            case '^':
+            case '*':
+            case '&':
+            case '(':
+            case ')':
+            case ':':
+            case '?':
+            case '_':
+            case '{':
+            case '}':
+            case '+':
+            case '|':
+            case '"':
+            case '<':
+            case '>':
+                leftShift = true;
                 return 'little'
             default:
                 return 'none'
@@ -86,7 +112,8 @@ export default class HandsWithKeyboard extends React.Component {
     }
 
     whichFingerRightHand = () => {
-        switch (this.props.letter) {
+        rightShift = false;
+        switch (this.state.letter) {
             case ' ':
                 return 'thumb'
             case '^':
@@ -124,9 +151,30 @@ export default class HandsWithKeyboard extends React.Component {
             case 'O':
             case 'L':
                 return 'ring'
+            case ')':
             case 'p':
             case 'P':
-            //capital letters from the left hand(shift)
+            case '0':
+            case ';':
+            case ':':
+            case '?':
+            case '/':
+            case '-':
+            case '_':
+            case '[':
+            case ']':
+            case '{':
+            case '}':
+            case "'":
+            case '"':
+            case '+':
+            case '=':
+            case 'Delete':
+            case '\\':
+            case '|':
+            case 'Enter':
+                return 'little'
+            //chars from the left hand(shift)
             case 'R':
             case 'F':
             case 'G':
@@ -142,6 +190,12 @@ export default class HandsWithKeyboard extends React.Component {
             case 'A':
             case 'Q':
             case 'Z':
+            case '$':
+            case '%':
+            case '@':
+            case '!':
+            case '#':
+                rightShift = true;
                 return 'little'
             default:
                 return 'none'
@@ -149,13 +203,19 @@ export default class HandsWithKeyboard extends React.Component {
     }
 
     render() {
+        let leftFinger = this.whichFingerLeftHand();
+        let rightFinger = this.whichFingerRightHand();
         return (
             <div className="row">
-                <LeftHands whichFinger={this.whichFingerLeftHand()} />
-                <div className="col">
-                    <Keyboard />
+                <div>
+                    <LeftHands whichFinger={leftFinger} />
                 </div>
-                <RightHand whichFinger={this.whichFingerRightHand()} />
+                <div className="col">
+                    <Keyboard letter={this.state.letter} leftShift={leftShift} rightShift={rightShift} />
+                </div>
+                <div>
+                    <RightHand whichFinger={rightFinger} />
+                </div>
             </div>
 
         )

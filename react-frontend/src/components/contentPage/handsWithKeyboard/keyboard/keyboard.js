@@ -2,7 +2,11 @@ import React from 'react';
 
 import './keyboard.css';
 
+let buttonName;
 export default class Keyboard extends React.Component {
+    state = {
+        letter: '',
+    }
     componentDidMount() {
         function size() {
             var size = keyboard.parentNode.clientWidth / 90;
@@ -13,175 +17,260 @@ export default class Keyboard extends React.Component {
         window.addEventListener('resize', function (e) {
             size();
         });
-        size();
+        this.highLightButtons()
     }
+    componentDidUpdate() {
+        console.log('didupdate')
+        try {
+            document.getElementById("button" + this.mapButtons(buttonName)).classList.remove("button--active--correct");
+            document.getElementById("buttonshiftright").classList.remove("button--active--correct");
+            document.getElementById("buttonshiftleft").classList.remove("button--active--correct");
+        } catch (error) {
+            console.log(error);
+        }
+        this.highLightButtons()
+    }
+
+    highLightButtons = () => {
+        if (this.props.letter) {
+            console.log('this.props.letter: ' + this.props.letter)
+            buttonName = this.props.letter.toLowerCase();
+            try {
+                document.getElementById("button" + this.mapButtons(buttonName)).classList.add("button--active--correct");
+            } catch (error) {
+                console.log(error);
+            }
+            if (this.props.rightShift) {
+                document.getElementById("buttonshiftright").classList.add("button--active--correct");
+            }
+            if (this.props.leftShift) {
+                document.getElementById("buttonshiftleft").classList.add("button--active--correct");
+            }
+        }
+
+
+    }
+
+    mapButtons = (char) => {
+        switch (char) {
+            case '`':
+                return '~'
+            case 'Dead':
+                return '~'
+            case '!':
+                return '1'
+            case '@':
+                return '2'
+            case '#':
+                return '3'
+            case '$':
+                return '4'
+            case '%':
+                return '5'
+            case '^':
+                return '6'
+            case '&':
+                return '7'
+            case '*':
+                return '8'
+            case '(':
+                return '9'
+            case ')':
+                return '0'
+            case '_':
+                return '-'
+            case '=':
+                return '+'
+            case '[':
+                return '{'
+            case ']':
+                return '}'
+            case '\\':
+                return '|'
+            case ';':
+                return ':'
+            case '"':
+                return "'"
+            case ',':
+                return '<'
+            case '.':
+                return '>'
+            case '/':
+                return '?'
+            case 'ArrowDown':
+                return 'ArrowUp'
+            default:
+                return char;
+        }
+    }
+
     render() {
         return (
             <div>
                 <div className="keyboard">
                     <div className="keyboard__row">
-                        <div className="key--double" data-key="192">
+                        <div id="button~" className="key--double" data-key="192">
                             <div>~</div>
                             <div>`</div>
                         </div>
-                        <div className="key--double" data-key="49">
+                        <div id="button1" className="key--double" data-key="49">
                             <div>!</div>
                             <div>1</div>
                         </div>
-                        <div className="key--double" data-key="50">
+                        <div id="button2" className="key--double" data-key="50">
                             <div>@</div>
                             <div>2</div>
                         </div>
-                        <div className="key--double" data-key="51">
+                        <div id="button3" className="key--double" data-key="51">
                             <div>#</div>
                             <div>3</div>
                         </div>
-                        <div className="key--double" data-key="52">
+                        <div id="button4" className="key--double" data-key="52">
                             <div>$</div>
                             <div>4</div>
                         </div>
-                        <div className="key--double" data-key="53">
+                        <div id="button5" className="key--double" data-key="53">
                             <div>%</div>
                             <div>5</div>
                         </div>
-                        <div className="key--double" data-key="54">
+                        <div id="button6" className="key--double" data-key="54">
                             <div>^</div>
                             <div>6</div>
                         </div>
-                        <div className="key--double" data-key="55">
+                        <div id="button7" className="key--double" data-key="55">
                             <div>{'&'}</div>
                             <div>7</div>
                         </div>
-                        <div className="key--double" data-key="56">
+                        <div id="button8" className="key--double" data-key="56">
                             <div>*</div>
                             <div>8</div>
                         </div>
-                        <div className="key--double" data-key="57">
+                        <div id="button9" className="key--double" data-key="57">
                             <div>{'('}</div>
                             <div>9</div>
                         </div>
-                        <div className="key--double" data-key="48">
+                        <div id="button0" className="key--double" data-key="48">
                             <div>{')'}</div>
                             <div>0</div>
                         </div>
-                        <div className="key--double" data-key="189">
+                        <div id="button-" className="key--double" data-key="189">
                             <div>_</div>
                             <div>-</div>
                         </div>
-                        <div className="key--double" data-key="187">
+                        <div id="button+" className="key--double" data-key="187">
                             <div>+</div>
                             <div>=</div>
                         </div>
-                        <div className="key--bottom-right key--word key--w4" data-key="8">
+                        <div id="buttonbackspace" className="key--bottom-right key--word key--w4" data-key="8">
                             <span>backspace</span>
                         </div>
                     </div>
                     <div className="keyboard__row">
-                        <div className="key--bottom-left key--word key--w4" data-key="9">
+                        <div id="buttonTab" className="key--bottom-left key--word key--w4" data-key="9">
                             <span>tab</span>
                         </div>
-                        <div className="key--letter" data-char="Q">Q</div>
-                        <div className="key--letter" data-char="W">W</div>
-                        <div className="key--letter" data-char="E">E</div>
-                        <div className="key--letter" data-char="R">R</div>
-                        <div className="key--letter" data-char="T">T</div>
-                        <div className="key--letter" data-char="Y">Y</div>
-                        <div className="key--letter" data-char="U">U</div>
-                        <div className="key--letter" data-char="I">I</div>
-                        <div className="key--letter" data-char="O">O</div>
-                        <div className="key--letter" data-char="P">P</div>
-                        <div className="key--double" data-key="219" data-char="{[">
+                        <div id="buttonq" className="key--letter" data-char="Q">Q</div>
+                        <div id="buttonw" className="key--letter" data-char="W">W</div>
+                        <div id="buttone" className="key--letter" data-char="E">E</div>
+                        <div id="buttonr" className="key--letter" data-char="R">R</div>
+                        <div id="buttont" className="key--letter" data-char="T">T</div>
+                        <div id="buttony" className="key--letter" data-char="Y">Y</div>
+                        <div id="buttonu" className="key--letter" data-char="U">U</div>
+                        <div id="buttoni" className="key--letter" data-char="I">I</div>
+                        <div id="buttono" className="key--letter" data-char="O">O</div>
+                        <div id="buttonp" className="key--letter" data-char="P">P</div>
+                        <div id="button{" className="key--double" data-key="219" data-char="{[">
                             <div>{'{'}</div>
                             <div>[</div>
                         </div>
-                        <div className="key--double" data-key="221" data-char="}]">
+                        <div id="button}" className="key--double" data-key="221" data-char="}]">
                             <div>{'}'}</div>
                             <div>]</div>
                         </div>
-                        <div className="key--double" data-key="220" data-char="|\">
+                        <div id="button|" className="key--double" data-key="220" data-char="|\">
                             <div>|</div>
                             <div>\</div>
                         </div>
                     </div>
                     <div className="keyboard__row">
-                        <div className="key--bottom-left key--word key--w5" data-key="20">
+                        <div id="buttoncapslock" className="key--bottom-left key--word key--w5" data-key="20">
                             <span>caps lock</span>
                         </div>
-                        <div className="key--letter" data-char="A">A</div>
-                        <div className="key--letter" data-char="S">S</div>
-                        <div className="key--letter" data-char="D">D</div>
-                        <div className="key--letter" data-char="F">F</div>
-                        <div className="key--letter" data-char="G">G</div>
-                        <div className="key--letter" data-char="H">H</div>
-                        <div className="key--letter" data-char="J">J</div>
-                        <div className="key--letter" data-char="K">K</div>
-                        <div className="key--letter" data-char="L">L</div>
-                        <div className="key--double" data-key="186">
+                        <div id="buttona" className="key--letter" data-char="A">A</div>
+                        <div id="buttons" className="key--letter" data-char="S">S</div>
+                        <div id="buttond" className="key--letter" data-char="D">D</div>
+                        <div id="buttonf" className="key--letter" data-char="F">F</div>
+                        <div id="buttong" className="key--letter" data-char="G">G</div>
+                        <div id="buttonh" className="key--letter" data-char="H">H</div>
+                        <div id="buttonj" className="key--letter" data-char="J">J</div>
+                        <div id="buttonk" className="key--letter" data-char="K">K</div>
+                        <div id="buttonl" className="key--letter" data-char="L">L</div>
+                        <div id="button:" className="key--double" data-key="186">
                             <div>:</div>
                             <div>;</div>
                         </div>
-                        <div className="key--double" data-key="222">
+                        <div id="button'" className="key--double" data-key="222">
                             <div>"</div>
                             <div>'</div>
                         </div>
-                        <div className="key--bottom-right key--word key--w5" data-key="13">
-                            <span>return</span>
+                        <div id="buttonenter" className="key--bottom-right key--word key--w5" data-key="13">
+                            <span>enter</span>
                         </div>
                     </div>
                     <div className="keyboard__row">
-                        <div className="key--bottom-left key--word key--w6" data-key="16">
+                        <div id="buttonshiftleft" className="key--bottom-left key--word key--w6" data-key="16">
                             <span>shift</span>
                         </div>
-                        <div className="key--letter" data-char="Z">Z</div>
-                        <div className="key--letter" data-char="X">X</div>
-                        <div className="key--letter" data-char="C">C</div>
-                        <div className="key--letter" data-char="V">V</div>
-                        <div className="key--letter" data-char="B">B</div>
-                        <div className="key--letter" data-char="N">N</div>
-                        <div className="key--letter" data-char="M">M</div>
-                        <div className="key--double" data-key="188">
+                        <div id="buttonz" className="key--letter" data-char="Z">Z</div>
+                        <div id="buttonx" className="key--letter" data-char="X">X</div>
+                        <div id="buttonc" className="key--letter" data-char="C">C</div>
+                        <div id="buttonv" className="key--letter" data-char="V">V</div>
+                        <div id="buttonb" className="key--letter" data-char="B">B</div>
+                        <div id="buttonn" className="key--letter" data-char="N">N</div>
+                        <div id="buttonm" className="key--letter" data-char="M">M</div>
+                        <div id="button<" className="key--double" data-key="188">
                             <div>&lt;</div>
                             <div>,</div>
                         </div>
-                        <div className="key--double" data-key="190">
+                        <div id="button>" className="key--double" data-key="190">
                             <div>&gt;</div>
                             <div>.</div>
                         </div>
-                        <div className="key--double" data-key="191">
+                        <div id="button?" className="key--double" data-key="191">
                             <div>?</div>
                             <div>/</div>
                         </div>
-                        <div className="key--bottom-right key--word key--w6" data-key="16-R">
+                        <div id="buttonshiftright" className="key--bottom-right key--word key--w6" data-key="16-R">
                             <span>shift</span>
                         </div>
                     </div>
                     <div className="keyboard__row keyboard__row--h3">
-                        <div className="key--bottom-left key--word">
+                        <div id="buttonctrlleft" className="key--bottom-left key--word">
                             <span>ctrl</span>
                         </div>
-                        <div className="key--bottom-left key--word key--w1" data-key="17">
+                        <div id="buttonfn" className="key--bottom-left key--word key--w1" data-key="17">
                             <span>fn</span>
                         </div>
-                        <div className="key--bottom-left key--word key--w1" data-key="18">
+                        <div id="buttonaltleft" className="key--bottom-left key--word key--w1" data-key="18">
                             <span>alt</span>
                         </div>
-                        <div className="key--double key--right key--space" data-key="32" data-char=" ">
+                        <div id="button " className="key--double key--right key--space" data-key="32" data-char=" ">
                             &nbsp;
                         </div>
-                        <div className="key--bottom-left key--word key--w3" data-key="93-R">
-                            <span>command</span>
-                        </div>
-                        <div className="key--bottom-left key--word key--w1" data-key="18-R">
+                        <div id="buttonaltright" className="key--bottom-left key--word key--w3" data-key="93-R">
                             <span>alt</span>
                         </div>
-                        <div data-key="37" className="key--arrow">
+                        <div id="buttonctrlright" className="key--bottom-left key--word key--w1" data-key="18-R">
+                            <span>ctrl</span>
+                        </div>
+                        <div id="buttonarrowleft" data-key="37" className="key--arrow">
                             <span>&#9664;</span>
                         </div>
-                        <div className="key--double key--arrow--tall" data-key="38">
+                        <div id="buttonarrowup" className="key--double key--arrow--tall" data-key="38">
                             <div>&#9650;</div>
                             <div>&#9660;</div>
                         </div>
-                        <div data-key="39" className="key--arrow">
+                        <div id="buttonarrowright" data-key="39" className="key--arrow">
                             <span>&#9654;</span>
                         </div>
                     </div>

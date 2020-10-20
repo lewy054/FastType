@@ -25,8 +25,8 @@ export default class SideBar extends React.Component {
             <div className="navigation">
                 <div className="sidebar">
                     <ul className="navigation_list">
-                        <li onClick={this.homeClick}><i className="fas fa-home"></i>Home</li>
-                        <li onClick={this.practiceClick}><i className="fas fa-user"></i>Practice</li>
+                        <li onClick={this.homeClick}><i className="fab fa-readme"></i>Wstęp</li>
+                        <li onClick={this.practiceClick}><i className="fas fa-pen"></i>Praktyka</li>
                         <li onClick={this.aboutClick}><i className="fas fa-address-card"></i>About</li>
                     </ul>
                 </div>
