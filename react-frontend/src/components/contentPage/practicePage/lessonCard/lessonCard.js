@@ -1,5 +1,5 @@
 import React from 'react';
-
+import history from '../../../../history';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
@@ -7,8 +7,7 @@ import Button from 'react-bootstrap/Button';
 export default class LessonCard extends React.Component {
 
     startClick = () => {
-        const lessonData = [this.props.lessonType, this.props.lessonId];
-        this.props.onLessonSelect(lessonData);
+        history.push('/practice/' + this.props.lessonType + '/' + this.props.lessonId);
     }
 
     render() {

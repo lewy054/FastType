@@ -85,7 +85,7 @@ export default class PreviewLesson extends React.Component {
     }
 
     render() {
-        loadedLessonText = lessons[this.props.lessonId]["text"];
+        loadedLessonText = lessons[this.props.match.params.id]["text"];
         lessonLen = loadedLessonText.length;
         lessonText = loadedLessonText.slice(this.state.j);
 

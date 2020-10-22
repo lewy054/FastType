@@ -1,13 +1,16 @@
 import React from 'react';
-import NavBar from '../navBar/navBar';
-import SideBar from '../sideBar/sideBar'
-import './contentPage.css'
+import { Router, Route, Link } from 'react-router-dom';
+import history from '../../history'
 
+
+import NavBar from '../navBar/navBar';
 import HomePage from './homePage/homePage';
 import AboutPage from './aboutPage/aboutPage';
 import PracticePage from './practicePage/practicePage';
 
 import PreviewLesson from './practicePage/previewLesson/previewLesson';
+
+import './contentPage.css'
 
 export default class ContentPage extends React.Component {
     constructor() {
@@ -18,11 +21,6 @@ export default class ContentPage extends React.Component {
         }
     }
 
-    getData = (page) => {
-        this.setState({
-            page: page,
-        })
-    }
 
     getLessonData = (lessonData) => {
         this.setState({
@@ -31,53 +29,41 @@ export default class ContentPage extends React.Component {
         })
     }
 
-    showPage = () => {
-        switch (this.state.page) {
-            case 'home':
-                return <HomePage />;
-            case 'practice':
-                return <PracticePage onLessonSelect={this.getLessonData} />;
-            case 'about':
-                return <AboutPage />;
-            case 'previewLesson':
-                return <PreviewLesson lessonId={this.state.lessonId} />;
-            default:
-                return <HomePage />;
-        }
-    }
-
-    showLesson = () => {
-        switch (this.state.lessonPage) {
-            case 'preview':
-                console.log("preview");
-                return <PreviewLesson />;
-            case 'review':
-                console.log("review");
-                break;
-            case 'practice':
-                console.log("practice");
-                break;
-            // case 'practice':
-            //     return <PracticePage/>
-            // case 'about':
-            //     return <AboutPage/>
-            default:
-                return <PracticePage />;
-        }
+    closeSideBar = () => {
+        var nav = document.querySelector('.navigation');
+        nav.classList.toggle('navigation--active');
     }
 
     render() {
         return (
             <div className="mainPage">
-                <div className="navBar">
-                    <NavBar />
-                </div>
-                <div className="sideBar">
-                    <SideBar onPageChange={this.getData} />
-                </div>
-                <div className="content">
-                    {this.showPage()}
-                </div>
+                <Router history={history}>
+                    <div className="navBar">
+                        <NavBar />
+                    </div>
+                    <div className="sideBar">
+                        <div className="navigation">
+                            <div className="sidebar">
+                                <ul className="navigation_list">
+                                    <Link to="/"><li onClick={this.closeSideBar}><i className="fab fa-readme"></i>Wstęp</li></Link>
+                                    <Link to="/practice"><li onClick={this.closeSideBar}><i className="fas fa-pen"></i>Praktyka</li></Link>
+                                    <Link to="/about"><li onClick={this.closeSideBar}><i className="fas fa-address-card"></i>About</li></Link>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="content">
+                        <Route exact path="/" component={HomePage} />
+                        <Route
+                            exact path='/practice'
+                            render={(props) => (
+                                <PracticePage {...props} onLessonSelect={this.getLessonData} />
+                            )}
+                        />
+                        <Route path="/about" component={AboutPage} />
+                        <Route path="/practice/previewLesson/:id" component={PreviewLesson} />
+                    </div>
+                </Router>
             </div>
         )
     }
