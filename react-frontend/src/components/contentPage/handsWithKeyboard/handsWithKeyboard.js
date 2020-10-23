@@ -2,6 +2,8 @@ import React from 'react';
 import Keyboard from './keyboard/keyboard';
 import LeftHands from './leftHand/leftHand';
 import RightHand from './rightHand/rightHand';
+import TextInstructions from './textInstructions/textInstructions';
+
 
 import './handsWithKeyboard.css'
 
@@ -206,17 +208,21 @@ export default class HandsWithKeyboard extends React.Component {
         let leftFinger = this.whichFingerLeftHand();
         let rightFinger = this.whichFingerRightHand();
         return (
-            <div className="row">
-                <div>
-                    <LeftHands whichFinger={leftFinger} />
-                </div>
-                <div className="col">
-                    <Keyboard letter={this.state.letter} leftShift={leftShift} rightShift={rightShift} />
-                </div>
-                <div>
-                    <RightHand whichFinger={rightFinger} />
+            <div>
+                <TextInstructions letter={this.state.letter} leftFinger={leftFinger} rightFinger={rightFinger} leftShift={leftShift} rightShift={rightShift} />
+                <div className="row">
+                    <div>
+                        <LeftHands whichFinger={leftFinger} />
+                    </div>
+                    <div className="col">
+                        <Keyboard letter={this.state.letter} leftShift={leftShift} rightShift={rightShift} />
+                    </div>
+                    <div>
+                        <RightHand whichFinger={rightFinger} />
+                    </div>
                 </div>
             </div>
+
 
         )
     }

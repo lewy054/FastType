@@ -62,6 +62,7 @@ export default class ContentPage extends React.Component {
                         />
                         <Route path="/about" component={AboutPage} />
                         <Route path="/practice/previewLesson/:id" component={PreviewLesson} />
+                        <Route path="/practice/trainingLesson/:id" component={PreviewLesson} />
                     </div>
                 </Router>
             </div>

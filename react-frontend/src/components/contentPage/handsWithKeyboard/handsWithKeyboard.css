@@ -1,7 +1,3 @@
-.leftHand {
-  /* float: left; */
-}
-
 .rightHand {
   /* float: left; */
   -webkit-transform: scaleX(-1);

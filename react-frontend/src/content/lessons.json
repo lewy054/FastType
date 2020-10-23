@@ -27,7 +27,7 @@
         "id": 3,
         "title" : "Lesson 4",
         "description": "test4",
-        "lessonType": "previewLesson",
+        "lessonType": "trainingLesson",
         "image" : "Image",
         "text" : "JJ"
     },

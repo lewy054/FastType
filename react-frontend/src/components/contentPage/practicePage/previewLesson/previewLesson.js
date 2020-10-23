@@ -1,6 +1,7 @@
 import React from 'react';
 import lessons from '../../../../content/lessons.json';
 import HandsWithKeyboard from '../../handsWithKeyboard/handsWithKeyboard';
+
 import './previewLesson.css';
 
 
@@ -14,6 +15,8 @@ export default class PreviewLesson extends React.Component {
         super();
         this.state = {
             j: 0,
+            leftFinger: 'none',
+            rightFinger: 'none',
         }
     }
 
@@ -49,7 +52,7 @@ export default class PreviewLesson extends React.Component {
         document.onkeydown = (e) => {
             if (lessonText.length !== 0) {
                 let div = document.getElementById(this.state.j);
-                if(e.key === 'Shift'){
+                if (e.key === 'Shift') {
                     return;
                 }
                 console.log(e.key);
@@ -96,8 +99,7 @@ export default class PreviewLesson extends React.Component {
                         {this.renderButtons()}
                     </div>
                 </div>
-                <p className="whichFinger">Naciskaj ten przycisk jakiś se palcem</p>
-                <HandsWithKeyboard letter={this.getLetter()} />
+                <HandsWithKeyboard letter={this.getLetter()} getLeftFinger={this.getLeftFinger} getRightFinger={this.getRightFinger} />
             </div>
         )
     }
