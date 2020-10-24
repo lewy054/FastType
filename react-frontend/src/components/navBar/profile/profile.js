@@ -6,7 +6,7 @@ export default class Profile extends React.Component {
     render() {
         return (
             <div className="profile">
-                <li><i className="fas fa-user"></i>Guest</li>
+                <li><i className="fas fa-user"></i>Gość</li>
             </div>
         )
     }

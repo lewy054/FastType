@@ -29,6 +29,9 @@ export default class TextInstructions extends Component {
             return;
         }
         let letter = this.props.letter.toUpperCase();
+        if (letter === ' ') {
+            return <p className="instruction">Naciśnij <span style={{ color: "#4287f5", fontSize: 'xx-large' }}>spację</span> <span style={{ color: "#00358a" }}> kciukiem lewej lub prawej ręki</span></p>
+        }
         if (this.props.leftShift) {
             text = this.whichFinger(this.props.rightFinger);
             hand = ' prawej ręki';

@@ -9,6 +9,7 @@ import AboutPage from './aboutPage/aboutPage';
 import PracticePage from './practicePage/practicePage';
 
 import PreviewLesson from './practicePage/previewLesson/previewLesson';
+import TrainingLesson from './practicePage/trainingLesson/trainingLesson';
 
 import './contentPage.css'
 
@@ -62,7 +63,7 @@ export default class ContentPage extends React.Component {
                         />
                         <Route path="/about" component={AboutPage} />
                         <Route path="/practice/previewLesson/:id" component={PreviewLesson} />
-                        <Route path="/practice/trainingLesson/:id" component={PreviewLesson} />
+                        <Route path="/practice/trainingLesson/:id" component={TrainingLesson} />
                     </div>
                 </Router>
             </div>

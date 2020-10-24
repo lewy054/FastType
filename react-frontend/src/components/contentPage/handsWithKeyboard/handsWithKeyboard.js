@@ -204,12 +204,19 @@ export default class HandsWithKeyboard extends React.Component {
         }
     }
 
+    renderInstructions = (leftFinger, rightFinger) => {
+        if (this.props.withInstructions) {
+            return <TextInstructions letter={this.state.letter} leftFinger={leftFinger} rightFinger={rightFinger} leftShift={leftShift} rightShift={rightShift} />
+
+        }
+    }
+
     render() {
         let leftFinger = this.whichFingerLeftHand();
         let rightFinger = this.whichFingerRightHand();
         return (
             <div>
-                <TextInstructions letter={this.state.letter} leftFinger={leftFinger} rightFinger={rightFinger} leftShift={leftShift} rightShift={rightShift} />
+                {this.renderInstructions(leftFinger, rightFinger)}
                 <div className="row">
                     <div>
                         <LeftHands whichFinger={leftFinger} />

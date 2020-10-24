@@ -5,6 +5,12 @@
 }
 
 .row {
+  position: fixed;
   bottom: 0;
+  width: 100%;
 }
 
+.col {
+  position: relative;
+  bottom: 0;
+}

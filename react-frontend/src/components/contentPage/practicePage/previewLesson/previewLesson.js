@@ -15,8 +15,6 @@ export default class PreviewLesson extends React.Component {
         super();
         this.state = {
             j: 0,
-            leftFinger: 'none',
-            rightFinger: 'none',
         }
     }
 
@@ -99,7 +97,7 @@ export default class PreviewLesson extends React.Component {
                         {this.renderButtons()}
                     </div>
                 </div>
-                <HandsWithKeyboard letter={this.getLetter()} getLeftFinger={this.getLeftFinger} getRightFinger={this.getRightFinger} />
+                <HandsWithKeyboard letter={this.getLetter()} withInstructions={true}/>
             </div>
         )
     }
