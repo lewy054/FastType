@@ -54,39 +54,45 @@ export default class ContentPage extends React.Component {
         if (nav.classList.toggle('navigation--active')) {
             nav.classList.toggle('navigation--active');
         }
+        document.getElementById("overlay").style.display = "none";
     }
+
+
 
     render() {
         return (
-            <div className="mainPage">
-                <Router history={history}>
-                    <div className="navBar">
-                        <NavBar />
-                    </div>
-                    <div ref={this.wrapperRef} className="sideBar">
-                        <div className="navigation">
-                            <div className="sidebar">
-                                <ul className="navigation_list">
-                                    <Link to="/"><li onClick={this.closeSideBar}><i className="fab fa-readme"></i>Wstęp</li></Link>
-                                    <Link to="/practice"><li onClick={this.closeSideBar}><i className="fas fa-pen"></i>Praktyka</li></Link>
-                                    <Link to="/about"><li onClick={this.closeSideBar}><i className="fas fa-address-card"></i>About</li></Link>
-                                </ul>
+            <div>
+                <div id="overlay" ></div>
+                <div className="mainPage">
+                    <Router history={history}>
+                        <div className="navBar">
+                            <NavBar />
+                        </div>
+                        <div ref={this.wrapperRef} className="sideBar">
+                            <div className="navigation">
+                                <div className="sidebar">
+                                    <ul className="navigation_list">
+                                        <Link to="/"><li onClick={this.closeSideBar}><i className="fab fa-readme"></i>Wstęp</li></Link>
+                                        <Link to="/practice"><li onClick={this.closeSideBar}><i className="fas fa-pen"></i>Praktyka</li></Link>
+                                        <Link to="/about"><li onClick={this.closeSideBar}><i className="fas fa-address-card"></i>About</li></Link>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="content">
-                        <Route exact path="/" component={HomePage} />
-                        <Route
-                            exact path='/practice'
-                            render={(props) => (
-                                <PracticePage {...props} onLessonSelect={this.getLessonData} />
-                            )}
-                        />
-                        <Route path="/about" component={AboutPage} />
-                        <Route path="/practice/previewLesson/:id" component={PreviewLesson} />
-                        <Route path="/practice/trainingLesson/:id" component={TrainingLesson} />
-                    </div>
-                </Router>
+                        <div className="content">
+                            <Route exact path="/" component={HomePage} />
+                            <Route
+                                exact path='/practice'
+                                render={(props) => (
+                                    <PracticePage {...props} onLessonSelect={this.getLessonData} />
+                                )}
+                            />
+                            <Route path="/about" component={AboutPage} />
+                            <Route path="/practice/previewLesson/:id" component={PreviewLesson} />
+                            <Route path="/practice/trainingLesson/:id" component={TrainingLesson} />
+                        </div>
+                    </Router>
+                </div>
             </div>
         )
     }

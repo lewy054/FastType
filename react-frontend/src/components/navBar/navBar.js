@@ -7,7 +7,13 @@ export default class NavBar extends React.Component {
 
   handleClick = () => {
     var nav = document.querySelector('.navigation');
-    nav.classList.toggle('navigation--active');
+    if (nav.classList.toggle('navigation--active')) {
+      document.getElementById("overlay").style.display = "block";
+    }
+    else {
+      document.getElementById("overlay").style.display = "none";
+    }
+
   }
 
 
