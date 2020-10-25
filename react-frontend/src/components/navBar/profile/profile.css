@@ -2,10 +2,13 @@
   color: #d7d2eb;
   cursor: pointer;
   float: right;
-  padding: 20px;
   list-style: none;
 }
 
 i {
   margin-right: 10px;
+}
+
+.profile-container {
+  padding: 25px;
 }

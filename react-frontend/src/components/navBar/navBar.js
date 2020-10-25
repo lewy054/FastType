@@ -29,7 +29,9 @@ export default class NavBar extends React.Component {
           <h1 className="logo">
             FastType
           </h1>
+          <div className="profile">
           <Profile />
+          </div>
         </div>
       </div>
     )
