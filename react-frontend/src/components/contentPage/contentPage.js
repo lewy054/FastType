@@ -20,6 +20,25 @@ export default class ContentPage extends React.Component {
             page: 'home',
             lessonPage: '',
         }
+        this.wrapperRef = React.createRef();
+        this.handleClickOutside = this.handleClickOutside.bind(this);
+    }
+
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
+    //  close the sidebar after clicking outside of it
+    handleClickOutside(event) {
+        if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+            if (event.target.className !== 'hamburger' && event.target.className !== 'hamburger__box' && event.target.className !== 'hamburger__inner') {
+                this.closeSideBar();
+            }
+        }
     }
 
 
@@ -32,7 +51,9 @@ export default class ContentPage extends React.Component {
 
     closeSideBar = () => {
         var nav = document.querySelector('.navigation');
-        nav.classList.toggle('navigation--active');
+        if (nav.classList.toggle('navigation--active')) {
+            nav.classList.toggle('navigation--active');
+        }
     }
 
     render() {
@@ -42,7 +63,7 @@ export default class ContentPage extends React.Component {
                     <div className="navBar">
                         <NavBar />
                     </div>
-                    <div className="sideBar">
+                    <div ref={this.wrapperRef} className="sideBar">
                         <div className="navigation">
                             <div className="sidebar">
                                 <ul className="navigation_list">

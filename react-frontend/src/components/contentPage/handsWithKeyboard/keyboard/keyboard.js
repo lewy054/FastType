@@ -20,7 +20,6 @@ export default class Keyboard extends React.Component {
         this.highLightButtons()
     }
     componentDidUpdate() {
-        console.log('didupdate')
         try {
             document.getElementById("button" + this.mapButtons(buttonName)).classList.remove("button--active--correct");
             document.getElementById("buttonshiftright").classList.remove("button--active--correct");
@@ -33,7 +32,6 @@ export default class Keyboard extends React.Component {
 
     highLightButtons = () => {
         if (this.props.letter) {
-            console.log('this.props.letter: ' + this.props.letter)
             buttonName = this.props.letter.toLowerCase();
             try {
                 document.getElementById("button" + this.mapButtons(buttonName)).classList.add("button--active--correct");

@@ -53,7 +53,6 @@ export default class PreviewLesson extends React.Component {
                 if (e.key === 'Shift') {
                     return;
                 }
-                console.log(e.key);
                 if (e.key === lessonText[0]) {
                     lessonText = lessonText.substring(1);
                     console.log("dobre")
