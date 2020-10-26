@@ -56,24 +56,25 @@ export default class PreviewLesson extends React.Component {
                 if (e.key === lessonText[0]) {
                     lessonText = lessonText.substring(1);
                     console.log("dobre")
-                    div = document.getElementById(this.state.j);
-
-                    if (div.classList.contains('clickedWrong')) {
-                        this.toggleAnimationBad();
+                    if (div) {
+                        if (div.classList.contains('clickedWrong')) {
+                            this.toggleAnimationBad();
+                        }
+                        if (div.classList.contains('click')) {
+                            this.toggleAnimation();
+                        }
+                        div.style.backgroundColor = '#00ad3d';
                     }
-                    if (div.classList.contains('click')) {
-                        this.toggleAnimation();
-                    }
-
-                    div.style.backgroundColor = '#00ad3d';
                     this.setState({
                         j: this.state.j + 1
                     })
                 }
                 else {
                     console.log("zle");
-                    if (!div.classList.contains('clickedWrong')) {
-                        this.toggleAnimationBad();
+                    if (div) {
+                        if (!div.classList.contains('clickedWrong')) {
+                            this.toggleAnimationBad();
+                        }
                     }
                 }
                 this.toggleAnimation();
@@ -96,7 +97,7 @@ export default class PreviewLesson extends React.Component {
                         {this.renderButtons()}
                     </div>
                 </div>
-                <HandsWithKeyboard letter={this.getLetter()} withInstructions={true}/>
+                <HandsWithKeyboard letter={this.getLetter()} withInstructions={true} />
             </div>
         )
     }

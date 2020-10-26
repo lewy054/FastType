@@ -4,20 +4,18 @@ import './keyboard.css';
 
 let buttonName;
 export default class Keyboard extends React.Component {
-    state = {
-        letter: '',
+    constructor() {
+        super()
+        this.state = {
+            letter: '',
+            test: false,
+        }
     }
     componentDidMount() {
-        function size() {
-            var size = keyboard.parentNode.clientWidth / 90;
-            keyboard.style.fontSize = size + 'px';
-        }
-
-        var keyboard = document.querySelector('.keyboard');
-        window.addEventListener('resize', function (e) {
-            size();
-        });
+        document.addEventListener("keydown", this.highLightClickedButton, false);
+        window.addEventListener('resize', this.resize, false);
         this.highLightButtons()
+
     }
     componentDidUpdate() {
         try {
@@ -30,13 +28,38 @@ export default class Keyboard extends React.Component {
         this.highLightButtons()
     }
 
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.highLightClickedButton, false);
+        window.removeEventListener('resize', this.size, false);
+    }
+
+    resize = () => {
+        let size = this.keyboard.clientWidth / 90;
+        this.keyboard.style.fontSize = size + 'px';
+    }
+
+
+    highLightClickedButton = (event) => {
+        let div = document.getElementById("button" + this.mapButtons(event.key.toLowerCase()));
+        if (div) {
+            if (div.classList.contains('button--active')) {
+                div.classList.toggle('button--active', false);
+                void div.offsetWidth;
+                div.classList.toggle('button--active', true);
+            }
+            else {
+                div.classList.toggle('button--active', true);
+            }
+        }
+
+    }
+
     highLightButtons = () => {
         if (this.props.letter) {
             buttonName = this.props.letter.toLowerCase();
-            try {
-                document.getElementById("button" + this.mapButtons(buttonName)).classList.add("button--active--correct");
-            } catch (error) {
-                console.log(error);
+            let div = document.getElementById("button" + this.mapButtons(buttonName));
+            if (div) {
+                div.classList.add("button--active--correct");
             }
             if (this.props.rightShift) {
                 document.getElementById("buttonshiftright").classList.add("button--active--correct");
@@ -45,8 +68,6 @@ export default class Keyboard extends React.Component {
                 document.getElementById("buttonshiftleft").classList.add("button--active--correct");
             }
         }
-
-
     }
 
     mapButtons = (char) => {
@@ -95,17 +116,18 @@ export default class Keyboard extends React.Component {
                 return '>'
             case '/':
                 return '?'
-            case 'ArrowDown':
-                return 'ArrowUp'
+            case 'arrowdown':
+                return 'arrowup'
             default:
                 return char;
         }
     }
 
+
     render() {
         return (
             <div>
-                <div className="keyboard">
+                <div className="keyboard" ref={elem => this.keyboard = elem}>
                     <div className="keyboard__row">
                         <div id="button~" className="key--double" data-key="192">
                             <div>~</div>
@@ -164,7 +186,7 @@ export default class Keyboard extends React.Component {
                         </div>
                     </div>
                     <div className="keyboard__row">
-                        <div id="buttonTab" className="key--bottom-left key--word key--w4" data-key="9">
+                        <div id="buttontab" className="key--bottom-left key--word key--w4" data-key="9">
                             <span>tab</span>
                         </div>
                         <div id="buttonq" className="key--letter" data-char="Q">Q</div>
