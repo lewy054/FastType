@@ -1,8 +1,10 @@
 import React from 'react';
 
 import './keyboard.css';
+import clickSound from '../../../../sounds/button_sound.mp3';
 
 let buttonName;
+let audio;
 export default class Keyboard extends React.Component {
     constructor() {
         super()
@@ -10,6 +12,7 @@ export default class Keyboard extends React.Component {
             letter: '',
             test: false,
         }
+        audio = new Audio(clickSound);
     }
     componentDidMount() {
         document.addEventListener("keydown", this.highLightClickedButton, false);
@@ -40,6 +43,7 @@ export default class Keyboard extends React.Component {
 
 
     highLightClickedButton = (event) => {
+        audio.play();
         let div = document.getElementById("button" + this.mapButtons(event.key.toLowerCase()));
         if (div) {
             if (div.classList.contains('button--active')) {

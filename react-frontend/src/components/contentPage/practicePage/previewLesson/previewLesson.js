@@ -34,14 +34,18 @@ export default class PreviewLesson extends React.Component {
     toggleAnimation = () => {
         if (this.state.j < lessonLen) {
             let div = document.getElementById(this.state.j);
-            div.classList.toggle('click');
+            if (div) {
+                div.classList.toggle('click');
+            }
         }
     }
 
     toggleAnimationBad = () => {
         if (this.state.j < lessonLen) {
             let div = document.getElementById(this.state.j);
-            div.classList.toggle('clickedWrong');
+            if (div) {
+                div.classList.toggle('clickedWrong');
+            }
         }
     }
 
