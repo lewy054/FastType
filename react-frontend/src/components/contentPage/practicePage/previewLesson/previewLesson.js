@@ -1,6 +1,7 @@
 import React from 'react';
 import lessons from '../../../../content/lessons.json';
 import HandsWithKeyboard from '../../handsWithKeyboard/handsWithKeyboard';
+import EndScreen from '../endScreen/endScreen';
 
 import './previewLesson.css';
 
@@ -15,6 +16,7 @@ export default class PreviewLesson extends React.Component {
         super();
         this.state = {
             j: 0,
+            winScreen: false,
         }
     }
 
@@ -27,7 +29,7 @@ export default class PreviewLesson extends React.Component {
         return buttons;
     }
 
-    getLetter() {
+    getLetter = () => {
         return lessonText[0];
     }
 
@@ -57,7 +59,7 @@ export default class PreviewLesson extends React.Component {
                 if (e.key === 'Shift') {
                     return;
                 }
-                if (e.key === lessonText[0]) {
+                if (e.key === this.getLetter()) {
                     lessonText = lessonText.substring(1);
                     console.log("dobre")
                     if (div) {
@@ -85,6 +87,9 @@ export default class PreviewLesson extends React.Component {
             }
             if (lessonText.length === 0) {
                 console.log('koniec');
+                this.setState({
+                    winScreen: true,
+                })
             }
         };
     }
@@ -96,12 +101,21 @@ export default class PreviewLesson extends React.Component {
 
         return (
             <div>
-                <div className="buttons">
-                    <div className="buttons__row">
-                        {this.renderButtons()}
+                <div>
+                    <div className="buttons">
+                        <div className="buttons__row">
+                            {this.renderButtons()}
+                        </div>
                     </div>
+                    <HandsWithKeyboard letter={this.getLetter()} withInstructions={true} win={this.state.winScreen} />
                 </div>
-                <HandsWithKeyboard letter={this.getLetter()} withInstructions={true} />
+                {this.state.winScreen ? (
+                    <div>
+                        <EndScreen wpm={93} source={'test12'} howManyChar={12} />
+                    </div>) :
+                    (
+                        <div></div>
+                    )}
             </div>
         )
     }

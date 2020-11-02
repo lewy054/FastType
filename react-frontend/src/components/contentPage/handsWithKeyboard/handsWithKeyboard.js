@@ -17,6 +17,7 @@ export default class HandsWithKeyboard extends React.Component {
         rightShift = false;
         this.state = {
             letter: '',
+            win: false,
         }
     }
 
@@ -217,15 +218,17 @@ export default class HandsWithKeyboard extends React.Component {
         return (
             <div>
                 {this.renderInstructions(leftFinger, rightFinger)}
-                <div className="row">
-                    <div>
-                        <LeftHands whichFinger={leftFinger} />
-                    </div>
-                    <div className="col">
-                        <Keyboard letter={this.state.letter} leftShift={leftShift} rightShift={rightShift} />
-                    </div>
-                    <div>
-                        <RightHand whichFinger={rightFinger} />
+                <div>
+                    <div className="row">
+                        <div>
+                            <LeftHands whichFinger={leftFinger} />
+                        </div>
+                        <div className="col">
+                            <Keyboard letter={this.state.letter} leftShift={leftShift} rightShift={rightShift} win={this.props.win} />
+                        </div>
+                        <div>
+                            <RightHand whichFinger={rightFinger} />
+                        </div>
                     </div>
                 </div>
             </div>

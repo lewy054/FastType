@@ -11,14 +11,16 @@ export default class Keyboard extends React.Component {
         this.state = {
             letter: '',
             test: false,
+            size: '9',
         }
+        this.keyboard = React.createRef()
         audio = new Audio(clickSound);
     }
     componentDidMount() {
-        document.addEventListener("keydown", this.highLightClickedButton, false);
+        this.resize();
+        document.addEventListener("keydown", this.onButtonClick, false);
         window.addEventListener('resize', this.resize, false);
         this.highLightButtons()
-
     }
     componentDidUpdate() {
         try {
@@ -28,23 +30,48 @@ export default class Keyboard extends React.Component {
         } catch (error) {
             console.log(error);
         }
-        this.highLightButtons()
+        this.highLightButtons();
+        if(this.props.win){
+            document.removeEventListener("keydown", this.onButtonClick, false);
+        }
     }
 
     componentWillUnmount() {
-        document.removeEventListener("keydown", this.highLightClickedButton, false);
-        window.removeEventListener('resize', this.size, false);
+        document.removeEventListener("keydown", this.onButtonClick, false);
+        window.removeEventListener('resize', this.resize, false);
     }
 
     resize = () => {
+        console.log(this.keyboard.clientWidth)
         let size = this.keyboard.clientWidth / 90;
-        this.keyboard.style.fontSize = size + 'px';
+        this.setState({
+            size: size,
+        })
+        console.log(this.state.size)
     }
 
+    onButtonClick = (event) => {
+        let key = event.key.toLowerCase();
+        if (key === 'shift') {
+            this.highLightClickedButton('shiftleft');
+            this.highLightClickedButton('shiftright');
+        }
+        else if (key === 'control') {
+            this.highLightClickedButton('ctrlleft');
+            this.highLightClickedButton('ctrlright');
+        }
+        else if (key === 'alt') {
+            this.highLightClickedButton('altleft');
+            this.highLightClickedButton('altright');
+        }
+        else {
+            audio.play();
+            this.highLightClickedButton(this.mapButtons(key));
+        }
+    }
 
-    highLightClickedButton = (event) => {
-        audio.play();
-        let div = document.getElementById("button" + this.mapButtons(event.key.toLowerCase()));
+    highLightClickedButton = (key) => {
+        let div = document.getElementById("button" + key);
         if (div) {
             if (div.classList.contains('button--active')) {
                 div.classList.toggle('button--active', false);
@@ -55,7 +82,6 @@ export default class Keyboard extends React.Component {
                 div.classList.toggle('button--active', true);
             }
         }
-
     }
 
     highLightButtons = () => {
@@ -131,7 +157,7 @@ export default class Keyboard extends React.Component {
     render() {
         return (
             <div>
-                <div className="keyboard" ref={elem => this.keyboard = elem}>
+                <div className="keyboard" ref={elem => this.keyboard = elem} style={ { fontSize: `${ this.state.size }px`} }>
                     <div className="keyboard__row">
                         <div id="button~" className="key--double" data-key="192">
                             <div>~</div>

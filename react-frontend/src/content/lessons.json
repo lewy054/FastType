@@ -4,7 +4,7 @@
         "title": "Lesson 1",
         "description": "fjfj",
         "lessonType": "previewLesson",
-        "image" : "Image",
+        "image" : "fjpreview",
         "text" : "!@#$%^&*()_+[]\\;',./{}|:\"<>?"
     },
     {
@@ -12,7 +12,7 @@
         "title" : "Lesson 2",
         "description": "f j f j",
         "lessonType": "previewLesson",
-        "image" : "Image",
+        "image" : "fjpreview",
         "text" : "f j f j"
     },
     {
@@ -20,7 +20,7 @@
         "title" : "Lesson 3",
         "description": "test3",
         "lessonType": "previewLesson",
-        "image" : "Image",
+        "image" : "placeholder",
         "text" : "AASDFGHJKLasdfghjkl"
     },
     {
@@ -28,35 +28,70 @@
         "title" : "Lesson 4",
         "description": "test4",
         "lessonType": "trainingLesson",
-        "image" : "Image",
-        "text" : "JJ"
+        "image" : "fjpreview",
+        "text" : "ff jj ff jj FF JJ FF"
     },
     {
         "id": 4,
         "title" : "Lesson 5",
         "description": "test5",
-        "image" : "Image",
+        "image" : "placeholder",
         "text" : "jjjjjjjjjj"
     },
     {
         "id": 5,
         "title" : "Lesson 6",
         "description": "test6",
-        "image" : "Image",
+        "image" : "placeholder",
         "text" : "jjjjjjjjjj"
     },
     {
         "id": 6,
         "title" : "Lesson 7",
         "description": "test7",
-        "image" : "Image",
+        "image" : "placeholder",
         "text" : "jjjjjjjjjj"
     },
     {
         "id": 7,
         "title" : "Lesson 8",
         "description": "test8",
-        "image" : "Image",
+        "image" : "placeholder",
+        "text" : "jjjjjjjjjj"
+    },
+    {
+        "id": 8,
+        "title" : "Lesson 7",
+        "description": "test7",
+        "image" : "placeholder",
+        "text" : "jjjjjjjjjj"
+    },
+    {
+        "id": 9,
+        "title" : "Lesson 7",
+        "description": "test7",
+        "image" : "placeholder",
+        "text" : "jjjjjjjjjj"
+    },
+    {
+        "id": 10,
+        "title" : "Lesson 7",
+        "description": "test7",
+        "image" : "placeholder",
+        "text" : "jjjjjjjjjj"
+    },
+    {
+        "id": 11,
+        "title" : "Lesson 7",
+        "description": "test7",
+        "image" : "placeholder",
+        "text" : "jjjjjjjjjj"
+    },
+    {
+        "id": 12,
+        "title" : "Lesson 7",
+        "description": "test7",
+        "image" : "placeholder",
         "text" : "jjjjjjjjjj"
     }
 ]
