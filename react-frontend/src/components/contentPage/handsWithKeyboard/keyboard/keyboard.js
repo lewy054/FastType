@@ -42,7 +42,6 @@ export default class Keyboard extends React.Component {
     }
 
     resize = () => {
-        console.log(this.keyboard.clientWidth)
         let size = this.keyboard.clientWidth / 90;
         this.setState({
             size: size,

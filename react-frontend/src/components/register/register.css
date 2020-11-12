@@ -1,4 +1,4 @@
-.login-form {
+.register-form {
   background: #005bf0;
   opacity: 90%;
   margin-top: 100px;
@@ -8,7 +8,7 @@
   color: white;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
-.login-heading {
+.register-heading {
   text-align: center;
   margin-top: 20px;
 }
@@ -21,7 +21,7 @@
   width: 100%;
 }
 
-.login-form h1 {
+.register-form h1 {
   text-align: center;
   margin-bottom: 5%;
 }

@@ -74,7 +74,6 @@ export default class TrainingLesson extends Component {
                 this.setState({
                     winScreen: true,
                 })
-                console.log('koniec');
             }
         };
     }
@@ -102,10 +101,7 @@ export default class TrainingLesson extends Component {
                 {this.state.winScreen ? (
                     <div>
                         <EndScreen wpm={93} source={'test12'} howManyChar={12} />
-                    </div>) :
-                    (
-                        <div></div>
-                    )}
+                    </div>) :  null}
             </div>
         )
     }

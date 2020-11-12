@@ -20,7 +20,7 @@
         "title" : "Lesson 3",
         "description": "test3",
         "lessonType": "previewLesson",
-        "image" : "placeholder",
+        "image" : "fjpreview",
         "text" : "AASDFGHJKLasdfghjkl"
     },
     {
@@ -28,7 +28,7 @@
         "title" : "Lesson 4",
         "description": "test4",
         "lessonType": "trainingLesson",
-        "image" : "fjpreview",
+        "image" : "placeholder",
         "text" : "ff jj ff jj FF JJ FF"
     },
     {

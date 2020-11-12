@@ -11,6 +11,9 @@ import PracticePage from './practicePage/practicePage';
 import PreviewLesson from './practicePage/previewLesson/previewLesson';
 import TrainingLesson from './practicePage/trainingLesson/trainingLesson';
 
+import Register from '../register/register';
+import Login from '../login/login';
+
 import './contentPage.css'
 
 export default class ContentPage extends React.Component {
@@ -19,6 +22,9 @@ export default class ContentPage extends React.Component {
         this.state = {
             page: 'home',
             lessonPage: '',
+            logged: false,
+            showLogin: 'none',
+            showRegister: 'none',
         }
         this.wrapperRef = React.createRef();
         this.handleClickOutside = this.handleClickOutside.bind(this);
@@ -57,11 +63,42 @@ export default class ContentPage extends React.Component {
         document.getElementById("overlay").style.display = "none";
     }
 
+    logout = () => {
+        this.closeSideBar();
+    }
+
+    showLogin = () => {
+        this.closeSideBar();
+        this.setState({
+            showLogin: 'block',
+        })
+    }
+
+    showRegister = () => {
+        this.closeSideBar();
+        this.setState({
+            showRegister: 'block',
+        })
+    }
+
+    closeLogin = () => {
+        this.setState({
+            showLogin: 'none',
+        })
+    }
+
+    closeRegister = () => {
+        this.setState({
+            showRegister: 'none',
+        })
+    }
 
 
     render() {
         return (
             <div>
+                <Register show={this.state.showRegister} closeRegister={this.closeRegister} />
+                <Login show={this.state.showLogin} closeLogin={this.closeLogin}/>
                 <div id="overlay" ></div>
                 <div className="mainPage">
                     <Router history={history}>
@@ -75,6 +112,15 @@ export default class ContentPage extends React.Component {
                                         <Link to="/"><li onClick={this.closeSideBar}><i className="fab fa-readme"></i>Wstęp</li></Link>
                                         <Link to="/practice"><li onClick={this.closeSideBar}><i className="fas fa-pen"></i>Praktyka</li></Link>
                                         <Link to="/about"><li onClick={this.closeSideBar}><i className="fas fa-address-card"></i>About</li></Link>
+                                    </ul>
+                                    <ul className="navigation_list_bottom">
+                                        {this.state.logged ?
+                                            <li onClick={this.logout}><i className="fas fa-sign-out-alt"></i>Wyloguj</li> :
+                                            <div>
+                                                <li onClick={this.showLogin}><i className="fas fa-sign-in-alt"></i>Zaloguj</li>
+                                                <li onClick={this.showRegister}><i className="fas fa-user-plus fa-xs"></i>Zarejestruj</li>
+                                            </div>
+                                        }
                                     </ul>
                                 </div>
                             </div>

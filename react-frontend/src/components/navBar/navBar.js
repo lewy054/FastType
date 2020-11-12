@@ -1,6 +1,7 @@
 import React from 'react';
+import history from '../../history';
 import './navBar.css';
-import Profile from './profile/profile'
+import Profile from './profile/profile';
 
 
 export default class NavBar extends React.Component {
@@ -13,7 +14,10 @@ export default class NavBar extends React.Component {
     else {
       document.getElementById("overlay").style.display = "none";
     }
+  }
 
+  goToMain = () => {
+    history.push('/');
   }
 
 
@@ -26,11 +30,11 @@ export default class NavBar extends React.Component {
               <span className="hamburger__inner"></span>
             </span>
           </button>
-          <h1 className="logo">
+          <h1 className="logo" onClick={this.goToMain}>
             FastType
           </h1>
           <div className="profile">
-          <Profile />
+            <Profile />
           </div>
         </div>
       </div>

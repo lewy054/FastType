@@ -67,9 +67,6 @@ export default class TextInstructions extends Component {
     }
 
     render() {
-
-
-
         return (
             <div className="instructionsBlock">
                 {this.getFirstFinger()}
