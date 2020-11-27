@@ -5,8 +5,8 @@ import history from '../../history'
 
 import NavBar from '../navBar/navBar';
 import HomePage from './homePage/homePage';
-import AboutPage from './aboutPage/aboutPage';
 import PracticePage from './practicePage/practicePage';
+import AchievementsList from './achievements/achievementsList';
 
 import PreviewLesson from './practicePage/previewLesson/previewLesson';
 import TrainingLesson from './practicePage/trainingLesson/trainingLesson';
@@ -111,7 +111,7 @@ export default class ContentPage extends React.Component {
                                     <ul className="navigation_list">
                                         <Link to="/"><li onClick={this.closeSideBar}><i className="fab fa-readme"></i>Wstęp</li></Link>
                                         <Link to="/practice"><li onClick={this.closeSideBar}><i className="fas fa-pen"></i>Praktyka</li></Link>
-                                        <Link to="/about"><li onClick={this.closeSideBar}><i className="fas fa-address-card"></i>About</li></Link>
+                                        <Link to="/achievements"><li onClick={this.closeSideBar}><i className="fas fa-address-card"></i>Osiągnięcia</li></Link>
                                     </ul>
                                     <ul className="navigation_list_bottom">
                                         {this.state.logged ?
@@ -133,7 +133,7 @@ export default class ContentPage extends React.Component {
                                     <PracticePage {...props} onLessonSelect={this.getLessonData} />
                                 )}
                             />
-                            <Route path="/about" component={AboutPage} />
+                            <Route path="/achievements" component={AchievementsList} />
                             <Route path="/practice/previewLesson/:id" component={PreviewLesson} />
                             <Route path="/practice/trainingLesson/:id" component={TrainingLesson} />
                         </div>

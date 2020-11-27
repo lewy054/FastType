@@ -13,11 +13,11 @@ export default class LessonCard extends React.Component {
     }
 
     startClick = () => {
-        history.push('/practice/' + this.props.lessonType + '/' + this.props.lessonId);
+        history.push('/practice/' + this.props.lessonDetails.lessonType + '/' + this.props.lessonDetails.id);
     }
 
     componentDidMount() {
-        let image = require(`../../../../images/${this.props.image}.jpg`)
+        let image = require(`../../../../images/${this.props.lessonDetails.image}.jpg`)
         this.setState({ image: image });
     }
 
@@ -26,9 +26,9 @@ export default class LessonCard extends React.Component {
             <Card className="text-center" style={{ width: '20rem', height:'25rem' }}>
                 <Card.Img variant="top" src={this.state.image}  style={{ width: '20rem', height:'15rem' }}/>
                 <Card.Body>
-                    <Card.Title>{this.props.lessonName}</Card.Title>
+                    <Card.Title>{this.props.lessonDetails.title}</Card.Title>
                     <Card.Text>
-                        {this.props.lessonDescription}
+                        {this.props.lessonDetails.description}
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer >

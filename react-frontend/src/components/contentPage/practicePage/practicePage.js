@@ -12,7 +12,7 @@ export default class PracticePage extends React.Component {
     }
 
     renderLessons = () => {
-        return lessons.map((d) => <CardDeck key={d.id} className="cardDeck"><LessonCard className="lessonCard" onLessonSelect={this.getLessonType} lessonId={d.id} lessonName={d.title} lessonDescription={d.description} lessonType={d.lessonType} image={d.image} /></CardDeck>);
+        return lessons.map((d) => <CardDeck key={d.id} className="cardDeck"><LessonCard className="lessonCard" onLessonSelect={this.getLessonType} lessonDetails={d} /></CardDeck>);
     }
     render() {
         return (
