@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import image from '../../../images/fjpreview.jpg';
 import achievements from '../../../content/achievements.json';
 import Achievement from './achievement/achievement';
 

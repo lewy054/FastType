@@ -1,5 +1,12 @@
 .rightHand {
   transform: scaleX(-1);
+  width: auto;
+  height: auto;
+}
+
+.leftHand{
+  width: auto;
+  height: auto;
 }
 
 .row {

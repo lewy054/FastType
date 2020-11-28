@@ -2,25 +2,29 @@
     {
         "id": 0,
         "title": "Achievement 1",
-        "description": "Achievement 1 desc",
-        "image": "previewLesson"
+        "description": "Achievement 1 desc dasadsdsadsdasadsadsdasadsdasddasasdasasdasdasasdasdasdasdadsasdadsasddasadsdsadsdasadsadsdasadsdasddasasdasasdasdasasdasdasdasdadsasdadsasd",
+        "image": "previewLesson",
+        "done":"true"
     },
     {
         "id": 1,
         "title" : "Achievement 2",
         "description": "Achievement 2 desc",
-        "image" : "fjpreview"
+        "image" : "fjpreview",
+        "done":"true"
     },
     {
         "id": 2,
         "title" : "Achievement 3",
         "description": "Achievement 3 desc",
-        "image" : "fjpreview"
+        "image" : "fjpreview",
+        "done":"false"
     },
     {
         "id": 3,
         "title" : "Achievement 4",
         "description": "Achievement 4 desc",
-        "image" : "fjpreview"
+        "image" : "fjpreview",
+        "done":"false"
     }
 ]

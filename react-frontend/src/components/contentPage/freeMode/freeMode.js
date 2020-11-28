@@ -1,35 +1,73 @@
-import React, { Component } from 'react';
-import HandsWithKeyboard from '../../handsWithKeyboard/handsWithKeyboard';
-import ProgressBar from 'react-bootstrap/progressBar';
-import EndScreen from '../endScreen/endScreen';
-
-import lessons from '../../../../content/lessons.json';
-
-import './trainingLesson.css'
+import React, { Component } from 'react'
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import EndScreen from '../practicePage/endScreen/endScreen'
+import HandsWithKeyboard from '../handsWithKeyboard/handsWithKeyboard';
 
 let lessonText;
-let loadedLessonText;
 let completedText;
 let percentage;
-export default class TrainingLesson extends Component {
+let loadedLessonText;
+export default class FreeMode extends Component {
     constructor() {
-        super();
+        super()
         this.state = {
             j: 0,
             totalPercentage: 0,
             winScreen: false,
         }
+        lessonText = '';
         completedText = '';
         loadedLessonText = '';
-        lessonText = '';
+    }
+
+    textLenght = (min, max) => {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    makeRandomSentence = () => {
+        let length = this.textLenght(65, 300)
+        let result = [];
+        let characters = 'ab cdefghijklmno pqrs tuvwxyz .';
+        let charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            let letter = characters.charAt(Math.floor(Math.random() * charactersLength));
+            if (result[result.length - 1] === ' ') {
+                if (result[result.length - 2] === '.') {
+                    letter = letter.toUpperCase()
+                }
+                if (letter === ' ') {
+                    continue;
+                }
+                if (letter === '.') {
+                    continue;
+                }
+
+            }
+
+            if (letter === '.') {
+                letter='. '
+            }
+            result.push(letter)
+        }
+        result.push('.')
+        result = result.join('')
+        result = result.charAt(0).toUpperCase() + result.slice(1)
+        return result;
+    }
+
+    countPercentages = () => {
+        return (100 / loadedLessonText.length);
     }
 
     getLetter = () => {
         return lessonText[0];
     }
 
+
     renderText = () => {
-        let letter = this.getLetter();
+        let letter = this.getLetter()
         let restOfText = lessonText.substring(1);
         return (
             <p className="text" key="textToShow">
@@ -48,8 +86,12 @@ export default class TrainingLesson extends Component {
         )
     }
 
+
     componentDidMount() {
+        loadedLessonText = this.makeRandomSentence();
         percentage = this.countPercentages()
+        lessonText = loadedLessonText.slice(this.state.j);
+        this.setState({})
         document.onkeydown = (e) => {
             if (lessonText.length !== 0) {
                 if (e.key === 'Shift') {
@@ -64,6 +106,7 @@ export default class TrainingLesson extends Component {
                         j: this.state.j + 1,
                         totalPercentage: this.state.totalPercentage + percentage,
                     })
+                    console.log(this.state.totalPercentage)
                 }
                 else {
                     console.log("zle");
@@ -77,13 +120,7 @@ export default class TrainingLesson extends Component {
         };
     }
 
-    countPercentages = () => {
-        return (100 / loadedLessonText.length);
-    }
-
     render() {
-        loadedLessonText = lessons[this.props.match.params.id]["text"];
-        lessonText = loadedLessonText.slice(this.state.j);
         return (
             <div>
                 <div style={{ height: '100%' }}>
@@ -100,7 +137,7 @@ export default class TrainingLesson extends Component {
                 {this.state.winScreen ? (
                     <div>
                         <EndScreen wpm={93} source={'test12'} howManyChar={12} />
-                    </div>) :  null}
+                    </div>) : null}
             </div>
         )
     }

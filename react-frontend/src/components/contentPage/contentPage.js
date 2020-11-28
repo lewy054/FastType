@@ -7,6 +7,7 @@ import NavBar from '../navBar/navBar';
 import HomePage from './homePage/homePage';
 import PracticePage from './practicePage/practicePage';
 import AchievementsList from './achievements/achievementsList';
+import FreeMode from './freeMode/freeMode';
 
 import PreviewLesson from './practicePage/previewLesson/previewLesson';
 import TrainingLesson from './practicePage/trainingLesson/trainingLesson';
@@ -111,7 +112,8 @@ export default class ContentPage extends React.Component {
                                     <ul className="navigation_list">
                                         <Link to="/"><li onClick={this.closeSideBar}><i className="fab fa-readme"></i>Wstęp</li></Link>
                                         <Link to="/practice"><li onClick={this.closeSideBar}><i className="fas fa-pen"></i>Praktyka</li></Link>
-                                        <Link to="/achievements"><li onClick={this.closeSideBar}><i className="fas fa-address-card"></i>Osiągnięcia</li></Link>
+                                        <Link to="/achievements"><li onClick={this.closeSideBar}><i className="fas fa-trophy"></i>Osiągnięcia</li></Link>
+                                        <Link to="/freeMode"><li onClick={this.closeSideBar}><i className="fas fa-dice-three"></i>Tryb swobodny</li></Link>
                                     </ul>
                                     <ul className="navigation_list_bottom">
                                         {this.state.logged ?
@@ -136,6 +138,7 @@ export default class ContentPage extends React.Component {
                             <Route path="/achievements" component={AchievementsList} />
                             <Route path="/practice/previewLesson/:id" component={PreviewLesson} />
                             <Route path="/practice/trainingLesson/:id" component={TrainingLesson} />
+                            <Route path="/freeMode" component={FreeMode} />
                         </div>
                     </Router>
                 </div>
