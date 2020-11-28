@@ -5,7 +5,8 @@
         "description": "fjfj",
         "lessonType": "previewLesson",
         "image" : "fjpreview",
-        "text" : "!@#$%^&*()_+[]\\;',./{}|:\"<>?"
+        "text" : "!@#$%^&*()_+[]\\;',./{}|:\"<>?",
+        "done":true
     },
     {
         "id": 1,
@@ -13,7 +14,8 @@
         "description": "f j f j",
         "lessonType": "previewLesson",
         "image" : "fjpreview",
-        "text" : "f j f j"
+        "text" : "f j f j",
+        "done":true
     },
     {
         "id": 2,

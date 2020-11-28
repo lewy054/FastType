@@ -1,5 +1,5 @@
 /* The Modal (background) */
-.modal {
+.end-modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 99; /* Sit on top */
@@ -15,7 +15,7 @@
 }
 
 /* Modal Content */
-.modal-content {
+.end-modal-content {
   position: relative;
   background-color: #fefefe;
   margin: auto;

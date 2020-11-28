@@ -1,0 +1,14 @@
+.text-center img {
+  position: absolute;
+}
+
+.lessonImage {
+  z-index: 1;
+}
+.doneImage {
+  z-index: 3;
+  top: 30%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}

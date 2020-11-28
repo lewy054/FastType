@@ -78,22 +78,28 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div id="loginModal" className="modal" style={{ display: this.state.show }}>
-                <div id="loginModal" className="modal-content" ref={this.wrapperRef}>
-                    <div class="col-md-8 offset-md-2">
-                        <div class="login-form">
-                            <h1>Zaloguj się</h1>
-                            <form >
-                            <div class="form-group">
-                                    <label for="InputUserName">Nazwa użytkownika</label>
-                                    <input type="username" class="form-control" id="InputUserName" aria-describedby="usernameHelp" placeholder="Nazwa użytkownika" />
+            <div id="loginModal" className="login-modal" style={{ display: this.state.show }}>
+                <div id="loginModalContent" className="login-modal-content" >
+                    <div className="container" ref={this.wrapperRef}>
+                        <div className="row1">
+                            <div className="col-md-8 offset-md-2">
+                                <div className="login-form">
+                                    <h1>Zaloguj się</h1>
+                                    <form >
+                                        <div className="form-group">
+                                            <label for="InputUserName">Nazwa użytkownika</label>
+                                            <input type="username" className="form-control" aria-describedby="usernameHelp"
+                                                placeholder="Nazwa użytkownika" onChange={this.onUserNameChange} value={this.state.username} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label for="InputPassword">Hasło</label>
+                                            <input type="password" className="form-control" placeholder="Hasło"
+                                                onChange={this.onPasswordChange} value={this.state.password} />
+                                        </div>
+                                        <button type="submit" className="btn btn-primary">Zaloguj</button>
+                                    </form>
                                 </div>
-                                <div class="form-group">
-                                    <label for="InputPassword">Hasło</label>
-                                    <input type="password" class="form-control" id="InputPassword" placeholder="Hasło" />
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

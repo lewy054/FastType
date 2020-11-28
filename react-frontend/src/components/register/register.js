@@ -95,30 +95,38 @@ export default class Register extends Component {
 
     render() {
         return (
-            <div id="registerModal" className="modal" style={{ display: this.state.show }}>
-                <div id="registerModal" className="modal-content" ref={this.wrapperRef}>
-                    <div class="col-md-8 offset-md-2">
-                        <div class="register-form">
-                            <h1>Zarejestruj się</h1>
-                            <form >
-                            <div class="form-group">
-                                    <label for="InputUserName">Nazwa użytkownika</label>
-                                    <input type="username" class="form-control" id="InputUserName" aria-describedby="usernameHelp" placeholder="Wprowadź nazwę użytkownika" />
+            <div id="registerModal" className="register-modal" style={{ display: this.state.show }}>
+                <div id="registerModalContent" className="register-modal-content" >
+                    <div className="container" ref={this.wrapperRef}>
+                        <div className="row1">
+                            <div className="col-md-8 offset-md-2">
+                                <div className="register-form">
+                                    <h1>Zarejestruj się</h1>
+                                    <form >
+                                        <div className="form-group">
+                                            <label for="InputUserName">Nazwa użytkownika</label>
+                                            <input type="username" className="form-control" aria-describedby="usernameHelp"
+                                                placeholder="Wprowadź nazwę użytkownika" onChange={this.onUserNameChange} value={this.state.username}/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label for="InputEmail">Adres email</label>
+                                            <input type="email" className="form-control" aria-describedby="emailHelp"
+                                                onChange={this.onEmailChange} placeholder="Wprowadź swój adres email" value={this.state.email} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label for="InputPassword">Hasło</label>
+                                            <input type="password" className="form-control" placeholder="Hasło"
+                                             onChange={this.onPasswordChange} value={this.state.password}/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label for="InputRepeatPassword">Powtórz hasło</label>
+                                            <input type="password" className="form-control"
+                                             placeholder="Powtórz hasło" onChange={this.onPassConfChange} value={this.state.confPass} />
+                                        </div>
+                                        <button type="submit" className="btn btn-primary">Zarejestruj się</button>
+                                    </form>
                                 </div>
-                                <div class="form-group">
-                                    <label for="InputEmail">Adres email</label>
-                                    <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Wprowadź swój adres email" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="InputPassword">Hasło</label>
-                                    <input type="password" class="form-control" id="InputPassword" placeholder="Hasło" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="InputRepeatPassword">Powtórz hasło</label>
-                                    <input type="password" class="form-control" id="InputRepeatPassword" placeholder="Powtórz hasło" />
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

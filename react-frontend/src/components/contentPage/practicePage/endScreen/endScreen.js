@@ -16,7 +16,7 @@ export default class EndScreen extends React.Component {
 
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
-        let modal = document.getElementById('myModal');
+        let modal = document.getElementById('myModalEnd');
         modal.classList.toggle('modal-slide')
     }
 
@@ -33,9 +33,8 @@ export default class EndScreen extends React.Component {
 
 
     handleClickOutside(event) {
-        if (!this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
-            if (event.target.className !== 'myModal')
-                 {
+        if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+            if (event.target.className !== 'end-modal') {
                 let modal = document.getElementById('modal');
                 modal.classList.toggle('modal-shake')
             }
@@ -45,8 +44,8 @@ export default class EndScreen extends React.Component {
 
     render() {
         return (
-            <div id="myModal" className="modal" style={{ display: this.state.display }}>
-                <div id="modal" className="modal-content" ref={this.wrapperRef}>
+            <div id="myModalEnd" className="end-modal" style={{ display: this.state.display }}>
+                <div id="modal" className="end-modal-content" ref={this.wrapperRef}>
                     <div className="modal-header">
                         <h2>Dobra robota!</h2>
                     </div>
@@ -63,7 +62,7 @@ export default class EndScreen extends React.Component {
                     </div>
                     <Button variant="primary" size="lg" onClick={this.closeWindow}>
                         Zakończ
-                        </Button>
+                    </Button>
                 </div>
             </div>
         )

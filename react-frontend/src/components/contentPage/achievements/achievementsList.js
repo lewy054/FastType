@@ -9,7 +9,7 @@ export default class AchievementsList extends Component {
 
     render() {
         return (
-            <div style={{ width: "90%", marginLeft: "auto", marginRight: "auto", marginTop:"7em" }}>
+            <div style={{ width: "90%", marginLeft: "auto", marginRight: "auto", marginTop:"3em" }}>
                 {this.renderLessons()}
             </div>
         )

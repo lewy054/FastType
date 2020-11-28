@@ -2,7 +2,9 @@ import React from 'react';
 import history from '../../../../history';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import doneImage from '../../../../images/done.png';
 
+import './lessonCard.css';
 
 export default class LessonCard extends React.Component {
     constructor() {
@@ -23,9 +25,12 @@ export default class LessonCard extends React.Component {
 
     render() {
         return (
-            <Card className="text-center" style={{ width: '20rem', height:'25rem' }}>
-                <Card.Img variant="top" src={this.state.image}  style={{ width: '20rem', height:'15rem' }}/>
-                <Card.Body>
+            <Card className="text-center" style={{ width: '20rem', height: '25rem' }}>
+                <img className="lessonImage" src={this.state.image} style={{ width: '20rem', height: '15rem' }} alt="lesson icon" />
+                {this.props.lessonDetails.done ?
+                    <img className="doneImage" src={doneImage} style={{ width: '10rem', height: '10rem' }} alt="done icon" />
+                    : null}
+                <Card.Body style={{ marginTop: '15rem' }}>
                     <Card.Title>{this.props.lessonDetails.title}</Card.Title>
                     <Card.Text>
                         {this.props.lessonDetails.description}
