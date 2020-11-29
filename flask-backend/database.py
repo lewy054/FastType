@@ -1,9 +1,11 @@
 import sqlite3
 from passlib.hash import pbkdf2_sha256
+from flask import Response
+import json
 
 
 class Database():
-    
+
     def __init__(self):
         self.user_data = ()
 
@@ -17,18 +19,20 @@ class Database():
                                 (username, self.hash_password(password), email))
             self.connection.commit()
             self.disconnect()
-            return "User added"
+            return Response(json.dumps({'message': 'Zarejestrowano pomyślnie'}), status=201, mimetype="application/json")
         else:
             for one_user in all_users:
                 if one_user[0] == username:
                     self.disconnect()
-                    return "Username exists"
-                elif one_user[1]==email:
-                   return "Email exists"
+                    return Response(json.dumps({'message': 'Użytkownik o podanej nazwie już istnieje'}), status=400, mimetype="application/json")
+                elif one_user[1] == email:
+                    self.disconnect()
+                    return Response(json.dumps({'message': 'Adres email jest już w użyciu'}), status=400, mimetype="application/json")
+        self.cursor.execute('INSERT INTO users VALUES(NULL, ?, ?, ?);',
+                            (username, self.hash_password(password), email))
         self.connection.commit()
         self.disconnect()
-        print("user added")
-        return "User added"
+        return Response(json.dumps({'message': 'Zarejestrowano pomyślnie'}), status=201, mimetype="application/json")
 
     # select for login
     def login_user(self, username, password):
@@ -63,14 +67,13 @@ class Database():
             self.disconnect()
             return users[0]
 
-
     # password security
+
     def hash_password(self, nothashed):
         return pbkdf2_sha256.hash(nothashed)
 
     def verify_password(self, user_password, database_password):
         return pbkdf2_sha256.verify(user_password, database_password)
-
 
     def connect(self):
         self.connection = sqlite3.connect(
@@ -85,4 +88,4 @@ class Database():
 
 if __name__ == "__main__":
     db = Database()
-    #db.create_database()
+    # db.create_database()

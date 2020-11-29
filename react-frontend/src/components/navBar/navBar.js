@@ -34,7 +34,7 @@ export default class NavBar extends React.Component {
             FastType
           </h1>
           <div className="profile">
-            <Profile />
+            <Profile username={this.props.username} showLogin={this.props.showLogin} showRegister={this.props.showRegister} logged={this.props.logged} logout={this.props.logout}/>
           </div>
         </div>
       </div>

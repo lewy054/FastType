@@ -16,6 +16,7 @@ import Register from '../register/register';
 import Login from '../login/login';
 
 import './contentPage.css'
+import { ResponsiveEmbed } from 'react-bootstrap';
 
 export default class ContentPage extends React.Component {
     constructor() {
@@ -26,12 +27,14 @@ export default class ContentPage extends React.Component {
             logged: false,
             showLogin: 'none',
             showRegister: 'none',
+            username: 'Gość',
         }
         this.wrapperRef = React.createRef();
         this.handleClickOutside = this.handleClickOutside.bind(this);
     }
 
     componentDidMount() {
+        this.getUserName();
         document.addEventListener('mousedown', this.handleClickOutside);
     }
 
@@ -64,8 +67,22 @@ export default class ContentPage extends React.Component {
         document.getElementById("overlay").style.display = "none";
     }
 
-    logout = () => {
+    logout = async () => {
         this.closeSideBar();
+        await fetch('/logout', {
+            method: 'POST',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(function (response) {
+            return response.text();
+        }).then(text => {
+            this.setState({
+                username: 'Gość',
+                logged: false,
+            })
+        }).catch(error => console.log(error))
     }
 
     showLogin = () => {
@@ -94,17 +111,38 @@ export default class ContentPage extends React.Component {
         })
     }
 
+    getUserName = async () => {
+        await fetch('/getUsername', {
+            method: 'GET',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                return response.text().then(text => {
+                    if (text) {
+                        let username = (JSON.parse(text))['username']
+                        this.setState({
+                            username: username,
+                            logged: true,
+                        })
+                    }
+                })
+            }
+        }).catch(error => console.log(error))
+    }
 
     render() {
         return (
             <div>
                 <Register show={this.state.showRegister} closeRegister={this.closeRegister} />
-                <Login show={this.state.showLogin} closeLogin={this.closeLogin}/>
+                <Login show={this.state.showLogin} closeLogin={this.closeLogin} sendUserName={this.getUserName} />
                 <div id="overlay" ></div>
                 <div className="mainPage">
                     <Router history={history}>
                         <div className="navBar">
-                            <NavBar />
+                            <NavBar username={this.state.username} showLogin={this.showLogin} showRegister={this.showRegister} logged={this.state.logged} logout={this.logout}/>
                         </div>
                         <div ref={this.wrapperRef} className="sideBar">
                             <div className="navigation">

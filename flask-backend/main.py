@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 import database as db
 import json
+import re
 
 
 app = Flask("__main__")
@@ -26,46 +27,59 @@ class User(UserMixin):
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
-    if current_user.get_id():
-        return render_template('home.html')
     return render_template('index.html')
 
 
-@app.route('/home')
-@login_required
-def renderHome():
-    if True:
-        return render_template('home.html')
+@app.route('/getUsername', methods=['GET'])
+def getUsername():
+    if current_user.get_id():
+        database = db.Database()
+        temp_data = database.select_for_info(current_user.get_id())
+        username = temp_data[0]
+        return Response(json.dumps({'username': f'{username}'}),
+                        status=200,
+                        mimetype="application/json")
     else:
-        return render_template('index.html')
+        return Response(
+            status=203,
+            mimetype="application/json")
 
 
-@app.route('/signIn', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def signIn():
-    print("test")
     database = db.Database()
     if request.method == 'POST':
         username = request.get_json()["username"]
         password = request.get_json()["password"]
+        remember = request.get_json()["remember"]
+        print(remember)
+        if(remember):
+            remember_me()
+        else:
+            dont_remember()
+
         if username == None or password == None:
-            print("nope")
-            return 'Incorrect username or password', 401
+            return Response(json.dumps({'message': 'Nieprawidłowa nazwa użytkownika i/lub hasło'}), status=401, mimetype="application/json")
         logged = database.login_user(username, password)
         if logged:
             login_user(User(database.user_data[1]))
-            print("ok")
-            return 'OK', 200
+            return Response(json.dumps({'message': 'Zalogowano pomyślnie'}), status=200, mimetype="application/json")
         else:
-            print("nope1")
-            return 'Incorrect username or password', 401
+            return Response(json.dumps({'message': 'Nieprawidłowa nazwa użytkownika i/lub hasło'}), status=401, mimetype="application/json")
     else:
-        print("else")
         return render_template('index.html')
+
+
+def dont_remember():
+    session.permanent = False
+
+
+def remember_me():
+    session.permanent = True
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    print("inside register")
     database = db.Database()
     data = request.get_json()
     data = json.loads(json.dumps(data))
@@ -74,18 +88,15 @@ def register():
         email = data["email"]
         password = data["password"]
         passwordConfirm = data["confPass"]
-        print(name)
-        print(email)
-        print(password)
-        print(password)
         if name == None or name == "" or password == None or password == "" or email == None or email == "" or passwordConfirm == None or passwordConfirm == "":
-            return 'Fill all fields'
+            return Response(json.dumps({'message': 'Wypełnij wszystkie pola'}), status=400, mimetype="application/json")
         if not password == passwordConfirm:
-            return 'Passwords do not match'
+            return Response(json.dumps({'message': 'Hasła się nie zgadzają'}), status=400, mimetype="application/json")
+        if not validate_email(email):
+            return Response(json.dumps({'message': 'Podaj poprawny adres email'}), status=400, mimetype="application/json")
         return database.register_user(name, password, email)
     else:
-        print("nope1")
-        return "something is missing"
+        return Response(status=405, mimetype="application/json")
 
 
 @login_manager.user_loader
@@ -93,11 +104,19 @@ def load_user(id_user):
     return User(id_user)
 
 
-@app.route('/logout')
+@app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
     logout_user()
     return render_template('index.html')
+
+
+def validate_email(email):
+    regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+    if(re.search(regex, email)):
+        return True
+    else:
+        return False
 
 
 app.run(debug=True)

@@ -6,7 +6,7 @@
   border-radius: 50px;
   color: white;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  opacity: 85%;
+  opacity: 0.85;
 }
 .register-heading {
   text-align: center;

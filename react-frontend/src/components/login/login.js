@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import Alert from 'react-bootstrap/Alert';
 import './login.css';
 
 export default class Login extends Component {
@@ -9,8 +9,12 @@ export default class Login extends Component {
             show: 'none',
             username: "",
             password: "",
+            showAlert: false,
+            alertText: '',
+            checked:true,
         }
         this.wrapperRef = React.createRef();
+        this.remember = React.createRef();
         this.handleClickOutside = this.handleClickOutside.bind(this);
     }
 
@@ -56,11 +60,27 @@ export default class Login extends Component {
             body: JSON.stringify({
                 "username": this.state.username,
                 "password": this.state.password,
+                "remember": this.state.checked,
             })
-        }).then(function (response) {
-            return response.text();
-        }).then(text => {
-            console.log('zalogowany');
+        }).then(response => {
+            if (response.status === 200) {
+                return response.text().then(text => {
+                    this.setState({
+                        showAlert: false,
+                    })
+                    this.props.sendUserName()
+                    this.props.closeLogin();
+
+                })
+            }
+            else {
+                return response.text().then(text => {
+                    this.setState({
+                        showAlert: true,
+                        alertText: (JSON.parse(text))['message'],
+                    })
+                })
+            }
         }).catch(error => console.log(error))
     }
 
@@ -76,6 +96,9 @@ export default class Login extends Component {
         });
     }
 
+    handleCheckboxChange = event =>
+    this.setState({ checked: event.target.checked })
+
     render() {
         return (
             <div id="loginModal" className="login-modal" style={{ display: this.state.show }}>
@@ -87,17 +110,30 @@ export default class Login extends Component {
                                     <h1>Zaloguj się</h1>
                                     <form >
                                         <div className="form-group">
-                                            <label for="InputUserName">Nazwa użytkownika</label>
+                                            <label>Nazwa użytkownika</label>
                                             <input type="username" className="form-control" aria-describedby="usernameHelp"
                                                 placeholder="Nazwa użytkownika" onChange={this.onUserNameChange} value={this.state.username} />
                                         </div>
                                         <div className="form-group">
-                                            <label for="InputPassword">Hasło</label>
+                                            <label>Hasło</label>
                                             <input type="password" className="form-control" placeholder="Hasło"
                                                 onChange={this.onPasswordChange} value={this.state.password} />
                                         </div>
-                                        <button type="submit" className="btn btn-primary">Zaloguj</button>
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input" checked={this.state.checked} onChange={this.handleCheckboxChange}/>
+                                            <label class="form-check-label">Zapamiętaj mnie</label>
+                                        </div>
+                                        <button type="submit" className="btn btn-primary" onClick={this.login}>Zaloguj</button>
                                     </form>
+                                    <br />
+                                    {this.state.showAlert ?
+                                        <Alert variant='danger' onClose={() => this.setState({ showAlert: false })} dismissible>
+                                            <Alert.Heading>Nie udało się zalogować</Alert.Heading>
+                                            <p>
+                                                {this.state.alertText}
+                                            </p>
+                                        </Alert>
+                                        : null}
                                 </div>
                             </div>
                         </div>
