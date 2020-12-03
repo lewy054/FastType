@@ -24,10 +24,11 @@ export default class LessonCard extends React.Component {
     }
 
     render() {
+        console.log(this.props.lessonStatus)
         return (
             <Card className="text-center" style={{ width: '20rem', height: '25rem' }}>
                 <img className="lessonImage" src={this.state.image} style={{ width: '20rem', height: '15rem' }} alt="lesson icon" />
-                {this.props.lessonDetails.done ?
+                {this.props.lessonStatus == 1 ?
                     <img className="doneImage" src={doneImage} style={{ width: '10rem', height: '10rem' }} alt="done icon" />
                     : null}
                 <Card.Body style={{ marginTop: '15rem' }}>

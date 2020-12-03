@@ -70,15 +70,29 @@ export default class TrainingLesson extends Component {
                 }
             }
             if (lessonText.length === 0) {
-                this.setState({
-                    winScreen: true,
-                })
+                this.completeLesson();
             }
         };
     }
 
     countPercentages = () => {
         return (100 / loadedLessonText.length);
+    }
+
+    completeLesson = async () => {
+        this.setState({
+            winScreen: true,
+        })
+        await fetch('/completedLesson', {
+            method: 'POST',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "lesson_id": lessons[this.props.match.params.id]['id'],
+            })
+        }).catch(error => console.log(error))
     }
 
     render() {
@@ -100,7 +114,7 @@ export default class TrainingLesson extends Component {
                 {this.state.winScreen ? (
                     <div>
                         <EndScreen wpm={93} source={'test12'} howManyChar={12} />
-                    </div>) :  null}
+                    </div>) : null}
             </div>
         )
     }

@@ -106,7 +106,6 @@ export default class FreeMode extends Component {
                         j: this.state.j + 1,
                         totalPercentage: this.state.totalPercentage + percentage,
                     })
-                    console.log(this.state.totalPercentage)
                 }
                 else {
                     console.log("zle");

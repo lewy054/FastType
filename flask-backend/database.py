@@ -2,69 +2,71 @@ import sqlite3
 from passlib.hash import pbkdf2_sha256
 from flask import Response
 import json
+from sqlalchemy import create_engine
+from sqlalchemy import Column, String, Integer
+from sqlalchemy.orm import scoped_session, sessionmaker, Query
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from user import User
+from flask import jsonify
+from lesson import Lesson
+import os.path
+from base import Base
+from base import engine
+from alchemyEncoder import AlchemyEncoder
 
 
 class Database():
 
     def __init__(self):
+        self.db_session = scoped_session(sessionmaker(bind=engine))
         self.user_data = ()
 
     # write for register
     def register_user(self, username, password, email):
-        self.connect()
-        self.cursor.execute('SELECT username, email FROM users')
-        all_users = self.cursor.fetchall()
+        all_users = self.db_session.query(User.username, User.email)
         if not all_users:
-            self.cursor.execute('INSERT INTO users VALUES(NULL, ?, ?, ?);',
-                                (username, self.hash_password(password), email))
-            self.connection.commit()
-            self.disconnect()
+            new_user = User(username=username,
+                            password=self.hash_password(password), email=email)
+            self.db_session.add(new_user)
+            self.db_session.commit()
             return Response(json.dumps({'message': 'Zarejestrowano pomyślnie'}), status=201, mimetype="application/json")
         else:
             for one_user in all_users:
                 if one_user[0] == username:
-                    self.disconnect()
                     return Response(json.dumps({'message': 'Użytkownik o podanej nazwie już istnieje'}), status=400, mimetype="application/json")
                 elif one_user[1] == email:
-                    self.disconnect()
                     return Response(json.dumps({'message': 'Adres email jest już w użyciu'}), status=400, mimetype="application/json")
-        self.cursor.execute('INSERT INTO users VALUES(NULL, ?, ?, ?);',
-                            (username, self.hash_password(password), email))
-        self.connection.commit()
-        self.disconnect()
+        new_user = User(username=username,
+                        password=self.hash_password(password), email=email)
+        self.db_session.add(new_user)
+        self.db_session.commit()
+        self.db_session.close()
         return Response(json.dumps({'message': 'Zarejestrowano pomyślnie'}), status=201, mimetype="application/json")
 
     # select for login
     def login_user(self, username, password):
-        self.connect()
-        self.cursor.execute(
-            'SELECT * FROM users WHERE username = ?', (username,))
-        users = self.cursor.fetchall()
+        users = self.db_session.query(User).filter_by(username=username).all()
         if not users:
-            self.disconnect()
             return False
         else:
             for user in users:
+                user = user.__dict__
                 user_pass = user['password']
             if self.verify_password(password, user_pass):
-                self.user_data = (user['username'], user['id'])
-                self.disconnect()
+                self.user_data = (user['username'], user['user_id'])
                 return True
             else:
-                self.disconnect()
                 return False
 
     # select for info
     def select_for_info(self, id_us):
-        self.connect()
-        self.cursor.execute(
-            'SELECT username FROM users WHERE id = ?', (id_us,))
-        users = self.cursor.fetchall()
+        users = self.db_session.query(
+            User.username).filter_by(user_id=id_us).all()
+        self.db_session.close()
         if not users:
-            self.disconnect()
             return False
         else:
-            self.disconnect()
             return users[0]
 
     # password security
@@ -75,17 +77,33 @@ class Database():
     def verify_password(self, user_password, database_password):
         return pbkdf2_sha256.verify(user_password, database_password)
 
-    def connect(self):
-        self.connection = sqlite3.connect(
-            'database.db', check_same_thread=False)
-        self.connection.row_factory = sqlite3.Row
-        self.cursor = self.connection.cursor()
+    def mark_lesson_as_completed(self, user_id, lesson_id):
 
-    def disconnect(self):
-        self.cursor.close()
-        self.connection.close()
+        exists = self.db_session.query(Lesson).filter_by(
+            user_id=user_id).scalar() is None
+        lesson_name = "lesson" + str(lesson_id+1)
+        if (exists):
+            lesson = Lesson(user_id=user_id)
+            self.db_session.add(lesson)
+            self.db_session.query(Lesson).filter_by(
+                user_id=user_id).update({lesson_name: True})
+            self.db_session.commit()
+        else:
+            self.db_session.query(Lesson).filter_by(
+                user_id=user_id).update({lesson_name: True})
+            self.db_session.commit()
+            self.db_session.close()
+
+    def load_lessons_status(self, user_id):
+        try:
+            lesson_details = self.db_session.query(
+                Lesson).filter_by(user_id=user_id).one()
+        except NoResultFound:
+            print ('No result was found')
+        except MultipleResultsFound:
+            print ('Multiple results were found')
+        return (json.dumps(lesson_details, cls=AlchemyEncoder))
 
 
 if __name__ == "__main__":
     db = Database()
-    # db.create_database()

@@ -4,6 +4,7 @@ from flask_login import LoginManager, UserMixin, login_required, login_user, log
 import database as db
 import json
 import re
+from base import Base
 
 
 app = Flask("__main__")
@@ -98,6 +99,25 @@ def register():
     else:
         return Response(status=405, mimetype="application/json")
 
+@app.route('/completedLesson', methods=['GET', 'POST'])
+def mark_lesson_as_completed():
+    if request.method == 'POST':
+        database = db.Database()
+        lessonId = request.get_json()["lesson_id"]
+        database.mark_lesson_as_completed(current_user.get_id(), lessonId)
+        return Response(status=200)
+    else:
+        return render_template('index.html')
+
+@app.route('/getLessonsStatus', methods=['GET', 'POST'])
+def practice():
+    database = db.Database()
+    lessons = database.load_lessons_status(current_user.get_id())
+    return Response(json.dumps({'data': lessons}), status=200, mimetype="application/json")
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('index.html'), 404
 
 @login_manager.user_loader
 def load_user(id_user):
@@ -117,6 +137,5 @@ def validate_email(email):
         return True
     else:
         return False
-
 
 app.run(debug=True)

@@ -51,6 +51,23 @@ export default class PreviewLesson extends React.Component {
         }
     }
 
+    completeLesson = async () => {
+        this.setState({
+            winScreen: true,
+        })
+        console.log(lessons[this.props.match.params.id]['id'])
+        await fetch('/completedLesson', {
+            method: 'POST',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "lesson_id": lessons[this.props.match.params.id]['id'],
+            })
+        }).catch(error => console.log(error))
+    }
+
     componentDidMount() {
         this.toggleAnimation();
         document.onkeydown = (e) => {
@@ -61,7 +78,6 @@ export default class PreviewLesson extends React.Component {
                 }
                 if (e.key === this.getLetter()) {
                     lessonText = lessonText.substring(1);
-                    console.log("dobre")
                     if (div) {
                         if (div.classList.contains('clickedWrong')) {
                             this.toggleAnimationBad();
@@ -86,10 +102,7 @@ export default class PreviewLesson extends React.Component {
                 this.toggleAnimation();
             }
             if (lessonText.length === 0) {
-                console.log('koniec');
-                this.setState({
-                    winScreen: true,
-                })
+                this.completeLesson();
             }
         };
     }
