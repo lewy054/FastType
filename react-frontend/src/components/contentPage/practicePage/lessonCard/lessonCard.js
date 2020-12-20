@@ -19,16 +19,20 @@ export default class LessonCard extends React.Component {
     }
 
     componentDidMount() {
-        let image = require(`../../../../images/${this.props.lessonDetails.image}.jpg`)
+        try{
+        let image = require(`../../../../images/lessons/${this.props.lessonDetails.image}.jpg`)
         this.setState({ image: image });
+        }
+        catch{
+            console.log("Image cannot be loaded")
+        }
     }
 
     render() {
-        console.log(this.props.lessonStatus)
         return (
-            <Card className="text-center" style={{ width: '20rem', height: '25rem' }}>
+            <Card className="text-center" style={{ width: '20rem', height: '28rem' }}>
                 <img className="lessonImage" src={this.state.image} style={{ width: '20rem', height: '15rem' }} alt="lesson icon" />
-                {this.props.lessonStatus == 1 ?
+                {this.props.lessonStatus === 1 ?
                     <img className="doneImage" src={doneImage} style={{ width: '10rem', height: '10rem' }} alt="done icon" />
                     : null}
                 <Card.Body style={{ marginTop: '15rem' }}>
@@ -38,7 +42,9 @@ export default class LessonCard extends React.Component {
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer >
-                    <Button variant="primary" style={{ width: '100%' }} onClick={this.startClick}>Start</Button>
+                {this.props.lessonStatus === 1 ?
+                <Button variant="success" style={{ width: '100%' }} onClick={this.startClick}>Start</Button> : 
+                    <Button variant="primary" style={{ width: '100%' }} onClick={this.startClick}>Start</Button>}
                 </Card.Footer>
             </Card>
         )

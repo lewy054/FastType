@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, flash, redirect, send_from_directory, url_for, jsonify, Response, session
+import json
+import re
+from flask import Flask, render_template, request, flash, redirect, send_from_directory, url_for, Response, session
 from flask_cors import CORS, cross_origin
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 import database as db
-import json
-import re
-from base import Base
-
+import os
+from flask import send_from_directory
 
 app = Flask("__main__")
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
@@ -99,6 +99,7 @@ def register():
     else:
         return Response(status=405, mimetype="application/json")
 
+
 @app.route('/completedLesson', methods=['GET', 'POST'])
 def mark_lesson_as_completed():
     if request.method == 'POST':
@@ -109,19 +110,45 @@ def mark_lesson_as_completed():
     else:
         return render_template('index.html')
 
+
 @app.route('/getLessonsStatus', methods=['GET', 'POST'])
-def practice():
+def get_lesson_status():
     database = db.Database()
     lessons = database.load_lessons_status(current_user.get_id())
     return Response(json.dumps({'data': lessons}), status=200, mimetype="application/json")
+
+
+@app.route('/getAchievemenetsStatus', methods=['GET', 'POST'])
+def get_achievement_status():
+    database = db.Database()
+    achievements = database.load_achievements_status(current_user.get_id())
+    return Response(json.dumps({'data': achievements}), status=200, mimetype="application/json")
+
+
+@app.route('/completedAchievement', methods=['GET', 'POST'])
+def mark_achievement_as_completed():
+    if request.method == 'POST':
+        database = db.Database()
+        lessonId = request.get_json()["achievement_id"]
+        database.mark_achievement_as_completed(current_user.get_id(), lessonId)
+        return Response(status=200)
+    else:
+        return render_template('index.html')
+
 
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('index.html'), 404
 
+
 @login_manager.user_loader
 def load_user(id_user):
     return User(id_user)
+
+
+@app.route('/practice', methods=['GET', 'POST'])
+def practice():
+    return render_template('index.html')
 
 
 @app.route('/logout', methods=['GET', 'POST'])

@@ -55,17 +55,18 @@ export default class PreviewLesson extends React.Component {
         this.setState({
             winScreen: true,
         })
-        console.log(lessons[this.props.match.params.id]['id'])
-        await fetch('/completedLesson', {
-            method: 'POST',
-            credentials: "same-origin",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                "lesson_id": lessons[this.props.match.params.id]['id'],
-            })
-        }).catch(error => console.log(error))
+        if (this.props.logged) {
+            await fetch('/completedLesson', {
+                method: 'POST',
+                credentials: "same-origin",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "lesson_id": lessons[this.props.match.params.id]['id'],
+                })
+            }).catch(error => console.log(error))
+        }
     }
 
     componentDidMount() {

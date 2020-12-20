@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardDeck } from 'react-bootstrap';
+import { CardDeck, Button, Modal } from 'react-bootstrap';
 import LessonCard from './lessonCard/lessonCard';
 import lessons from '../../../content/lessons.json'
 import './practicePage.css';

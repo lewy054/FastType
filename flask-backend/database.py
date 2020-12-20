@@ -1,16 +1,15 @@
-import sqlite3
+import os.path
 from passlib.hash import pbkdf2_sha256
 from flask import Response
 import json
-from sqlalchemy import create_engine
-from sqlalchemy import Column, String, Integer
-from sqlalchemy.orm import scoped_session, sessionmaker, Query
+from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from user import User
 from flask import jsonify
 from lesson import Lesson
-import os.path
+from achievement import Achievement
 from base import Base
 from base import engine
 from alchemyEncoder import AlchemyEncoder
@@ -95,6 +94,7 @@ class Database():
             self.db_session.close()
 
     def load_lessons_status(self, user_id):
+        lesson_details=''
         try:
             lesson_details = self.db_session.query(
                 Lesson).filter_by(user_id=user_id).one()
@@ -103,6 +103,36 @@ class Database():
         except MultipleResultsFound:
             print ('Multiple results were found')
         return (json.dumps(lesson_details, cls=AlchemyEncoder))
+
+
+
+    def mark_achievement_as_completed(self, user_id, achievemenet_id):
+
+        exists = self.db_session.query(Achievement).filter_by(
+            user_id=user_id).scalar() is None
+        achievement_name = "achievement" + str(achievemenet_id+1)
+        if (exists):
+            achievement = Achievement(user_id=user_id)
+            self.db_session.add(achievement)
+            self.db_session.query(Achievement).filter_by(
+                user_id=user_id).update({achievement_name: True})
+            self.db_session.commit()
+        else:
+            self.db_session.query(Achievement).filter_by(
+                user_id=user_id).update({achievement_name: True})
+            self.db_session.commit()
+            self.db_session.close()
+
+    def load_achievements_status(self, user_id):
+        achievement_details=''
+        try:
+            achievement_details = self.db_session.query(
+                Achievement).filter_by(user_id=user_id).one()
+        except NoResultFound:
+            print ('No result was found')
+        except MultipleResultsFound:
+            print ('Multiple results were found')
+        return (json.dumps(achievement_details, cls=AlchemyEncoder))
 
 
 if __name__ == "__main__":

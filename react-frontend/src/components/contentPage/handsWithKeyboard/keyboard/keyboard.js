@@ -31,7 +31,7 @@ export default class Keyboard extends React.Component {
             console.log(error);
         }
         this.highLightButtons();
-        if(this.props.win){
+        if (this.props.win) {
             document.removeEventListener("keydown", this.onButtonClick, false);
         }
     }
@@ -52,14 +52,17 @@ export default class Keyboard extends React.Component {
     onButtonClick = (event) => {
         let key = event.key.toLowerCase();
         if (key === 'shift') {
+            audio.play();
             this.highLightClickedButton('shiftleft');
             this.highLightClickedButton('shiftright');
         }
         else if (key === 'control') {
+            audio.play();
             this.highLightClickedButton('ctrlleft');
             this.highLightClickedButton('ctrlright');
         }
         else if (key === 'alt') {
+            audio.play();
             this.highLightClickedButton('altleft');
             this.highLightClickedButton('altright');
         }
@@ -145,8 +148,6 @@ export default class Keyboard extends React.Component {
                 return '>'
             case '/':
                 return '?'
-            case 'arrowdown':
-                return 'arrowup'
             default:
                 return char;
         }
@@ -156,7 +157,7 @@ export default class Keyboard extends React.Component {
     render() {
         return (
             <div>
-                <div className="keyboard" ref={elem => this.keyboard = elem} style={ { fontSize: `${ this.state.size }px`} }>
+                <div className="keyboard" ref={elem => this.keyboard = elem} style={{ fontSize: `${this.state.size}px` }}>
                     <div className="keyboard__row">
                         <div id="button~" className="key--double" data-key="192">
                             <div>~</div>
@@ -294,7 +295,7 @@ export default class Keyboard extends React.Component {
                         </div>
                     </div>
                     <div className="keyboard__row keyboard__row--h3">
-                        <div id="buttonctrlleft" className="key--bottom-left key--word">
+                        <div id="buttonctrlleft" className="key--bottom-left key--word key--w1">
                             <span>ctrl</span>
                         </div>
                         <div id="buttonfn" className="key--bottom-left key--word key--w1" data-key="17">
@@ -309,18 +310,11 @@ export default class Keyboard extends React.Component {
                         <div id="buttonaltright" className="key--bottom-left key--word key--w3" data-key="93-R">
                             <span>alt</span>
                         </div>
+                        <div id="buttonfnright" className="key--bottom-left key--word key--w1" data-key="18-R">
+                            <span>fn</span>
+                        </div>
                         <div id="buttonctrlright" className="key--bottom-left key--word key--w1" data-key="18-R">
                             <span>ctrl</span>
-                        </div>
-                        <div id="buttonarrowleft" data-key="37" className="key--arrow">
-                            <span>&#9664;</span>
-                        </div>
-                        <div id="buttonarrowup" className="key--double key--arrow--tall" data-key="38">
-                            <div>&#9650;</div>
-                            <div>&#9660;</div>
-                        </div>
-                        <div id="buttonarrowright" data-key="39" className="key--arrow">
-                            <span>&#9654;</span>
                         </div>
                     </div>
                 </div>

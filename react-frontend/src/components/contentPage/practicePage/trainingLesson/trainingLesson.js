@@ -6,6 +6,7 @@ import EndScreen from '../endScreen/endScreen';
 import lessons from '../../../../content/lessons.json';
 
 import './trainingLesson.css'
+import Timer from '../timer/timer';
 
 let lessonText;
 let loadedLessonText;
@@ -15,13 +16,15 @@ export default class TrainingLesson extends Component {
     constructor() {
         super();
         this.state = {
-            j: 0,
+            correctChars: 0,
             totalPercentage: 0,
             winScreen: false,
+            timerStarted: false,
         }
         completedText = '';
         loadedLessonText = '';
         lessonText = '';
+        this.timer = React.createRef();
     }
 
     getLetter = () => {
@@ -51,6 +54,12 @@ export default class TrainingLesson extends Component {
     componentDidMount() {
         percentage = this.countPercentages()
         document.onkeydown = (e) => {
+            if (!this.state.timerStarted) {
+                this.timer.current.startTimer();
+                this.setState({
+                    timerStarted: true,
+                })
+            }
             if (lessonText.length !== 0) {
                 if (e.key === 'Shift') {
                     return;
@@ -61,7 +70,7 @@ export default class TrainingLesson extends Component {
                     console.log("dobre")
 
                     this.setState({
-                        j: this.state.j + 1,
+                        correctChars: this.state.correctChars + 1,
                         totalPercentage: this.state.totalPercentage + percentage,
                     })
                 }
@@ -70,7 +79,10 @@ export default class TrainingLesson extends Component {
                 }
             }
             if (lessonText.length === 0) {
-                this.completeLesson();
+                this.setState({
+                    winScreen: true,
+                    timerStarted:false,
+                })
             }
         };
     }
@@ -79,32 +91,25 @@ export default class TrainingLesson extends Component {
         return (100 / loadedLessonText.length);
     }
 
-    completeLesson = async () => {
-        this.setState({
-            winScreen: true,
-        })
-        await fetch('/completedLesson', {
-            method: 'POST',
-            credentials: "same-origin",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                "lesson_id": lessons[this.props.match.params.id]['id'],
-            })
-        }).catch(error => console.log(error))
-    }
+    handleTimeChange = (time) => this.setState({ time: time });
+
 
     render() {
         loadedLessonText = lessons[this.props.match.params.id]["text"];
-        lessonText = loadedLessonText.slice(this.state.j);
+        lessonText = loadedLessonText.slice(this.state.correctChars);
         return (
             <div>
                 <div style={{ height: '100%' }}>
-                    <div style={{ width: '50%', left: '50%', margin: 'auto', overflow: 'auto' }}>
-                        {this.renderText()}
+                    <div className="text-timer">
+                        <div className="text-container">
+                            {this.renderText()}
+                        </div>
+                        <div className="timer-container">
+                            <Timer ref={this.timer} correctChars={this.state.correctChars} />
+                        </div>
                     </div>
-                    <div>
+
+                    <div style={{ height: '50%' }}>
                         <div style={{ width: '50%', left: '50%', margin: 'auto', overflow: 'auto' }}>
                             <ProgressBar variant="success" now={this.state.totalPercentage} />
                         </div>

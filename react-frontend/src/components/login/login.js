@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Alert from 'react-bootstrap/Alert';
+import history from '../../history';
 import './login.css';
 
 export default class Login extends Component {
@@ -70,7 +71,7 @@ export default class Login extends Component {
                     })
                     this.props.sendUserName()
                     this.props.closeLogin();
-
+                    history.push('/');
                 })
             }
             else {
@@ -104,6 +105,7 @@ export default class Login extends Component {
             <div id="loginModal" className="login-modal" style={{ display: this.state.show }}>
                 <div id="loginModalContent" className="login-modal-content" >
                     <div className="container" ref={this.wrapperRef}>
+                        <div className="login-container">
                         <div className="row1">
                             <div className="col-md-8 offset-md-2">
                                 <div className="login-form">
@@ -135,6 +137,7 @@ export default class Login extends Component {
                                         </Alert>
                                         : null}
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>

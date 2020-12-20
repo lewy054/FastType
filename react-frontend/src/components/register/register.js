@@ -120,42 +120,44 @@ export default class Register extends Component {
             <div id="registerModal" className="register-modal" style={{ display: this.state.show }}>
                 <div id="registerModalContent" className="register-modal-content" >
                     <div className="container" ref={this.wrapperRef}>
-                        <div className="row1">
-                            <div className="col-md-8 offset-md-2">
-                                <div className="register-form">
-                                    <h1>Zarejestruj się</h1>
-                                    <form >
-                                        <div className="form-group">
-                                            <label >Nazwa użytkownika</label>
-                                            <input type="username" className="form-control" aria-describedby="usernameHelp"
-                                                placeholder="Wprowadź nazwę użytkownika" onChange={this.onUserNameChange} value={this.state.username} />
-                                        </div>
-                                        <div className="form-group">
-                                            <label >Adres email</label>
-                                            <input type="email" className="form-control" aria-describedby="emailHelp"
-                                                onChange={this.onEmailChange} placeholder="Wprowadź swój adres email" value={this.state.email} />
-                                        </div>
-                                        <div className="form-group">
-                                            <label >Hasło</label>
-                                            <input type="password" className="form-control" placeholder="Hasło"
-                                                onChange={this.onPasswordChange} value={this.state.password} />
-                                        </div>
-                                        <div className="form-group">
-                                            <label >Powtórz hasło</label>
-                                            <input type="password" className="form-control"
-                                                placeholder="Powtórz hasło" onChange={this.onPassConfChange} value={this.state.confPass} />
-                                        </div>
-                                        <button type="submit" className="btn btn-primary" onClick={this.register}>Zarejestruj się</button>
-                                    </form>
-                                    <br />
-                                    {this.state.showAlert ?
-                                        <Alert variant={this.state.variant} onClose={() => this.setState({ showAlert: false })} dismissible>
-                                            <Alert.Heading>{this.state.alertHead}</Alert.Heading>
-                                            <p>
-                                                {this.state.alertText}
-                                            </p>
-                                        </Alert>
-                                        : null}
+                        <div className="register-container">
+                            <div className="row1">
+                                <div className="col-md-8 offset-md-2">
+                                    <div className="register-form">
+                                        <h1>Zarejestruj się</h1>
+                                        <form >
+                                            <div className="form-group">
+                                                <label >Nazwa użytkownika</label>
+                                                <input type="username" className="form-control" aria-describedby="usernameHelp"
+                                                    placeholder="Wprowadź nazwę użytkownika" onChange={this.onUserNameChange} value={this.state.username} />
+                                            </div>
+                                            <div className="form-group">
+                                                <label >Adres email</label>
+                                                <input type="email" className="form-control" aria-describedby="emailHelp"
+                                                    onChange={this.onEmailChange} placeholder="Wprowadź swój adres email" value={this.state.email} />
+                                            </div>
+                                            <div className="form-group">
+                                                <label >Hasło</label>
+                                                <input type="password" className="form-control" placeholder="Hasło"
+                                                    onChange={this.onPasswordChange} value={this.state.password} />
+                                            </div>
+                                            <div className="form-group">
+                                                <label >Powtórz hasło</label>
+                                                <input type="password" className="form-control"
+                                                    placeholder="Powtórz hasło" onChange={this.onPassConfChange} value={this.state.confPass} />
+                                            </div>
+                                            <button type="submit" className="btn btn-primary" onClick={this.register}>Zarejestruj się</button>
+                                        </form>
+                                        <br />
+                                        {this.state.showAlert ?
+                                            <Alert variant={this.state.variant} onClose={() => this.setState({ showAlert: false })} dismissible>
+                                                <Alert.Heading>{this.state.alertHead}</Alert.Heading>
+                                                <p>
+                                                    {this.state.alertText}
+                                                </p>
+                                            </Alert>
+                                            : null}
+                                    </div>
                                 </div>
                             </div>
                         </div>

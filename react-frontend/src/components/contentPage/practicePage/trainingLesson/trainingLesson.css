@@ -9,23 +9,42 @@
   left: 50%;
 }
 
-.letterToWrite{
-    background-color: 'f00000';
-    animation-duration: 1.5s;
-    animation-name: blinkingBorder;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-    padding: 10px;
+.letterToWrite {
+  background-color: "f00000";
+  animation-duration: 1.5s;
+  animation-name: blinkingBorder;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  padding: 10px;
+}
+
+.text-timer {
+  height: 500px;
+  width: 100%;
+  padding: 10px 10px;
+  position: relative;
+}
+
+.text-container {
+  width: 50%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.timer-container {
+  position: absolute;
+  right: 10%;
+  top: 10%;
 }
 
 @keyframes blinkingBorder {
-    0% {
-        border: 2px solid white
-    }
-    50% {
-        border: 2px solid #4287f5;
-    }
-    100% {
-        border: 2px solid white
-    }
+  0% {
+    border: 2px solid white;
   }
+  50% {
+    border: 2px solid #4287f5;
+  }
+  100% {
+    border: 2px solid white;
+  }
+}

@@ -1,99 +1,747 @@
 [
     {
         "id": 0,
-        "title": "Lesson 1",
-        "description": "fjfj",
+        "title": "Lekcja 1",
+        "description": "Wstęp: W tej lekcji nauczysz się postawowych klawiszy czyli f oraz j",
         "lessonType": "previewLesson",
         "image" : "fjpreview",
-        "text" : "!@#$%^&*()_+[]\\;',./{}|:\"<>?",
-        "done":true
+        "text" : "fjfj"
     },
     {
         "id": 1,
-        "title" : "Lesson 2",
-        "description": "f j f j",
+        "title" : "Lekcja 2",
+        "description": "Wstęp: Nauczysz się stawiania odstępu między znakami czyli klawisza spacja",
         "lessonType": "previewLesson",
-        "image" : "fjpreview",
-        "text" : "f j f j",
-        "done":true
+        "image" : "spacebarpreview",
+        "text" : "f j f j"
     },
     {
         "id": 2,
-        "title" : "Lesson 3",
-        "description": "test3",
-        "lessonType": "previewLesson",
-        "image" : "fjpreview",
-        "text" : "AASDFGHJKLasdfghjkl"
+        "title" : "Lekcja 3",
+        "description": "Doskonalenie: Poprawisz tutaj swoje zdolności w pistaniu liter f oraz j",
+        "lessonType": "trainingLesson",
+        "image" : "fjtraining",
+        "text" : "fffjj ffjfj ffj"
     },
     {
         "id": 3,
-        "title" : "Lesson 4",
-        "description": "test4",
-        "lessonType": "trainingLesson",
-        "image" : "placeholder",
-        "text" : "ff jj ff jj FF JJ FF"
+        "title" : "Lekcja 4",
+        "description": "Wstęp: W tej lekcji nauczysz się pisania liter d, k",
+        "lessonType": "previewLesson",
+        "image" : "dkpreview",
+        "text" : "dk dk"
     },
     {
         "id": 4,
-        "title" : "Lesson 5",
-        "description": "test5",
-        "image" : "placeholder",
-        "text" : "jjjjjjjjjj"
+        "title" : "Lekcja 5",
+        "description": "Doskonalenie: Dzięki tej lekcji utrwalisz zasady korzystania z klawiszy d, k",
+        "lessonType": "trainingLesson",
+        "image" : "dktraining",
+        "text" : "dk kdk kdd dkdkddk"
     },
     {
         "id": 5,
-        "title" : "Lesson 6",
-        "description": "test6",
-        "image" : "placeholder",
-        "text" : "jjjjjjjjjj"
+        "title" : "Podsumowanie 1",
+        "description": "Przećwiczysz tutaj wszystkie poznane do tej pory litery",
+        "lessonType": "summaryLesson",
+        "image" : "summary",
+        "text" : "fjdk fdkfjdk fjdfk jkdf jkfd"
     },
     {
         "id": 6,
-        "title" : "Lesson 7",
-        "description": "test7",
-        "image" : "placeholder",
-        "text" : "jjjjjjjjjj"
+        "title" : "Lekcja 6",
+        "description": "Wstęp: Zapoznasz się tutaj z zasadami obsługiwania klawiszy s, l",
+        "lessonType": "previewLesson",
+        "image" : "slpreview",
+        "text" : "sl sl"
     },
     {
         "id": 7,
-        "title" : "Lesson 8",
-        "description": "test8",
-        "image" : "placeholder",
-        "text" : "jjjjjjjjjj"
+        "title" : "Lekcja 7",
+        "description": "Doskonalenie: Udoskonalisz tutaj swoje zdolności pisania liter s, l",
+        "lessonType": "trainingLesson",
+        "image" : "sltraining",
+        "text" : "sl ls l ssls lslslsl s ls ls"
     },
     {
         "id": 8,
-        "title" : "Lesson 7",
-        "description": "test7",
-        "image" : "placeholder",
-        "text" : "jjjjjjjjjj"
+        "title" : "Lekcja 8",
+        "description": "Wstęp: Poznasz tutaj obsługę klawiszy a i ;",
+        "lessonType": "previewLesson",
+        "image" : "a;preview",
+        "text" : "a; a;"
     },
     {
         "id": 9,
-        "title" : "Lesson 7",
-        "description": "test7",
-        "image" : "placeholder",
-        "text" : "jjjjjjjjjj"
+        "title" : "Lekcja 9",
+        "description": "Doskonalenie: Przećwiczysz tutaj wciskanie przycisków odpowiadających za znaki a i ;",
+        "lessonType": "trainingLesson",
+        "image" : "a;training",
+        "text" : "a;; aa a aaa ;a aa; aa"
     },
     {
         "id": 10,
-        "title" : "Lesson 7",
-        "description": "test7",
-        "image" : "placeholder",
-        "text" : "jjjjjjjjjj"
+        "title" : "Podsumowanie 2",
+        "description": "Pisanie wszystkich liter rzędu głównego",
+        "lessonType": "summaryLesson",
+        "image" : "summary",
+        "text" : "fajdk sklakd kjfdsaj kdjfskld; fjaadk lsjfds djfsk"
     },
     {
         "id": 11,
-        "title" : "Lesson 7",
-        "description": "test7",
-        "image" : "placeholder",
-        "text" : "jjjjjjjjjj"
+        "title" : "Informacje 1",
+        "description": "Zakończenie nauki głównego rzędu",
+        "lessonType": "informationLesson",
+        "image" : "information",
+        "text" : "Brawo! Udało ci się ukończyć nauke z głównego rzędu klawiatury. Kolejnym krokiem w nauce będzie przejdzie do rzędu wyżej. Powodzenia!"
     },
     {
         "id": 12,
-        "title" : "Lesson 7",
-        "description": "test7",
+        "title" : "Lekcja 10",
+        "description": "Wstęp: Poznasz tutaj litery r, u",
+        "lessonType": "previewLesson",
+        "image" : "rupreview",
+        "text" : "ru ru"
+    },
+    {
+        "id": 13,
+        "title" : "Lekcja 11",
+        "description": "Doskonalenie: W tej lekcji przećwiczysz pisanie liter r, u",
+        "lessonType": "trainingLesson",
+        "image" : "rutraining",
+        "text" : "ruu rrrrurruuu ur ur ru rr uu r"
+    },
+    {
+        "id": 14,
+        "title" : "Lekcja 12",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "fuksja skaluj grasuj hulaj dukaj kraju raduj"
+    },
+    {
+        "id": 15,
+        "title" : "Lekcja 13",
+        "description": "Wstęp: Poznanie liter e, i",
+        "lessonType": "previewLesson",
+        "image" : "eipreview",
+        "text" : "ei ei ei"
+    },
+    {
+        "id": 16,
+        "title" : "Lekcja 14",
+        "description": "Doskonalenie: Ćwiczenia pisania liter e, i",
+        "lessonType": "trainingLesson",
+        "image" : "eitraining",
+        "text" : "eiii eiieiei iie eieeiiii eee"
+    },
+    {
+        "id": 17,
+        "title" : "Podsumowanie 3",
+        "description": "Przećwiczysz tutaj pisanie wszystkich poznanych do tej pory znaków",
+        "lessonType": "summaryLesson",
+        "image" : "summary",
+        "text" : "ldksa fgjk rui ldaie; ekdsikjruj dsahhdreu"
+    },
+    {
+        "id": 18,
+        "title" : "Lekcja 15",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "deklasuj lakieruj grilluje luksfera usidla grafik glejak daleki"
+    },
+    {
+        "id": 19,
+        "title" : "Lekcja 16",
+        "description": "Wstęp: W tej lekcji poznasz zasady pisania liter w, o",
+        "lessonType": "previewLesson",
+        "image" : "wopreview",
+        "text" : "wo wo wo"
+    },
+    {
+        "id": 20,
+        "title" : "Lekcja 17",
+        "description": "Doskonalenie: W tej lekcji będziesz ćwiczyć pisanie liter w, o",
+        "lessonType": "trainingLesson",
+        "image" : "wotraining",
+        "text" : "owooo owowoww wwowow wwwo wowo wwo wow"
+    },
+    {
+        "id": 21,
+        "title" : "Lekcja 18",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "rudawskiego drwalskiego freskowali figurowej dialog grudkowej odreaguj odkuwali"
+    },
+    {
+        "id": 22,
+        "title" : "Lekcja 19",
+        "description": "Wstęp: Nauczysz się tutaj pisania liter q, p",
+        "lessonType": "previewLesson",
+        "image" : "qppreview",
+        "text" : "qp qp qp"
+    },
+    {
+        "id": 23,
+        "title" : "Lekcja 20",
+        "description": "Doskonalenie: Udoskonalisz tutaj pisanie liter q, p",
+        "lessonType": "trainingLesson",
+        "image" : "qptraining",
+        "text" : "qpqpqp qpqpq qqqqp qpqpppp qpqpqp"
+    },
+    {
+        "id": 24,
+        "title" : "Lekcja 21",
+        "description": "Wstęp: W tej lekcji poznasz klawisze t, y",
+        "lessonType": "previewLesson",
+        "image" : "typreview",
+        "text" : "ty ty ty"
+    },
+    {
+        "id": 25,
+        "title" : "Lekcja 22",
+        "description": "Doskonalenie: Nauczysz się tutaj efektywnego pisania liter t, y",
+        "lessonType": "trainingLesson",
+        "image" : "tytraining",
+        "text" : "tyyy tytyttt tt yyy tyttt tytyty tyttytyttt yt"
+    },
+    {
+        "id": 26,
+        "title" : "Podsumowanie 4",
+        "description": "Przećwiczysz tutaj pisanie wszystkich poznanych do tej pory znaków",
+        "lessonType": "summaryLesson",
+        "image" : "summary",
+        "text" : "kdsj ;lsdakfgjr iqopw eutpckdshuiweo powikdjwitk poewkldsl woiepo"
+    },
+    {
+        "id": 27,
+        "title" : "Lekcja 23",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "typografia typograf futerkowe kuropatwy produkty kryptowa faktury odfruwa parkietowy deaktywuj"
+    },
+    {
+        "id": 28,
+        "title" : "Lekcja 24",
+        "description": "Doskonalenie: W tej lekcji podszkolisz przechodzenie między rzędem głównym, a górnym",
+        "lessonType": "trainingLesson",
         "image" : "placeholder",
-        "text" : "jjjjjjjjjj"
+        "text" : "aq sw de fr gt hy ju ki lo ;p uj ik rfedwsyholaq"
+    },
+    {
+        "id": 29,
+        "title" : "Informacje 2",
+        "description": "Zakończenie nauki drugiego rzędu",
+        "lessonType": "informationLesson",
+        "image" : "information",
+        "text" : "Brawo! Udało ci się ukończyć nauke z drugiego rzędu klawiatury. Od poznania wszystkich liter dzieli cię tylko jeden rząd. Powodzenia!"
+    },
+    {
+        "id": 30,
+        "title" : "Lekcja 25",
+        "description": "Wstęp: Poznasz tutaj pierwsze litery z rzędu dolnego czyli v oraz m",
+        "lessonType": "previewLesson",
+        "image" : "vmpreview",
+        "text" : "vm vm vm"
+    },
+    {
+        "id": 31,
+        "title" : "Lekcja 26",
+        "description": "Doskonalenie: Przećwiszysz tutaj pisanie liter v oraz m",
+        "lessonType": "trainingLesson",
+        "image" : "vmtraining",
+        "text" : "vmmm vmvmvmvvvm mm vv m vm vmv"
+    },
+    {
+        "id": 32,
+        "title" : "Lekcja 27",
+        "description": "Wstęp: Nauczysz się tutaj pisania litery c oraz stawiania przecinków",
+        "lessonType": "previewLesson",
+        "image" : "c,preview",
+        "text" : "c,c,c"
+    },
+    {
+        "id": 33,
+        "title" : "Lekcja 28",
+        "description": "Doskonalenie: Udoskonalisz tutaj swoje zdolności pisania litery c oraz umieszczania w tekście przecinków",
+        "lessonType": "trainingLesson",
+        "image" : "c,training",
+        "text" : "ccc,ccc c,c,c,cccccc, c cccccccc,cccc,ccccc"
+    },
+    {
+        "id": 34,
+        "title" : "Lekcja 29",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "sufitowych, kostucha kapslowych psalmowych violetta, wyprostujcie plecy, permutacja"
+    },
+    {
+        "id": 35,
+        "title" : "Lekcja 30",
+        "description": "Wstęp: Poznasz tutaj literę x oraz znak kropki",
+        "lessonType": "previewLesson",
+        "image" : "x.preview",
+        "text" : "x.x."
+    },
+    {
+        "id": 36,
+        "title" : "Lekcja 31",
+        "description": "Doskonalenie: Przećwiczysz tutaj pisanie litery x oraz kropkę",
+        "lessonType": "trainingLesson",
+        "image" : "x.training",
+        "text" : "xxx.xxx.xxxxx... xx.x xxx . xxx."
+    },
+    {
+        "id": 37,
+        "title" : "Podsumowanie 5",
+        "description": "Przećwiczysz tutaj pisanie wszystkich poznanych do tej pory znaków",
+        "lessonType": "summaryLesson",
+        "image" : "summary",
+        "text" : "iewqjksdap eqoi, xcmaweqitnkmfdkop cmjghops, qwepolkmmvcd."
+    },
+    {
+        "id": 38,
+        "title" : "Lekcja 32",
+        "description": "Wstęp: W tej lekcji zostanie wprowadzona litera z oraz ukośnik",
+        "lessonType": "previewLesson",
+        "image" : "zSlashpreview",
+        "text" : "z/z/z"
+    },
+    {
+        "id": 39,
+        "title" : "Lekcja 33",
+        "description": "Doskonalenie: Przećwiczysz tutaj literę z oraz pisanie ukośnika",
+        "lessonType": "trainingLesson",
+        "image" : "zSlashtraining",
+        "text" : "zzz/z zzzzz /zzzzzz/zzzzzzz/  zzzzzzzz zz"
+    },
+    {
+        "id": 40,
+        "title" : "Lekcja 34",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "xavier, jak sformatujesz dysk to posprzataj w szafie i poodkurzaj."
+    },
+
+    {
+        "id": 41,
+        "title" : "Lekcja 35",
+        "description": "Wstęp: Poznasz tutaj litery b oraz n",
+        "lessonType": "previewLesson",
+        "image" : "bnpreview",
+        "text" : "bn bn bn"
+    },
+    {
+        "id": 42,
+        "title" : "Lekcja 36",
+        "description": "Doskonalenie: Udoskonalisz tutaj swoje zdolności pisania liter b oraz n",
+        "lessonType": "trainingLesson",
+        "image" : "bntraining",
+        "text" : "bn bn bnnn bnbnbbnbnbnbbb nn bbbn bnbb"
+    },
+    {
+        "id": 43,
+        "title" : "Lekcja 37",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "twoj tekst sklada sie ze wszystkich liter na klawiaturze, dzieki czemu mozesz przejsc do bardziej zaawansowanych rzeczy np. duze litery/polskie znaki."
+    },
+    {
+        "id": 44,
+        "title" : "Podsumowanie 6",
+        "description": "Przećwiczysz tutaj pisanie znaków z całej klawiatury",
+        "lessonType": "summaryLesson",
+        "image" : "summary",
+        "text" : "qweoi kdsalkeum cxz,m.ld poei odsamjkjwequ dnasnbiejwqe, dsa. zxcqwerf/ghhtqweip."
+    },
+    {
+        "id": 45,
+        "title" : "Informacje 3",
+        "description": "Zakończenie nauki małych liter",
+        "lessonType": "informationLesson",
+        "image" : "information",
+        "text" : "Właśnie opanowałeś trzeci rząd co znaczy, że potrafisz pisać podstawowe, małe litery. Jesteś gotowy, żeby przejść do wielkich liter?"
+    },
+
+
+
+
+
+
+
+    {
+        "id": 46,
+        "title" : "Informacje 4",
+        "description": "Wstęp do dużych liter",
+        "lessonType": "informationLesson",
+        "image" : "information",
+        "text" : "Od tego momentu będziesz się uczył pisania dużych liter. Żeby to uczynić trzeba przytrzymać klawisz Shift a następnie porządaną literę."
+    },
+    {
+        "id": 47,
+        "title": "Lekcja 38",
+        "description": "Wstęp: W tej lekcji poznasz pierwsze wielkie litery - F oraz J",
+        "lessonType": "previewLesson",
+        "image" : "FJpreviewbig",
+        "text" : "F J F J"
+    },
+    {
+        "id": 48,
+        "title" : "Lekcja 39",
+        "description": "Doskonalenie: Opanujesz tutaj pisanie liter F, J",
+        "lessonType": "trainingLesson",
+        "image" : "FJtrainingbig",
+        "text" : "FFFJF JFFJ F JFJFF"
+    },
+    {
+        "id": 49,
+        "title" : "Lekcja 40",
+        "description": "Wstęp: Poznanie liter D, K",
+        "lessonType": "previewLesson",
+        "image" : "DKpreviewbig",
+        "text" : "DK DK"
+    },
+    {
+        "id": 50,
+        "title" : "Lekcja 41",
+        "description": "Doskonalenie: Ćwiczenie pisania liter D, K",
+        "lessonType": "trainingLesson",
+        "image" : "DKtrainingbig",
+        "text" : "DK DDKD DKDKD DKDKDDDD DK"
+    },
+    {
+        "id": 51,
+        "title" : "Podsumowanie 7",
+        "description": "Przećwiczysz tutaj pisanie wszystkich poznanych do tej pory znaków",
+        "lessonType": "summaryLesson",
+        "image" : "summary",
+        "text" : "FJFJ DK JFDKFJ FJDKFD JKDFFDJK"
+    },
+    {
+        "id": 52,
+        "title" : "Lekcja 42",
+        "description": "Wstęp: W tej lekcji zaznajomisz się z literami S oraz L",
+        "lessonType": "previewLesson",
+        "image" : "SLpreviewbig",
+        "text" : "SL SL"
+    },
+    {
+        "id": 53,
+        "title" : "Lekcja 43",
+        "description": "Doskonalenie: Celem tej lekcji jest przećwiczenie liter S, a także L",
+        "lessonType": "trainingLesson",
+        "image" : "SLtrainingbig",
+        "text" : "SL SLSL LSSL SL SL SLSLSSS"
+    },
+    {
+        "id": 54,
+        "title" : "Lekcja 44",
+        "description": "Wstęp: Poznasz tutaj obsługę klawiszy a i ;",
+        "lessonType": "previewLesson",
+        "image" : "Acolonpreviewbig",
+        "text" : "A: A:"
+    },
+    {
+        "id": 55,
+        "title" : "Lekcja 45",
+        "description": "Doskonalenie: Przećwiczysz tutaj wciskanie przycisków odpowiadających za znaki A i :",
+        "lessonType": "trainingLesson",
+        "image" : "Acolontrainingbig",
+        "text" : "A:AA A:AA: AAAA A:"
+    },
+    {
+        "id": 56,
+        "title" : "Podsumowanie 8",
+        "description": "Przećwiczysz tutaj pisanie wszystkich znaków z głównego rzędu",
+        "lessonType": "summaryLesson",
+        "image" : "summary",
+        "text" : "FASKsadcxzALDqwerrqw SDAKD: DdacbvhgytukjhASDFLF:D AbvfdsSDFG:DAewqD;  DASGGA"
+    },
+    {
+        "id": 57,
+        "title" : "Informacje 5",
+        "description": "Zakończenie nauki pierwszego rzędu wielkich liter",
+        "lessonType": "informationLesson",
+        "image" : "information",
+        "text" : "Zakończyłeś naukę pisania wielkich liter z głównego rzędu. Jesteś gotowy aby przejść rząd wyżej, ale zanim to uczynisz pamiętaj, żeby robić sobie przerwy w nauce :)"
+    },
+    {
+        "id": 58,
+        "title" : "Lekcja 46",
+        "description": "Wstęp: Poznasz tutaj litery R, U",
+        "lessonType": "previewLesson",
+        "image" : "RUpreviewbig",
+        "text" : "RU RU"
+    },
+    {
+        "id": 59,
+        "title" : "Lekcja 47",
+        "description": "Doskonalenie: W tej lekcji przećwiczysz pisanie liter r, u",
+        "lessonType": "trainingLesson",
+        "image" : "RUtrainingbig",
+        "text" : "RURUUU RUUU UU RURURU RRRU U UR UR"
+    },
+    {
+        "id": 60,
+        "title" : "Lekcja 48",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "Skaluj Fuksja Grasuj Raduj Dukaj Hulaj Kraju"
+    },
+    {
+        "id": 61,
+        "title" : "Lekcja 49",
+        "description": "Wstęp: W tej lekcji nauczysz się pisania liter E, I",
+        "lessonType": "previewLesson",
+        "image" : "EIpreviewbig",
+        "text" : "EI EI EI"
+    },
+    {
+        "id": 62,
+        "title" : "Lekcja 50",
+        "description": "Doskonalenie: Nauczysz się tutaj efektywnego pisania liter E, I",
+        "lessonType": "trainingLesson",
+        "image" : "EItrainingbig",
+        "text" : "EIII EIEI EIEIEEEE III EIEEE"
+    },
+    {
+        "id": 63,
+        "title" : "Podsumowanie 9",
+        "description": "Przećwiczysz tutaj pisanie wszystkich poznanych do tej pory znaków",
+        "lessonType": "summaryLesson",
+        "image" : "summary",
+        "text" : "LDKSA FGJK RUI LDAIE; EKDSIKJRUJ DSAHHDREU"
+    },
+    {
+        "id": 64,
+        "title" : "Lekcja 51",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "Deklasuj Lakieruj Grilluje LuksFera UsidlA Grafik GlejaK Daleki"
+    },
+    {
+        "id": 65,
+        "title" : "Lekcja 52",
+        "description": "Wstęp: W tej lekcji zostanie wprowadzona litera W oraz O",
+        "lessonType": "previewLesson",
+        "image" : "WOpreviewbig",
+        "text" : "WO WO WO"
+    },
+    {
+        "id": 66,
+        "title" : "Lekcja 53",
+        "description": "Doskonalenie: Przećwiczysz tutaj literę W oraz O",
+        "lessonType": "trainingLesson",
+        "image" : "WOtrainingbig",
+        "text" : "OWOO WOWO WOWOO WOWO WOWOWOWWWWOOOO"
+    },
+    {
+        "id": 67,
+        "title" : "Lekcja 54",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "RudawSkiego DiaLog drWalskieGo grudkowej Freskowali Odkuwali figurowej ODREaguj"
+    },
+    {
+        "id": 68,
+        "title" : "Lekcja 55",
+        "description": "Wstęp: Nauczysz się tutaj pisania liter Q, P",
+        "lessonType": "previewLesson",
+        "image" : "QPpreviewbig",
+        "text" : "QP QP QP"
+    },
+    {
+        "id": 67,
+        "title" : "Lekcja 56",
+        "description": "Doskonalenie: Polepszysz tutaj umiejętności pisanie liter Q, P",
+        "lessonType": "trainingLesson",
+        "image" : "QPtrainingbig",
+        "text" : "QPQPP QPQPQ QPQPQPQQQQP QPQPPQ"
+    },
+    {
+        "id": 68,
+        "title" : "Lekcja 57",
+        "description": "Wstęp: W tej lekcji poznasz klawisze T, Y",
+        "lessonType": "previewLesson",
+        "image" : "TYpreviewbig",
+        "text" : "TY TY TY"
+    },
+    {
+        "id": 67,
+        "title" : "Lekcja 58",
+        "description": "Doskonalenie: Nauczysz się tutaj efektywnego pisania liter T, Y",
+        "lessonType": "trainingLesson",
+        "image" : "TYtrainingbig",
+        "text" : "TYT YTYTYYTYTYT TYTY TTYTYTYT TYTYTYTYT"
+    },
+    {
+        "id": 68,
+        "title" : "Podsumowanie 10",
+        "description": "Przećwiczysz tutaj pisanie znaków z głównego oraz górnego rzędu",
+        "lessonType": "summaryLesson",
+        "image" : "summary",
+        "text" : "DSAHjwqehiuLEWPQO SADL;KPEWQpijjdsayeqw: FGYTEqsadklpo"
+    },
+    {
+        "id": 69,
+        "title" : "Lekcja 59",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "Typografia TYPOgraf Futerkowe Kuropatwy Produkty KRYPTOWA faktury Odfruwa parkietowy deAKTYWUJ"
+    },
+    {
+        "id": 70,
+        "title" : "Informacje 6",
+        "description": "Zakończenie nauki drugiego rzędu",
+        "lessonType": "informationLesson",
+        "image" : "information",
+        "text" : "Brawo! Udało ci się ukończyć nauke z drugiego rzędu klawiatury. Od poznania wszystkich liter dzieli cię tylko jeden rząd. Powodzenia!"
+    },
+    {
+        "id": 71,
+        "title" : "Lekcja 60",
+        "description": "Doskonalenie: W tej lekcji podszkolisz przechodzenie między rzędami",
+        "lessonType": "trainingLesson",
+        "image" : "placeholder",
+        "text" : "AQ SW DE FR GT HY JU KI LO :P EF YH UG ESIKJUHY"
+    },
+    {
+        "id": 72,
+        "title" : "Lekcja 61",
+        "description": "Wstęp: W tej lekcji poznasz zasady pisania liter V, M",
+        "lessonType": "previewLesson",
+        "image" : "VMpreviewbig",
+        "text" : "VM VM VM"
+    },
+    {
+        "id": 73,
+        "title" : "Lekcja 62",
+        "description": "Doskonalenie: W tej lekcji będziesz ćwiczyć pisanie liter V, M",
+        "lessonType": "trainingLesson",
+        "image" : "VMtrainingbig",
+        "text" : "VMVMVM VMM MVMV MVM MVMMVMV MVVM"
+    },
+    {
+        "id": 74,
+        "title" : "Lekcja 63",
+        "description": "Wstęp: Poznasz tutaj literę C oraz znak mniejszości",
+        "lessonType": "previewLesson",
+        "image" : "Clesspreviewbig",
+        "text" : "C<C<C<"
+    },
+    {
+        "id": 75,
+        "title" : "Lekcja 64",
+        "description": "Doskonalenie: Przećwiczysz tutaj pisanie litery C oraz znaku mniejszości",
+        "lessonType": "trainingLesson",
+        "image" : "Clesstrainingbig",
+        "text" : "CCCCCCC< CCC <C <<< CCCC"
+    },
+    {
+        "id": 76,
+        "title" : "Lekcja 65",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "sufitowych, kostucha kapslowych psalmowych violetta, wyprostujcie plecy, permutacja"
+    },
+    {
+        "id": 77,
+        "title" : "Lekcja 66",
+        "description": "Wstęp: W tej lekcji zostanie wprowadzona litera X oraz znak większości",
+        "lessonType": "previewLesson",
+        "image" : "Xmorepreviewbig",
+        "text" : "X>X>X>"
+    },
+    {
+        "id": 78,
+        "title" : "Lekcja 67",
+        "description": "Doskonalenie: Przećwiczysz tutaj literę X oraz pisanie znaku wiekszości",
+        "lessonType": "trainingLesson",
+        "image" : "Xmoretrainingbig",
+        "text" : "X> X>XXXXX>XXXXXX XX>>X"
+    },
+    {
+        "id": 79,
+        "title" : "Podsumowanie 11",
+        "description": "Przećwiczysz tutaj pisanie wszystkich poznanych do tej pory znaków",
+        "lessonType": "summaryLesson",
+        "image" : "summary",
+        "text" : "IEWQJPopdskawVDASdasgwqKLJHRfsdgRqIEWQ, JM<N>axcPOE. QW LNmn."
+    },
+    {
+        "id": 80,
+        "title" : "Lekcja 68",
+        "description": "Wstęp: Poznasz tutaj literę Z oraz znak zapytania",
+        "lessonType": "previewLesson",
+        "image" : "Zquestionpreviewbig",
+        "text" : "Z? Z?Z?"
+    },
+    {
+        "id": 81,
+        "title" : "Lekcja 69",
+        "description": "Doskonalenie: Udoskonalisz tutaj swoje zdolności pisania litery Z oraz znaku zapytania",
+        "lessonType": "trainingLesson",
+        "image" : "Zquestiontrainingbig",
+        "text" : "ZZZZ?ZZZZZ? ZZZZ? ZZZZ?"
+    },
+    {
+        "id": 82,
+        "title" : "Lekcja 70",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "Xavier, jak sformatujesz Dysk to POSPRZATAJ w SZAFIE i poodkurzaj. Zgoda?"
+    },
+
+    {
+        "id": 83,
+        "title" : "Lekcja 71",
+        "description": "Wstęp: W tej lekcji poznasz klawisze B, N",
+        "lessonType": "previewLesson",
+        "image" : "BNpreviewbig",
+        "text" : "BN BN BN"
+    },
+    {
+        "id": 84,
+        "title" : "Lekcja 72",
+        "description": "Doskonalenie: Nauczysz się tutaj efektywnego pisania liter B, N",
+        "lessonType": "trainingLesson",
+        "image" : "BNtrainingbig",
+        "text" : "BBNB BBNB BNBBNBN BNBNBNNBN BNBN"
+    },
+    {
+        "id": 85,
+        "title" : "Podsumowanie 12",
+        "description": "Przećwiczysz tutaj pisanie wszystkich poznanych wielkich znaków z całej klawiatury",
+        "lessonType": "summaryLesson",
+        "image" : "summary",
+        "text" : "QWERSAD ASDR? YTTGDF. DSXCZVBN>eqwdsa<ewqt:podsak;"
+    },
+    {
+        "id": 86,
+        "title" : "Lekcja 73",
+        "description": "Praktyka: Nauka pisania poznanych liter w słowach",
+        "lessonType": "practiceLesson",
+        "image" : "practice",
+        "text" : "Nauczyles sie pisania wszystkich podstawowych WIELKICH liter. Najwazniejsza czesc nauki za Toba."
+    },
+    {
+        "id": 87,
+        "title" : "Informacje 7",
+        "description": "Zakończenie nauki wielkich liter",
+        "lessonType": "informationLesson",
+        "image" : "information",
+        "text" : "Zakończyłeś naukę trzeciego rzędu wielkich liter co oznacza, że potrafisz pisać wszystkie podstawowe litery bez względu na to czy są to małe czy wielkie znaki. Ukończyłeś znaczną część nauki. Jeszcze trochę, a ukończysz cały kurs. Powodzenia!"
     }
 ]

@@ -16,7 +16,6 @@ import Register from '../register/register';
 import Login from '../login/login';
 
 import './contentPage.css'
-import { ResponsiveEmbed } from 'react-bootstrap';
 
 export default class ContentPage extends React.Component {
     constructor() {
@@ -82,6 +81,7 @@ export default class ContentPage extends React.Component {
                 username: 'Gość',
                 logged: false,
             })
+            history.push('/');
         }).catch(error => console.log(error))
     }
 
@@ -142,7 +142,7 @@ export default class ContentPage extends React.Component {
                 <div className="mainPage">
                     <Router history={history}>
                         <div className="navBar">
-                            <NavBar username={this.state.username} showLogin={this.showLogin} showRegister={this.showRegister} logged={this.state.logged} logout={this.logout}/>
+                            <NavBar username={this.state.username} showLogin={this.showLogin} showRegister={this.showRegister} logged={this.state.logged} logout={this.logout} />
                         </div>
                         <div ref={this.wrapperRef} className="sideBar">
                             <div className="navigation">
@@ -173,9 +173,19 @@ export default class ContentPage extends React.Component {
                                     <PracticePage {...props} onLessonSelect={this.getLessonData} />
                                 )}
                             />
+                            <Route
+                                exact path='/practice/previewLesson/:id'
+                                render={(props) => (
+                                    <PreviewLesson {...props} logged={this.state.logged} />
+                                )}
+                            />
+                            <Route
+                                exact path='/practice/trainingLesson/:id'
+                                render={(props) => (
+                                    <TrainingLesson {...props} logged={this.state.logged} />
+                                )}
+                            />
                             <Route path="/achievements" component={AchievementsList} />
-                            <Route path="/practice/previewLesson/:id" component={PreviewLesson} />
-                            <Route path="/practice/trainingLesson/:id" component={TrainingLesson} />
                             <Route path="/freeMode" component={FreeMode} />
                         </div>
                     </Router>

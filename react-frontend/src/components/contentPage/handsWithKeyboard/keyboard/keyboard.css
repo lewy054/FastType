@@ -40,8 +40,12 @@
   box-shadow: 0 0 0 0.05em black;
 }
 
+.key--w1 {
+  width: 4.5em;
+}
+
 .key--w3 {
-  width: 4.6em;
+  width: 4.5em;
 }
 
 .key--w4 {
@@ -57,7 +61,7 @@
 }
 
 .key--space {
-  width: 22.6em;
+  width: 23.7em;
 }
 
 .key--double > * {
@@ -84,22 +88,6 @@
 
 .key--word > * {
   font-size: 0.8em;
-}
-
-.key--arrow--tall > *,
-.key--arrow > * {
-  font-size: 0.5em;
-  line-height: 3em;
-}
-
-.key--arrow {
-  height: 1.8em;
-  margin-top: 1.7em;
-  line-height: 0.5em;
-}
-
-.key--arrow--tall > * {
-  padding-top: 0.2em;
 }
 
 .keyboard > .keyboard__row {

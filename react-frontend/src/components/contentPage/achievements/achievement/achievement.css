@@ -1,10 +1,11 @@
-.vertical-center {
-    margin: 0;
-    float: right;
-    height: auto;
-    width: auto;
-    position: relative;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
+.achievement-image{
+  height: 100px;
+  width: 100px;
+}
+.achievement-container{
+  margin-top: 3em;
+}
+
+.undone{
+  filter: grayscale(100%);
+}
