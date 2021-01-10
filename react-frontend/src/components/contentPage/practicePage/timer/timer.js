@@ -6,7 +6,7 @@ let one_second;
 let one_minute;
 let one_hour;
 let startDate;
-
+let score;
 
 export default class Timer extends Component {
     constructor() {
@@ -21,6 +21,7 @@ export default class Timer extends Component {
         one_second = 1000
         one_minute = one_second * 60
         one_hour = one_minute * 60
+        score = 0
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -38,8 +39,13 @@ export default class Timer extends Component {
         this.interval = setInterval(() => this.tick(), 1000);
     }
 
-    componentWillUnmount() {
+    stopTimer = () => {
+        this.setState({ started: false })
         clearInterval(this.interval);
+    }
+
+    componentWillUnmount() {
+        this.stopTimer()
     }
 
     tick = () => {
@@ -61,9 +67,21 @@ export default class Timer extends Component {
     countWPM = () => {
         let cps = this.state.correctChars / this.state.seconds;
         let wpm = cps * (60 / 5);
-        if (this.state.seconds !== 0 && this.state.started)   {
-            this.setState({ wpm: wpm })
+        if (this.state.seconds !== 0 && this.state.started) {
+            score = parseInt(wpm)
+            return parseInt(wpm)
         }
+        else {
+            return score
+        }
+    }
+
+    getWPM = () =>{
+        return (score)
+    }
+
+    getTime = () =>{
+        return (this.state.time)
     }
 
     render() {
@@ -92,7 +110,7 @@ export default class Timer extends Component {
                 </div>
                 <div className="face">
                     <h5>WPM:</h5>
-                    <h5>{this.state.wpm}</h5>
+                    <h5>{this.countWPM()}</h5>
                     <p id="lazy">{this.state.time}</p>
                 </div>
             </div>

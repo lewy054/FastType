@@ -1,7 +1,9 @@
 import React from 'react';
 import { Router, Route, Link } from 'react-router-dom';
 import history from '../../history'
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 import NavBar from '../navBar/navBar';
 import HomePage from './homePage/homePage';
@@ -16,6 +18,7 @@ import Register from '../register/register';
 import Login from '../login/login';
 
 import './contentPage.css'
+import Stats from './stats/stats';
 
 export default class ContentPage extends React.Component {
     constructor() {
@@ -81,6 +84,15 @@ export default class ContentPage extends React.Component {
                 username: 'Gość',
                 logged: false,
             })
+            toast.success('Wylogowano pomyślnie', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             history.push('/');
         }).catch(error => console.log(error))
     }
@@ -152,6 +164,7 @@ export default class ContentPage extends React.Component {
                                         <Link to="/practice"><li onClick={this.closeSideBar}><i className="fas fa-pen"></i>Praktyka</li></Link>
                                         <Link to="/achievements"><li onClick={this.closeSideBar}><i className="fas fa-trophy"></i>Osiągnięcia</li></Link>
                                         <Link to="/freeMode"><li onClick={this.closeSideBar}><i className="fas fa-dice-three"></i>Tryb swobodny</li></Link>
+                                        <Link to="/stats"><li onClick={this.closeSideBar}><i className="fas fa-chart-pie"></i>Statystki</li></Link>
                                     </ul>
                                     <ul className="navigation_list_bottom">
                                         {this.state.logged ?
@@ -185,11 +198,36 @@ export default class ContentPage extends React.Component {
                                     <TrainingLesson {...props} logged={this.state.logged} />
                                 )}
                             />
+                            <Route
+                                exact path='/practice/summaryLesson/:id'
+                                render={(props) => (
+                                    <TrainingLesson {...props} logged={this.state.logged} />
+                                )}
+                            />
+                            <Route
+                                exact path='/practice/practiceLesson/:id'
+                                render={(props) => (
+                                    <TrainingLesson {...props} logged={this.state.logged} />
+                                )}
+                            />
                             <Route path="/achievements" component={AchievementsList} />
                             <Route path="/freeMode" component={FreeMode} />
+                            <Route path="/stats" component={Stats} />
                         </div>
                     </Router>
                 </div>
+                <ToastContainer
+                    position="bottom-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
+                <ToastContainer />
             </div>
         )
     }

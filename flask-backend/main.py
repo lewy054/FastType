@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, flash, redirect, send_from_di
 from flask_cors import CORS, cross_origin
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 import database as db
+from check_achievements import AchievementCheck
 import os
 from flask import send_from_directory
 
@@ -53,12 +54,10 @@ def signIn():
         username = request.get_json()["username"]
         password = request.get_json()["password"]
         remember = request.get_json()["remember"]
-        print(remember)
         if(remember):
             remember_me()
         else:
             dont_remember()
-
         if username == None or password == None:
             return Response(json.dumps({'message': 'Nieprawidłowa nazwa użytkownika i/lub hasło'}), status=401, mimetype="application/json")
         logged = database.login_user(username, password)
@@ -104,9 +103,24 @@ def register():
 def mark_lesson_as_completed():
     if request.method == 'POST':
         database = db.Database()
-        lessonId = request.get_json()["lesson_id"]
-        database.mark_lesson_as_completed(current_user.get_id(), lessonId)
-        return Response(status=200)
+        data = request.get_json()
+        lessonId = data["lesson_id"]
+        time = '0'
+        wpm = 0
+        print('--------------------------------')
+        print(data)
+        print('------------------koniec--------------')
+        if('time' in data):
+            time = data["time"]
+        if('wpm' in data):
+            wpm = data["wpm"]
+        database.mark_lesson_as_completed(current_user.get_id(), lessonId, time, wpm)
+        achievement_check = AchievementCheck()
+        achiev_id = achievement_check.check_lesson_id(current_user.get_id(), lessonId)
+        if(achiev_id != -1):
+            return Response(json.dumps({'data': achiev_id}), status=200, mimetype="application/json")
+        else:
+            return Response(status=204, mimetype="application/json")
     else:
         return render_template('index.html')
 
@@ -118,7 +132,7 @@ def get_lesson_status():
     return Response(json.dumps({'data': lessons}), status=200, mimetype="application/json")
 
 
-@app.route('/getAchievemenetsStatus', methods=['GET', 'POST'])
+@app.route('/getAchievementsStatus', methods=['GET', 'POST'])
 def get_achievement_status():
     database = db.Database()
     achievements = database.load_achievements_status(current_user.get_id())
@@ -129,9 +143,118 @@ def get_achievement_status():
 def mark_achievement_as_completed():
     if request.method == 'POST':
         database = db.Database()
-        lessonId = request.get_json()["achievement_id"]
-        database.mark_achievement_as_completed(current_user.get_id(), lessonId)
+        achievement_id = request.get_json()["achievement_id"]
+        database.mark_achievement_as_completed(current_user.get_id(), achievement_id)
         return Response(status=200)
+    else:
+        return render_template('index.html')
+
+
+@app.route('/checkAchievements', methods=['GET', 'POST'])
+def check_achievements():
+    achievement_check = AchievementCheck()
+    achiev_id = achievement_check.how_many_done(current_user.get_id())
+    if(achiev_id != -1):
+        return Response(json.dumps({'data': achiev_id}), status=200, mimetype="application/json")
+    else:
+        return Response(status=204, mimetype="application/json")
+
+
+@app.route('/checkAchievementsFreeMode', methods=['GET', 'POST'])
+def check_achievements_free_mode():
+    achievement_check = AchievementCheck()
+    return render_template('index.html')
+
+
+@app.route('/getAvgValues', methods=['GET', 'POST'])
+def get_avg_values():
+    database = db.Database()
+    how_many_achievements = database.how_many_achievements_done(current_user.get_id())
+    how_many_lessons = database.how_many_lessons_done(current_user.get_id())
+    user_lessons, all_lessons = database.avg_wpm(current_user.get_id())
+
+    others_wpm = 0
+    others_wpm_count = 0
+    user_wpm = 0
+    user_wpm_count = 0
+    others_avg_wpm = 0
+    avg_wpm = 0
+    for lesson in all_lessons:
+        if not lesson in user_lessons:
+            lesson = lesson.__dict__
+            if lesson['wpm'] != 0:
+                others_wpm += lesson['wpm']
+                others_wpm_count += 1
+
+    for user_lesson in user_lessons:
+        user_lesson = user_lesson.__dict__
+        if user_lesson['wpm'] != 0:
+            user_wpm += user_lesson['wpm']
+            user_wpm_count += 1
+    if(user_wpm_count):
+        avg_wpm = user_wpm/user_wpm_count
+    if(others_wpm_count):
+        others_avg_wpm = others_wpm/others_wpm_count
+    return Response(json.dumps({'achievement_count': how_many_achievements, 'lesson_count': how_many_lessons, 'avgWpm': avg_wpm, 'othersWpm': others_avg_wpm}), status=200, mimetype="application/json")
+
+
+@app.route('/getLessonDetails', methods=['GET', 'POST'])
+def get_lesson_details():
+    if request.method == 'POST':
+        database = db.Database()
+        lesson_id = request.get_json()["lessonId"]
+        print(lesson_id)
+        lesson_exists = database.check_lesson_status(current_user.get_id(), lesson_id)
+        if(lesson_exists):
+            user_lesson_details = database.get_lesson_details(current_user.get_id(), lesson_id)
+            all_lessons = database.get_all_lesson_with_id(lesson_id)
+            lower_time = higher_time = same_time = lower_wpm = higher_wpm = same_wpm = 0
+
+            for one_lesson in all_lessons:
+                one_lesson = one_lesson.__dict__
+                if not one_lesson['id'] == user_lesson_details['id']:
+                    if user_lesson_details['wpm'] < one_lesson['wpm']:
+                        higher_wpm += 1
+                    elif user_lesson_details['wpm'] > one_lesson['wpm']:
+                        lower_wpm += 1
+                    else:
+                        same_wpm += 1
+
+                    if user_lesson_details['time'] < one_lesson['time']:
+                        lower_time += 1
+                    elif user_lesson_details['time'] > one_lesson['time']:
+                        higher_time += 1
+                    else:
+                        same_time += 1
+
+            time_count = same_time + higher_time + lower_time
+            wpm_count = same_wpm + higher_wpm + lower_wpm
+            if (time_count):
+                time_one_percentage = 100 / time_count
+                lower_time_percentage = lower_time * time_one_percentage
+                higher_time_percentage = higher_time * time_one_percentage
+                same_time_percentage = same_time * time_one_percentage
+            else:
+                # if only a user record exists
+                lower_time_percentage = 100
+                higher_time_percentage = 0
+                same_time_percentage = 0
+            if (wpm_count):
+                wpm_one_percentage = 100 / wpm_count
+                lower_wpm_percentage = lower_wpm * wpm_one_percentage
+                higher_wpm_percentage = higher_wpm * wpm_one_percentage
+                same_wpm_percentage = same_wpm * wpm_one_percentage
+            else:
+                # if only a user record exists
+                lower_wpm_percentage = 100
+                higher_wpm_percentage = 0
+                same_wpm_percentage = 0
+
+            return Response(json.dumps({'time': user_lesson_details['time'], 'wpm': user_lesson_details['wpm'], 'time_slower': lower_time_percentage,
+                                        'time_faster': higher_time_percentage, 'time_same': same_time_percentage, 'wpm_faster': higher_wpm_percentage,
+                                        'wpm_slower': lower_wpm_percentage, 'wpm_same': same_wpm_percentage}), status=200, mimetype="application/json")
+        else:
+            return Response(status=204)
     else:
         return render_template('index.html')
 
@@ -151,6 +274,11 @@ def practice():
     return render_template('index.html')
 
 
+@app.route('/stats', methods=['GET', 'POST'])
+def stats():
+    return render_template('index.html')
+
+
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
@@ -164,5 +292,6 @@ def validate_email(email):
         return True
     else:
         return False
+
 
 app.run(debug=True)

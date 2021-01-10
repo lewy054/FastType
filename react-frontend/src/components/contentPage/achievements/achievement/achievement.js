@@ -25,9 +25,9 @@ export default class Achievement extends Component {
             <div className="achievement-container card flex-row flex-wrap">
                 <div className="card-header border-0">
                     {this.props.achievementStatus === 1 ?
-                        <Image className="achievement-image" src={this.state.image} alt="Zdjęcie osiągnięcia"  />
+                        <Image className="achievement-image" src={this.state.image} alt="Zdjęcie osiągnięcia" />
                         :
-                        <Image className="achievement-image undone" src={this.state.image} alt="Zdjęcie osiągnięcia"  />}
+                        <Image className="achievement-image undone" src={this.state.image} alt="Zdjęcie osiągnięcia" />}
                 </div>
                 <div className="card-body px-2">
                     <h4 className="card-title">{this.props.achievementDetails.title}</h4>

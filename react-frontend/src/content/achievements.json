@@ -7,38 +7,74 @@
     },
     {
         "id": 1,
-        "title" : "Achievement 2",
+        "title": "Achievement 2",
         "description": "Ukończ 30 lekcji",
-        "image" : "30"
+        "image": "30"
     },
     {
         "id": 2,
-        "title" : "Achievement 3",
+        "title": "Achievement 3",
         "description": "Ukończ 50 lekcji",
-        "image" : "50"
+        "image": "50"
     },
     {
         "id": 3,
-        "title" : "Achievement 3",
+        "title": "Achievement 3",
         "description": "Ukończ 70 lekcji",
-        "image" : "70"
+        "image": "70"
     },
     {
         "id": 4,
-        "title" : "Szybszy od strefy zamieszkania",
-        "description": "Osiągnij wynik ponad 20 znaków na minutę",
-        "image" : "start"
+        "title": "Szybszy od strefy zamieszkania",
+        "description": "Osiągnij wynik ponad 20 słów na minutę podczas wykonywania lekcji",
+        "image": "start"
     },
     {
         "id": 5,
-        "title" : "Połowa za nami",
-        "description": "Ukończ połowę wszystkich dostępnych lekcji",
-        "image" : "start"
+        "title": "Achievement 5",
+        "description": "Osiągnij wynik ponad 50 słów na minutę podczas wykonywania lekcji",
+        "image": "start"
     },
     {
         "id": 6,
-        "title" : "To już jest koniec",
+        "title": "Połowa za nami",
+        "description": "Ukończ połowę wszystkich dostępnych lekcji",
+        "image": "start"
+    },
+    {
+        "id": 7,
+        "title": "Czas start",
+        "description": "Zakończ naukę małych liter",
+        "image": "start"
+    },
+    {
+        "id": 8,
+        "title": "Czas start",
+        "description": "Zakończ naukę wielkich liter",
+        "image": "start"
+    },
+    {
+        "id": 9,
+        "title": "To już jest koniec",
         "description": "Ukończ wszystkie dostępne lekcję",
-        "image" : "start"
+        "image": "start"
+    },
+    {
+        "id": 10,
+        "title": "Achievement",
+        "description": "Osiągnij wynik ponad 50 słów na minutę w trybie swobodnym",
+        "image": "start"
+    },
+    {
+        "id": 11,
+        "title": "Achievement",
+        "description": "Osiągnij wynik ponad 70 słów na minutę w trybie swobodnym",
+        "image": "start"
+    },
+    {
+        "id": 12,
+        "title": "Achievement",
+        "description": "Osiągnij wynik ponad 100 słów na minutę w trybie swobodnym",
+        "image": "start"
     }
 ]

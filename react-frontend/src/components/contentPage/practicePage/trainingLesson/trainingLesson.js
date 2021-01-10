@@ -4,9 +4,11 @@ import ProgressBar from 'react-bootstrap/progressBar';
 import EndScreen from '../endScreen/endScreen';
 
 import lessons from '../../../../content/lessons.json';
-
+import achievements from '../../../../content/achievements.json';
 import './trainingLesson.css'
 import Timer from '../timer/timer';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 let lessonText;
 let loadedLessonText;
@@ -20,11 +22,15 @@ export default class TrainingLesson extends Component {
             totalPercentage: 0,
             winScreen: false,
             timerStarted: false,
+            wpm: 0,
+            time: '',
+            achiev_id: -1,
         }
         completedText = '';
         loadedLessonText = '';
         lessonText = '';
         this.timer = React.createRef();
+        this.toast = React.createRef();
     }
 
     getLetter = () => {
@@ -51,6 +57,61 @@ export default class TrainingLesson extends Component {
         )
     }
 
+    completeLesson = async () => {
+        await fetch('/completedLesson', {
+            method: 'POST',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "lesson_id": lessons[this.props.match.params.id]['id'],
+                "wpm": this.state.wpm,
+                "time": this.state.time,
+            })
+        }).then(response => {
+            if (response.status === 200) {
+                return response.text().then(text => {
+                    if (text) {
+                        text = JSON.parse(text)
+                        let achievement = text['data']
+                        toast.info('Zdobyłeś osiągnięcie "' + achievements[achievement - 1].title + '"')
+                    }
+                })
+            }
+        }).catch(error => console.log(error))
+
+    }
+
+    checkAchievements = async () => {
+        await fetch('/checkAchievements', {
+            method: 'GET',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                return response.text().then(text => {
+                    if (text) {
+                        text = JSON.parse(text)
+                        let achievement = text['data']
+                        toast.info('Zdobyłeś osiągnięcie "' + achievements[achievement - 1].title + '"', {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+                })
+            }
+        }).catch(error => console.log(error))
+    }
+
+
     componentDidMount() {
         percentage = this.countPercentages()
         document.onkeydown = (e) => {
@@ -67,22 +128,26 @@ export default class TrainingLesson extends Component {
                 if (e.key === this.getLetter()) {
                     completedText += this.getLetter();
                     lessonText = lessonText.substring(1);
-                    console.log("dobre")
-
                     this.setState({
                         correctChars: this.state.correctChars + 1,
                         totalPercentage: this.state.totalPercentage + percentage,
                     })
                 }
-                else {
-                    console.log("zle");
-                }
             }
             if (lessonText.length === 0) {
-                this.setState({
-                    winScreen: true,
-                    timerStarted:false,
-                })
+                if (!this.state.winScreen) {
+                    this.setState({
+                        winScreen: true,
+                        timerStarted: false,
+                        wpm: this.timer.current.getWPM(),
+                        time: this.timer.current.getTime(),
+                    })
+                    this.timer.current.stopTimer();
+                    if (this.props.logged) {
+                        this.completeLesson();
+                        this.checkAchievements()
+                    }
+                }
             }
         };
     }
@@ -116,10 +181,8 @@ export default class TrainingLesson extends Component {
                         <HandsWithKeyboard letter={this.getLetter()} />
                     </div>
                 </div>
-                {this.state.winScreen ? (
-                    <div>
-                        <EndScreen wpm={93} source={'test12'} howManyChar={12} />
-                    </div>) : null}
+                <EndScreen show={this.state.winScreen} lesson={lessons[this.props.match.params.id]["title"]}
+                    score={" Osiągnąłeś wynik " + this.state.wpm + " słów na minutę. Lekcja została ukończona w " + this.state.time} />
             </div>
         )
     }

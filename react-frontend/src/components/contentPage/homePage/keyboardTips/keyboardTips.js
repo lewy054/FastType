@@ -9,7 +9,7 @@ export default class KeyboardTips extends Component {
         return (
             <div style={{ marginTop: '5%', marginBottom: '5%' }}>
                 <h1>Budowa klawiatury</h1>
-                <p>Klawiatura jest podzielona na kilka bloków klawiszy..</p>
+                <p>Klawiatura jest podzielona na kilka bloków klawiszy.</p>
                 <Image src={keyboardBlocks} alt="Bloki klawiatury" fluid></Image>
                 <br />
                 <div className="keysDescription">

@@ -31,9 +31,9 @@ export default class LessonCard extends React.Component {
     render() {
         return (
             <Card className="text-center" style={{ width: '20rem', height: '28rem' }}>
-                <img className="lessonImage" src={this.state.image} style={{ width: '20rem', height: '15rem' }} alt="lesson icon" />
+                <img className="lessonImage" src={this.state.image} style={{ width: '20rem', height: '15rem' }} alt="Zdjęcie lekcji" />
                 {this.props.lessonStatus === 1 ?
-                    <img className="doneImage" src={doneImage} style={{ width: '10rem', height: '10rem' }} alt="done icon" />
+                    <img className="doneImage" src={doneImage} style={{ width: '10rem', height: '10rem' }} alt="Lekcja ukończona" />
                     : null}
                 <Card.Body style={{ marginTop: '15rem' }}>
                     <Card.Title>{this.props.lessonDetails.title}</Card.Title>

@@ -3,4 +3,4 @@ from base import Base
 
 
 class Achievement(Base):
-    __table__ = Base.metadata.tables['achievements']
+    __table__ = Base.metadata.tables['achievement']

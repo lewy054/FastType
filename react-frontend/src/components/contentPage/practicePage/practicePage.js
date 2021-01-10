@@ -1,7 +1,8 @@
 import React from 'react';
-import { CardDeck, Button, Modal } from 'react-bootstrap';
+import { CardDeck } from 'react-bootstrap';
 import LessonCard from './lessonCard/lessonCard';
 import lessons from '../../../content/lessons.json'
+import { toast } from 'react-toastify';
 import './practicePage.css';
 
 export default class PracticePage extends React.Component {
@@ -37,7 +38,15 @@ export default class PracticePage extends React.Component {
             }
             else {
                 return response.text().then(text => {
-                    console.log('nie udało się zaladować danych')
+                    toast.error('Nie udało się załadować danych', {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 })
             }
         }).catch(error => console.log(error))
@@ -52,7 +61,7 @@ export default class PracticePage extends React.Component {
             this.state.lessonsStatus.hasOwnProperty(['data']) ?
                 <CardDeck key={d.id} className="cardDeck">
                     <LessonCard className="lessonCard" onLessonSelect={this.getLessonType} lessonDetails={d}
-                        lessonStatus={data['lesson' + (d.id + 1)]} />
+                        lessonStatus={data['lesson' + d.id]} />
                 </CardDeck>
                 :
                 <CardDeck key={d.id} className="cardDeck">

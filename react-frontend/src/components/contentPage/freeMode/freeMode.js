@@ -47,7 +47,7 @@ export default class FreeMode extends Component {
             }
 
             if (letter === '.') {
-                letter='. '
+                letter = '. '
             }
             result.push(letter)
         }
@@ -84,6 +84,24 @@ export default class FreeMode extends Component {
                 </span>
             </p>
         )
+    }
+
+    checkAchievementsFreeMode = async () => {
+        await fetch('/checkAchievementsFreeMode', {
+            method: 'GET',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                return response.text().then(text => {
+                    if (text) {
+                        console.log(text)
+                    }
+                })
+            }
+        }).catch(error => console.log(error))
     }
 
 
@@ -133,10 +151,7 @@ export default class FreeMode extends Component {
                         <HandsWithKeyboard letter={this.getLetter()} />
                     </div>
                 </div>
-                {this.state.winScreen ? (
-                    <div>
-                        <EndScreen wpm={93} source={'test12'} howManyChar={12} />
-                    </div>) : null}
+                <EndScreen show={this.state.winScreen}  />
             </div>
         )
     }

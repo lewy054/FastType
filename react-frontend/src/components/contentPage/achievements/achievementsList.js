@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import achievements from '../../../content/achievements.json';
 import Achievement from './achievement/achievement';
+import { toast } from 'react-toastify';
 
 export default class AchievementsList extends Component {
     constructor() {
@@ -13,7 +14,7 @@ export default class AchievementsList extends Component {
     renderAchievements = () => {
         let data;
         if (this.state.achievementStatus.hasOwnProperty(['data'])) {
-            data = JSON.parse(this.state.lessonsStatus['data'])
+            data = JSON.parse(this.state.achievementStatus['data'])
         }
 
         return achievements.map((d) =>
@@ -22,9 +23,12 @@ export default class AchievementsList extends Component {
                 : <Achievement achievementDetails={d} achievementStatus={false} />
         )
     }
+    componentDidMount() {
+        this.getAchievementStatus();
+    }
 
     getAchievementStatus = async () => {
-        await fetch('/getAchievementStatus', {
+        await fetch('/getAchievementsStatus', {
             method: 'POST',
             credentials: "same-origin",
             headers: {
@@ -40,7 +44,15 @@ export default class AchievementsList extends Component {
             }
             else {
                 return response.text().then(text => {
-                    console.log('nie udało się zaladować danych')
+                    toast.error('Nie udało się załadować danych', {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 })
             }
         }).catch(error => console.log(error))

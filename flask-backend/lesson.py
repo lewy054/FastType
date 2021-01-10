@@ -3,4 +3,4 @@ from base import Base
 
 
 class Lesson(Base):
-    __table__ = Base.metadata.tables['lessons']
+    __table__ = Base.metadata.tables['lesson']

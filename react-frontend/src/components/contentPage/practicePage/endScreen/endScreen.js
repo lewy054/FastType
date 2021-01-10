@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import history from '../../../../history';
 
 import './endScreen.css';
@@ -8,63 +8,57 @@ export default class EndScreen extends React.Component {
     constructor() {
         super();
         this.state = {
-            display: 'block',
+            show: false,
         }
-        this.wrapperRef = React.createRef();
-        this.handleClickOutside = this.handleClickOutside.bind(this);
     }
 
-    componentDidMount() {
-        document.addEventListener('mousedown', this.handleClickOutside);
-        let modal = document.getElementById('myModalEnd');
-        modal.classList.toggle('modal-slide')
-    }
 
-    componentWillUnmount() {
-        document.removeEventListener('mousedown', this.handleClickOutside);
+    static getDerivedStateFromProps(props, state) {
+        if (props.show !== state.show) {
+            return {
+                show: props.show,
+            }
+        }
+        return null;
     }
 
     closeWindow = () => {
         this.setState({
-            display: 'none'
+            show: false,
         })
         history.push('/practice/');
     }
 
 
-    handleClickOutside(event) {
-        if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
-            if (event.target.className !== 'end-modal') {
-                let modal = document.getElementById('modal');
-                modal.classList.toggle('modal-shake')
-            }
-        }
-    }
-
 
     render() {
         return (
-            <div id="myModalEnd" className="end-modal" style={{ display: this.state.display }}>
-                <div id="modal" className="end-modal-content" ref={this.wrapperRef}>
-                    <div className="modal-header">
-                        <h2>Dobra robota!</h2>
-                    </div>
-                    <div className="modal-body">
-                        <p style={{ fontSize: '150%' }}>{this.props.wpm} words per minute</p>
-                        <br />
-                        <p style={{ fontSize: '150%' }}>{this.props.howManyChar} characters per second</p>
-
-                        <div>
-                            <br />
-                            <p style={{ fontSize: '100%' }}>You just typed a quote from</p>
-                            <p style={{ fontSize: '100%' }}>{this.props.source}</p>
-                        </div>
-                    </div>
-                    <Button variant="primary" size="lg" onClick={this.closeWindow}>
-                        Zakończ
-                    </Button>
-                </div>
-            </div>
+            <body>
+                <Modal
+                    className="end-modal"
+                    show={this.state.show}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                    backdrop="static"
+                    onHide={this.closeWindow}
+                >
+                    <Modal.Header>
+                        <Modal.Title id="contained-modal-title-vcenter">
+                            Dobra robota!
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>
+                            Ukończyłeś właśnie {this.props.lesson}. Kontynuuj swoją naukę by stać się jeszcze lepszym w obsłudze klawiatury.
+                            {this.props.score}
+                        </p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.closeWindow}>Zamknij</Button>
+                    </Modal.Footer>
+                </Modal>
+            </body>
         )
     }
 }

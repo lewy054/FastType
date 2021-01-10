@@ -46,7 +46,6 @@ export default class KeyboardColors extends React.Component {
         this.setState({
             size: size,
         })
-        console.log(this.state.size)
     }
 
     onButtonClick = (event) => {

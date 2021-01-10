@@ -1,0 +1,47 @@
+.generalStats {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  width: 100%;
+  text-align: center;
+}
+
+.wpmStats {
+  width: 100%;
+  margin: auto;
+  padding: 2%;
+}
+
+.userAvg {
+  width: 50%;
+  float: left;
+}
+
+.othersAvg {
+  margin-left: 50%;
+}
+
+.progressbars {
+  margin: auto;
+  width: 60%;
+  text-align: center;
+  padding: 2%;
+}
+
+.detailStatsLeft {
+  width: 75%;
+  float: left;
+  border: 1px solid gray;
+}
+
+.detailStatsRight {
+  margin-left: 15%;
+}
+
+.detailStats {
+  width: 100%;
+  text-align: center;
+}
+
+.flex-column {
+  border: 1px solid gray;
+}

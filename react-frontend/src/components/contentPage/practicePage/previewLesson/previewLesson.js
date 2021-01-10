@@ -2,7 +2,10 @@ import React from 'react';
 import lessons from '../../../../content/lessons.json';
 import HandsWithKeyboard from '../../handsWithKeyboard/handsWithKeyboard';
 import EndScreen from '../endScreen/endScreen';
+import { toast } from 'react-toastify';
+import achievements from '../../../../content/achievements.json';
 
+import 'react-toastify/dist/ReactToastify.css';
 import './previewLesson.css';
 
 
@@ -65,8 +68,46 @@ export default class PreviewLesson extends React.Component {
                 body: JSON.stringify({
                     "lesson_id": lessons[this.props.match.params.id]['id'],
                 })
+            }).then(response => {
+                if (response.status === 200) {
+                    return response.text().then(text => {
+                        if (text) {
+                            text = JSON.parse(text)
+                            let achievement = text['data']
+                            toast.info('Zdobyłeś osiągnięcie "' + achievements[achievement - 1].title + '"')
+                        }
+                    })
+                }
             }).catch(error => console.log(error))
         }
+    }
+
+    checkAchievements = async () => {
+        await fetch('/checkAchievements', {
+            method: 'GET',
+            credentials: "same-origin",
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                return response.text().then(text => {
+                    if (text) {
+                        text = JSON.parse(text)
+                        let achievement = text['data']
+                        toast.info('Zdobyłeś osiągnięcie "' + achievements[achievement - 1].title + '"', {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+                })
+            }
+        }).catch(error => console.log(error))
     }
 
     componentDidMount() {
@@ -93,7 +134,6 @@ export default class PreviewLesson extends React.Component {
                     })
                 }
                 else {
-                    console.log("zle");
                     if (div) {
                         if (!div.classList.contains('clickedWrong')) {
                             this.toggleAnimationBad();
@@ -103,10 +143,17 @@ export default class PreviewLesson extends React.Component {
                 this.toggleAnimation();
             }
             if (lessonText.length === 0) {
-                this.completeLesson();
+                if (!this.state.winScreen) {
+                    if (this.props.logged) {
+                        this.completeLesson();
+                        this.checkAchievements();
+                    }
+                }
             }
         };
     }
+
+
 
     render() {
         loadedLessonText = lessons[this.props.match.params.id]["text"];
@@ -123,10 +170,7 @@ export default class PreviewLesson extends React.Component {
                     </div>
                     <HandsWithKeyboard letter={this.getLetter()} withInstructions={true} win={this.state.winScreen} />
                 </div>
-                {this.state.winScreen ? (
-                    <div>
-                        <EndScreen wpm={93} source={'test12'} howManyChar={12} />
-                    </div>) : null}
+                <EndScreen show={this.state.winScreen} wpm={93} source={'test12'} howManyChar={12} />
             </div>
         )
     }
