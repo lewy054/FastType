@@ -121,7 +121,6 @@ export default class Charts extends Component {
     }
 
     render() {
-        console.log(this.state.lessonDone)
         if (this.state.loading) {
             return (
                 <div>

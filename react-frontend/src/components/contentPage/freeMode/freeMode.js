@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import EndScreen from '../practicePage/endScreen/endScreen'
 import HandsWithKeyboard from '../handsWithKeyboard/handsWithKeyboard';
+import Timer from '../practicePage/timer/timer';
 
 let lessonText;
 let completedText;
@@ -14,10 +15,13 @@ export default class FreeMode extends Component {
             j: 0,
             totalPercentage: 0,
             winScreen: false,
+            timerStarted: false,
+            correctChars: 0,
         }
         lessonText = '';
         completedText = '';
         loadedLessonText = '';
+        this.timer = React.createRef();
     }
 
     textLenght = (min, max) => {
@@ -111,6 +115,12 @@ export default class FreeMode extends Component {
         lessonText = loadedLessonText.slice(this.state.j);
         this.setState({})
         document.onkeydown = (e) => {
+            if (!this.state.timerStarted) {
+                this.timer.current.startTimer();
+                this.setState({
+                    timerStarted: true,
+                })
+            }
             if (lessonText.length !== 0) {
                 if (e.key === 'Shift') {
                     return;
@@ -118,11 +128,10 @@ export default class FreeMode extends Component {
                 if (e.key === this.getLetter()) {
                     completedText += this.getLetter();
                     lessonText = lessonText.substring(1);
-                    console.log("dobre")
-
                     this.setState({
                         j: this.state.j + 1,
                         totalPercentage: this.state.totalPercentage + percentage,
+                        correctChars: this.state.correctChars + 1,
                     })
                 }
                 else {
@@ -130,9 +139,16 @@ export default class FreeMode extends Component {
                 }
             }
             if (lessonText.length === 0) {
-                this.setState({
-                    winScreen: true,
-                })
+                if (!this.state.winScreen) {
+                    this.timer.current.stopTimer();
+                    this.setState({
+                        winScreen: true,
+                        timerStarted: false,
+                        wpm: this.timer.current.getWPM(),
+                        time: this.timer.current.getTime(),
+                    })
+                }
+                //TODO if logged check achievements
             }
         };
     }
@@ -141,17 +157,24 @@ export default class FreeMode extends Component {
         return (
             <div>
                 <div style={{ height: '100%' }}>
-                    <div style={{ width: '50%', left: '50%', margin: 'auto', overflow: 'auto' }}>
-                        {this.renderText()}
-                    </div>
-                    <div>
+                    <div className="text-timer">
+                        <div className="text-container">
+                            {this.renderText()}
+                        </div>
+                        <div className="timer-container">
+                            <Timer ref={this.timer} correctChars={this.state.correctChars} />
+                        </div>
                         <div style={{ width: '50%', left: '50%', margin: 'auto', overflow: 'auto' }}>
                             <ProgressBar variant="success" now={this.state.totalPercentage} />
                         </div>
+                    </div>
+
+                    <div style={{ height: '50%' }}>
                         <HandsWithKeyboard letter={this.getLetter()} />
                     </div>
                 </div>
-                <EndScreen show={this.state.winScreen}  />
+                <EndScreen show={this.state.winScreen} lesson='Tryb swobodny'
+                    score={" Osiągnąłeś wynik " + this.state.wpm + " słów na minutę. Lekcja została ukończona w " + this.state.time} />
             </div>
         )
     }

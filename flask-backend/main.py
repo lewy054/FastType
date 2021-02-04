@@ -37,14 +37,15 @@ def getUsername():
     if current_user.get_id():
         database = db.Database()
         temp_data = database.select_for_info(current_user.get_id())
-        username = temp_data[0]
-        return Response(json.dumps({'username': f'{username}'}),
-                        status=200,
-                        mimetype="application/json")
+        if(temp_data):
+            username = temp_data[0]
+            return Response(json.dumps({'username': f'{username}'}),
+                            status=200,
+                            mimetype="application/json")
+        else:
+            return Response(status=203, mimetype="application/json")
     else:
-        return Response(
-            status=203,
-            mimetype="application/json")
+        return Response(status=203, mimetype="application/json")
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -104,12 +105,9 @@ def mark_lesson_as_completed():
     if request.method == 'POST':
         database = db.Database()
         data = request.get_json()
-        lessonId = data["lesson_id"]
+        lessonId = int(data["lesson_id"])
         time = '0'
         wpm = 0
-        print('--------------------------------')
-        print(data)
-        print('------------------koniec--------------')
         if('time' in data):
             time = data["time"]
         if('wpm' in data):
@@ -117,6 +115,7 @@ def mark_lesson_as_completed():
         database.mark_lesson_as_completed(current_user.get_id(), lessonId, time, wpm)
         achievement_check = AchievementCheck()
         achiev_id = achievement_check.check_lesson_id(current_user.get_id(), lessonId)
+        print(achiev_id)
         if(achiev_id != -1):
             return Response(json.dumps({'data': achiev_id}), status=200, mimetype="application/json")
         else:
@@ -160,7 +159,7 @@ def check_achievements():
         return Response(status=204, mimetype="application/json")
 
 
-@app.route('/checkAchievementsFreeMode', methods=['GET', 'POST'])
+# @app.route('/checkAchievementsFreeMode', methods=['GET', 'POST'])
 def check_achievements_free_mode():
     achievement_check = AchievementCheck()
     return render_template('index.html')
@@ -203,16 +202,14 @@ def get_lesson_details():
     if request.method == 'POST':
         database = db.Database()
         lesson_id = request.get_json()["lessonId"]
-        print(lesson_id)
         lesson_exists = database.check_lesson_status(current_user.get_id(), lesson_id)
         if(lesson_exists):
-            user_lesson_details = database.get_lesson_details(current_user.get_id(), lesson_id)
+            user_lesson_details, database_lesson_id = database.get_lesson_details(current_user.get_id(), lesson_id)
             all_lessons = database.get_all_lesson_with_id(lesson_id)
             lower_time = higher_time = same_time = lower_wpm = higher_wpm = same_wpm = 0
-
             for one_lesson in all_lessons:
                 one_lesson = one_lesson.__dict__
-                if not one_lesson['id'] == user_lesson_details['id']:
+                if not database.get_lesson_id(one_lesson['lesson_id']) == database_lesson_id:
                     if user_lesson_details['wpm'] < one_lesson['wpm']:
                         higher_wpm += 1
                     elif user_lesson_details['wpm'] > one_lesson['wpm']:
@@ -231,9 +228,13 @@ def get_lesson_details():
             wpm_count = same_wpm + higher_wpm + lower_wpm
             if (time_count):
                 time_one_percentage = 100 / time_count
-                lower_time_percentage = lower_time * time_one_percentage
-                higher_time_percentage = higher_time * time_one_percentage
-                same_time_percentage = same_time * time_one_percentage
+                lower_time_percentage = round(lower_time * time_one_percentage)
+                higher_time_percentage = round(higher_time * time_one_percentage)
+                same_time_percentage = round(same_time * time_one_percentage)
+                total_time = lower_time_percentage + higher_time_percentage + same_time_percentage
+                if(total_time != 100):
+                    missing = 100 - total_time
+                    lower_time_percentage += missing
             else:
                 # if only a user record exists
                 lower_time_percentage = 100
@@ -241,9 +242,13 @@ def get_lesson_details():
                 same_time_percentage = 0
             if (wpm_count):
                 wpm_one_percentage = 100 / wpm_count
-                lower_wpm_percentage = lower_wpm * wpm_one_percentage
-                higher_wpm_percentage = higher_wpm * wpm_one_percentage
-                same_wpm_percentage = same_wpm * wpm_one_percentage
+                lower_wpm_percentage = round(lower_wpm * wpm_one_percentage)
+                higher_wpm_percentage = round(higher_wpm * wpm_one_percentage)
+                same_wpm_percentage = round(same_wpm * wpm_one_percentage)
+                total_wpm = lower_wpm_percentage + higher_wpm_percentage + same_wpm_percentage
+                if(total_wpm != 100):
+                    missing = 100 - total_wpm
+                    lower_wpm_percentage += missing
             else:
                 # if only a user record exists
                 lower_wpm_percentage = 100
@@ -294,4 +299,5 @@ def validate_email(email):
         return False
 
 
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run(host="localhost", port=8000, debug=True)

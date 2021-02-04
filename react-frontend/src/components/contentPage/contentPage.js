@@ -92,7 +92,7 @@ export default class ContentPage extends React.Component {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                });
+            });
             history.push('/');
         }).catch(error => console.log(error))
     }
@@ -159,13 +159,20 @@ export default class ContentPage extends React.Component {
                         <div ref={this.wrapperRef} className="sideBar">
                             <div className="navigation">
                                 <div className="sidebar">
-                                    <ul className="navigation_list">
-                                        <Link to="/"><li onClick={this.closeSideBar}><i className="fab fa-readme"></i>Wstęp</li></Link>
-                                        <Link to="/practice"><li onClick={this.closeSideBar}><i className="fas fa-pen"></i>Praktyka</li></Link>
-                                        <Link to="/achievements"><li onClick={this.closeSideBar}><i className="fas fa-trophy"></i>Osiągnięcia</li></Link>
-                                        <Link to="/freeMode"><li onClick={this.closeSideBar}><i className="fas fa-dice-three"></i>Tryb swobodny</li></Link>
-                                        <Link to="/stats"><li onClick={this.closeSideBar}><i className="fas fa-chart-pie"></i>Statystki</li></Link>
-                                    </ul>
+                                    {this.state.logged ?
+                                        <ul className="navigation_list">
+                                            <Link to="/"><li onClick={this.closeSideBar}><i className="fab fa-readme"></i>Wstęp</li></Link>
+                                            <Link to="/practice"><li onClick={this.closeSideBar}><i className="fas fa-pen"></i>Praktyka</li></Link>
+                                            <Link to="/freeMode"><li onClick={this.closeSideBar}><i className="fas fa-dice-three"></i>Tryb swobodny</li></Link>
+                                            <Link to="/achievements"><li onClick={this.closeSideBar}><i className="fas fa-trophy"></i>Osiągnięcia</li></Link>
+                                            <Link to="/stats"><li onClick={this.closeSideBar}><i className="fas fa-chart-pie"></i>Statystki</li></Link>
+                                        </ul>
+                                        : <ul className="navigation_list">
+                                            <Link to="/"><li onClick={this.closeSideBar}><i className="fab fa-readme"></i>Wstęp</li></Link>
+                                            <Link to="/practice"><li onClick={this.closeSideBar}><i className="fas fa-pen"></i>Praktyka</li></Link>
+                                            <Link to="/freeMode"><li onClick={this.closeSideBar}><i className="fas fa-dice-three"></i>Tryb swobodny</li></Link>
+                                        </ul>
+                                    }
                                     <ul className="navigation_list_bottom">
                                         {this.state.logged ?
                                             <li onClick={this.logout}><i className="fas fa-sign-out-alt"></i>Wyloguj</li> :

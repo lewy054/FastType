@@ -142,7 +142,7 @@ export default class Profile extends React.Component {
                             <Popover id="popover-contained" >
                                 <Popover.Title as="h3">Cześć {this.props.username}</Popover.Title>
                                 <Popover.Content>
-                                    Zaloguj się by mieć dostęp do profilu
+                                    Zaloguj się aby mieć dostęp do statystyk
                             </Popover.Content>
                                 <ButtonGroup style={{ width: '100%' }} >
                                     <Button onClick={this.showLogin}>Zaloguj</Button>

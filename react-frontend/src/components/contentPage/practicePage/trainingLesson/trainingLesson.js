@@ -75,7 +75,15 @@ export default class TrainingLesson extends Component {
                     if (text) {
                         text = JSON.parse(text)
                         let achievement = text['data']
-                        toast.info('Zdobyłeś osiągnięcie "' + achievements[achievement - 1].title + '"')
+                        toast.info('Zdobyłeś osiągnięcie "' + achievements[achievement - 1].title + '"', {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                     }
                 })
             }
@@ -172,12 +180,12 @@ export default class TrainingLesson extends Component {
                         <div className="timer-container">
                             <Timer ref={this.timer} correctChars={this.state.correctChars} />
                         </div>
-                    </div>
-
-                    <div style={{ height: '50%' }}>
                         <div style={{ width: '50%', left: '50%', margin: 'auto', overflow: 'auto' }}>
                             <ProgressBar variant="success" now={this.state.totalPercentage} />
                         </div>
+                    </div>
+
+                    <div style={{ height: '50%' }}>
                         <HandsWithKeyboard letter={this.getLetter()} />
                     </div>
                 </div>

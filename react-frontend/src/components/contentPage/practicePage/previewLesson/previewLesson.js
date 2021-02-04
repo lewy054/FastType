@@ -74,7 +74,15 @@ export default class PreviewLesson extends React.Component {
                         if (text) {
                             text = JSON.parse(text)
                             let achievement = text['data']
-                            toast.info('Zdobyłeś osiągnięcie "' + achievements[achievement - 1].title + '"')
+                            toast.info('Zdobyłeś osiągnięcie "' + achievements[achievement].title + '"', {
+                                position: "bottom-right",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                            });
                         }
                     })
                 }
@@ -170,7 +178,7 @@ export default class PreviewLesson extends React.Component {
                     </div>
                     <HandsWithKeyboard letter={this.getLetter()} withInstructions={true} win={this.state.winScreen} />
                 </div>
-                <EndScreen show={this.state.winScreen} wpm={93} source={'test12'} howManyChar={12} />
+                <EndScreen show={this.state.winScreen} lesson={lessons[this.props.match.params.id]["title"]} />
             </div>
         )
     }
