@@ -218,7 +218,12 @@ export default class ContentPage extends React.Component {
                                 )}
                             />
                             <Route path="/achievements" component={AchievementsList} />
-                            <Route path="/freeMode" component={FreeMode} />
+                            <Route
+                                exact path='/freeMode'
+                                render={(props) => (
+                                    <FreeMode {...props} logged={this.state.logged} />
+                                )}
+                            />
                             <Route path="/stats" component={Stats} />
                         </div>
                     </Router>

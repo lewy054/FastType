@@ -3,7 +3,10 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import EndScreen from '../practicePage/endScreen/endScreen'
 import HandsWithKeyboard from '../handsWithKeyboard/handsWithKeyboard';
 import Timer from '../practicePage/timer/timer';
+import { toast } from 'react-toastify';
+import achievements from '../../../content/achievements.json';
 
+import 'react-toastify/dist/ReactToastify.css';
 let lessonText;
 let completedText;
 let percentage;
@@ -92,16 +95,33 @@ export default class FreeMode extends Component {
 
     checkAchievementsFreeMode = async () => {
         await fetch('/checkAchievementsFreeMode', {
-            method: 'GET',
+            method: 'POST',
             credentials: "same-origin",
             headers: {
                 'Content-Type': 'application/json',
-            }
+            },
+            body: JSON.stringify({
+                "wpm": this.state.wpm,
+            })
         }).then(response => {
             if (response.status === 200) {
                 return response.text().then(text => {
                     if (text) {
-                        console.log(text)
+                        text = JSON.parse(text)
+                        for (let achievement of text) {
+                            if (achievement.id != -1) {
+                                toast.info('Zdobyłeś osiągnięcie "' + achievements[achievement.id].title + '"', {
+                                    position: "bottom-right",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
+                            }
+                        }
+
                     }
                 })
             }
@@ -135,20 +155,22 @@ export default class FreeMode extends Component {
                     })
                 }
                 else {
-                    console.log("zle");
+                    // console.log("zle");
                 }
             }
             if (lessonText.length === 0) {
                 if (!this.state.winScreen) {
-                    this.timer.current.stopTimer();
                     this.setState({
                         winScreen: true,
                         timerStarted: false,
                         wpm: this.timer.current.getWPM(),
                         time: this.timer.current.getTime(),
                     })
+                    this.timer.current.stopTimer();
+                    if (this.props.logged) {
+                        this.checkAchievementsFreeMode();
+                    }
                 }
-                //TODO if logged check achievements
             }
         };
     }

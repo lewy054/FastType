@@ -109,7 +109,6 @@ class Database():
 
     def mark_achievement_as_completed(self, id, achievement_id):
         exists = self.check_achievement_status(id, achievement_id)
-        print(exists)
         if not (exists):
             achievement = db.Achievement(achievement_id=achievement_id)
             a = db.UserAchievement(achievement_id=achievement_id, user_id=id)

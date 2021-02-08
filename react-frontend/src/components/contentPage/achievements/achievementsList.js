@@ -16,7 +16,6 @@ export default class AchievementsList extends Component {
         if (this.state.achievementStatus.hasOwnProperty(['data'])) {
             data = JSON.parse(this.state.achievementStatus['data'])
         }
-        console.log(data)
         return achievements.map((d) =>
             this.state.achievementStatus.hasOwnProperty(['data']) ?
                 <Achievement achievementDetails={d} achievementStatus={data['achievement' + (d.id)]} />

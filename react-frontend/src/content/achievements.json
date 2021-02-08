@@ -7,74 +7,80 @@
     },
     {
         "id": 1,
-        "title": "Achievement 2",
+        "title": "Dobry początek",
         "description": "Ukończ 30 lekcji",
         "image": "30"
     },
     {
         "id": 2,
-        "title": "Achievement 3",
+        "title": "Pilny uczeń",
         "description": "Ukończ 50 lekcji",
         "image": "50"
     },
     {
         "id": 3,
-        "title": "Achievement 3",
+        "title": "Write, Forrest, Write!",
         "description": "Ukończ 70 lekcji",
-        "image": "70"
+        "image": "forrest"
     },
     {
         "id": 4,
         "title": "Szybszy od strefy zamieszkania",
         "description": "Osiągnij wynik ponad 20 słów na minutę podczas wykonywania lekcji",
-        "image": "start"
+        "image": "strefa"
     },
     {
         "id": 5,
-        "title": "Achievement 5",
+        "title": "Pół setki na minutę",
         "description": "Osiągnij wynik ponad 50 słów na minutę podczas wykonywania lekcji",
-        "image": "start"
+        "image": "writing50"
     },
     {
         "id": 6,
-        "title": "Połowa za nami",
-        "description": "Ukończ połowę wszystkich dostępnych lekcji",
-        "image": "start"
+        "title": "Coraz szybciej",
+        "description": "Osiągnij wynik ponad 70 słów na minutę podczas wykonywania lekcji",
+        "image": "70"
     },
     {
         "id": 7,
-        "title": "Czas start",
-        "description": "Zakończ naukę małych liter",
-        "image": "start"
+        "title": "Połowa za nami",
+        "description": "Ukończ połowę wszystkich dostępnych lekcji",
+        "image": "half"
     },
     {
         "id": 8,
-        "title": "Czas start",
-        "description": "Zakończ naukę wielkich liter",
-        "image": "start"
+        "title": "Małe jest piękne",
+        "description": "Zakończ naukę małych liter",
+        "image": "small"
     },
     {
         "id": 9,
-        "title": "To już jest koniec",
-        "description": "Ukończ wszystkie dostępne lekcję",
-        "image": "start"
+        "title": "DUUUŻEEEE",
+        "description": "Zakończ naukę wielkich liter",
+        "image": "uppercase"
     },
     {
         "id": 10,
-        "title": "Achievement",
-        "description": "Osiągnij wynik ponad 50 słów na minutę w trybie swobodnym",
-        "image": "start"
+        "title": "To już jest koniec",
+        "description": "Ukończ wszystkie dostępne lekcję",
+        "image": "end"
     },
     {
         "id": 11,
-        "title": "Achievement",
-        "description": "Osiągnij wynik ponad 70 słów na minutę w trybie swobodnym",
-        "image": "start"
+        "title": "Pół setki na minutę (Tryb swobodny)",
+        "description": "Osiągnij wynik ponad 50 słów na minutę w trybie swobodnym",
+        "image": "writing50"
     },
     {
         "id": 12,
-        "title": "Achievement",
+        "title": "Coraz szybciej (Tryb swobodny)",
+        "description": "Osiągnij wynik ponad 70 słów na minutę w trybie swobodnym",
+        "image": "70"
+    },
+    {
+        "id": 13,
+        "title": "Struś pędziwiatr",
         "description": "Osiągnij wynik ponad 100 słów na minutę w trybie swobodnym",
-        "image": "start"
+        "image": "roadrunner"
     }
 ]

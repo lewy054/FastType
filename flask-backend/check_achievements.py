@@ -37,3 +37,35 @@ class AchievementCheck():
             if(return_code):
                 return 8
         return -1
+
+    def how_fast(self, user_id, wpm):
+        database = db.Database()
+        if (wpm > 20 and wpm <= 50):
+            return_code = database.mark_achievement_as_completed(user_id, 4)
+            if(return_code):
+                return 4
+        elif(wpm > 50 and wpm <= 70):
+            return_code = database.mark_achievement_as_completed(user_id, 5)
+            if(return_code):
+                return 5
+        elif(wpm > 70):
+            return_code = database.mark_achievement_as_completed(user_id, 6)
+            if(return_code):
+                return 6
+        return -1
+
+    def how_fast_free_mode(self, user_id, wpm):
+        database = db.Database()
+        if (wpm > 50 and wpm <= 70):
+            return_code = database.mark_achievement_as_completed(user_id, 11)
+            if(return_code):
+                return 11
+        elif(wpm > 70 and wpm <= 100):
+            return_code = database.mark_achievement_as_completed(user_id, 12)
+            if(return_code):
+                return 12
+        elif(wpm > 100):
+            return_code = database.mark_achievement_as_completed(user_id, 13)
+            if(return_code):
+                return 13
+        return -1

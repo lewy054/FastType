@@ -74,49 +74,25 @@ export default class TrainingLesson extends Component {
                 return response.text().then(text => {
                     if (text) {
                         text = JSON.parse(text)
-                        let achievement = text['data']
-                        toast.info('Zdobyłeś osiągnięcie "' + achievements[achievement - 1].title + '"', {
-                            position: "bottom-right",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                        });
+                        for (let achievement of text) {
+                            if (achievement.id != -1) {
+                                toast.info('Zdobyłeś osiągnięcie "' + achievements[achievement.id].title + '"', {
+                                    position: "bottom-right",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
+                            }
+                        }
+
                     }
                 })
             }
         }).catch(error => console.log(error))
 
-    }
-
-    checkAchievements = async () => {
-        await fetch('/checkAchievements', {
-            method: 'GET',
-            credentials: "same-origin",
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        }).then(response => {
-            if (response.status === 200) {
-                return response.text().then(text => {
-                    if (text) {
-                        text = JSON.parse(text)
-                        let achievement = text['data']
-                        toast.info('Zdobyłeś osiągnięcie "' + achievements[achievement - 1].title + '"', {
-                            position: "bottom-right",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                        });
-                    }
-                })
-            }
-        }).catch(error => console.log(error))
     }
 
 
@@ -153,7 +129,6 @@ export default class TrainingLesson extends Component {
                     this.timer.current.stopTimer();
                     if (this.props.logged) {
                         this.completeLesson();
-                        this.checkAchievements()
                     }
                 }
             }

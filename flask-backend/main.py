@@ -115,9 +115,10 @@ def mark_lesson_as_completed():
         database.mark_lesson_as_completed(current_user.get_id(), lessonId, time, wpm)
         achievement_check = AchievementCheck()
         achiev_id = achievement_check.check_lesson_id(current_user.get_id(), lessonId)
-        print(achiev_id)
-        if(achiev_id != -1):
-            return Response(json.dumps({'data': achiev_id}), status=200, mimetype="application/json")
+        achiev_id_lessons = achievement_check.how_many_done(current_user.get_id())
+        achiev_id_wpm = achievement_check.how_fast(current_user.get_id(), wpm)
+        if(achiev_id != -1 or achiev_id_lessons != -1 or achiev_id_wpm != -1):
+            return Response(json.dumps([{'id': achiev_id}, {'id':achiev_id_lessons}, {'id': achiev_id_wpm}]), status=200, mimetype="application/json")
         else:
             return Response(status=204, mimetype="application/json")
     else:
@@ -149,20 +150,22 @@ def mark_achievement_as_completed():
         return render_template('index.html')
 
 
-@app.route('/checkAchievements', methods=['GET', 'POST'])
-def check_achievements():
-    achievement_check = AchievementCheck()
-    achiev_id = achievement_check.how_many_done(current_user.get_id())
-    if(achiev_id != -1):
-        return Response(json.dumps({'data': achiev_id}), status=200, mimetype="application/json")
-    else:
-        return Response(status=204, mimetype="application/json")
 
-
-# @app.route('/checkAchievementsFreeMode', methods=['GET', 'POST'])
+@app.route('/checkAchievementsFreeMode', methods=['GET', 'POST'])
 def check_achievements_free_mode():
-    achievement_check = AchievementCheck()
-    return render_template('index.html')
+    if request.method == 'POST':
+        database = db.Database()
+        data = request.get_json()
+        wpm = data["wpm"]
+        achievement_check = AchievementCheck()
+        # achiev_id_lessons = achievement_check.how_many_done(current_user.get_id())
+        achiev_id_wpm = achievement_check.how_fast_free_mode(current_user.get_id(), wpm)
+        if(achiev_id_wpm != -1):
+            return Response(json.dumps([{'id': achiev_id_wpm}]), status=200, mimetype="application/json")
+        else:
+            return Response(status=204, mimetype="application/json")
+    else:
+        return render_template('index.html')
 
 
 @app.route('/getAvgValues', methods=['GET', 'POST'])
