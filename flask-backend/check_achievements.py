@@ -29,13 +29,13 @@ class AchievementCheck():
             if(return_code):
                 return 0
         elif(lesson_id == 45):
-            return_code = database.mark_achievement_as_completed(user_id, 7)
-            if(return_code):
-                return 7
-        elif(lesson_id == 87):
             return_code = database.mark_achievement_as_completed(user_id, 8)
             if(return_code):
                 return 8
+        elif(lesson_id == 91):
+            return_code = database.mark_achievement_as_completed(user_id, 9)
+            if(return_code):
+                return 9
         return -1
 
     def how_fast(self, user_id, wpm):

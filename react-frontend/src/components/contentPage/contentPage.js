@@ -19,6 +19,7 @@ import Login from '../login/login';
 
 import './contentPage.css'
 import Stats from './stats/stats';
+import InformationLesson from './practicePage/informationLesson/informationLesson';
 
 export default class ContentPage extends React.Component {
     constructor() {
@@ -209,6 +210,12 @@ export default class ContentPage extends React.Component {
                                 exact path='/practice/summaryLesson/:id'
                                 render={(props) => (
                                     <TrainingLesson {...props} logged={this.state.logged} />
+                                )}
+                            />
+                            <Route
+                                exact path='/practice/informationLesson/:id'
+                                render={(props) => (
+                                    <InformationLesson {...props} logged={this.state.logged} />
                                 )}
                             />
                             <Route
