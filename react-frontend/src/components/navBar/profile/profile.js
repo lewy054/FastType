@@ -20,7 +20,6 @@ export default class Profile extends React.Component {
     }
 
     componentDidMount() {
-        this.getAvgValues();
         this.setState({
             lesson_count: Object.keys(lessons).length,
             achievement_count: Object.keys(achievement).length,
@@ -28,6 +27,10 @@ export default class Profile extends React.Component {
     }
 
     handleClick = (event) => {
+        //it will true after line 35 but we want to download the data sooner
+        if(!this.state.show){
+            this.getAvgValues();
+        }
         this.setState({
             show: !this.state.show,
             target: event.target,

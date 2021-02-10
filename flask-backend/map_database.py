@@ -10,19 +10,19 @@ Session = sessionmaker(bind=engine)
 
 
 class UserAchievement(Base):
-    __tablename__ = 'UserAchievement'
+    __tablename__ = 'UsersAchievements'
     __table_args__ = {'extend_existing': True}
-    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
-    achievement_id = Column(Integer, ForeignKey('achievement.id'), primary_key=True)
+    user_id = Column(Integer, ForeignKey('Users.id'), primary_key=True)
+    achievement_id = Column(Integer, ForeignKey('Achievements.id'), primary_key=True)
     achievements = relationship("Achievement", back_populates="users")
     users = relationship("User", back_populates="achievements")
 
 
 class UserLesson(Base):
-    __tablename__ = 'UserLesson'
+    __tablename__ = 'UsersLessons'
     __table_args__ = {'extend_existing': True}
-    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
-    lesson_id = Column(Integer, ForeignKey('lesson.id'), primary_key=True)
+    user_id = Column(Integer, ForeignKey('Users.id'), primary_key=True)
+    lesson_id = Column(Integer, ForeignKey('Lessons.id'), primary_key=True)
     wpm = Column(Integer)  # extra_data
     time = Column(String(50))  # extra_data
     lessons = relationship("Lesson", back_populates="users")
@@ -30,7 +30,7 @@ class UserLesson(Base):
 
 
 class User(Base):
-    __tablename__ = 'user'
+    __tablename__ = 'Users'
     __table_args__ = {'extend_existing': True}
     id = Column(Integer, primary_key=True)
     username = Column(String)
@@ -40,14 +40,14 @@ class User(Base):
     achievements = relationship("UserAchievement", back_populates="users")
 
 class Achievement(Base):
-    __tablename__ = 'achievement'
+    __tablename__ = 'Achievements'
     __table_args__ = {'extend_existing': True}
     id = Column(Integer, primary_key=True)
     achievement_id = Column(Integer)
     users = relationship("UserAchievement", back_populates="achievements")
 
 class Lesson(Base):
-    __tablename__ = 'lesson'
+    __tablename__ = 'Lessons'
     __table_args__ = {'extend_existing': True}
     id = Column(Integer, primary_key=True)
     lesson_id = Column(Integer)
