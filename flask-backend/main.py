@@ -95,6 +95,8 @@ def register():
             return Response(json.dumps({'message': 'Hasła się nie zgadzają'}), status=400, mimetype="application/json")
         if not validate_email(email):
             return Response(json.dumps({'message': 'Podaj poprawny adres email'}), status=400, mimetype="application/json")
+        if len(password) > 72:
+            return Response(json.dumps({'message': 'Hasło za długie, maksymalna ilość znaków to 72'}), status=400, mimetype="application/json")
         return database.register_user(name, password, email)
     else:
         return Response(status=405, mimetype="application/json")

@@ -28,8 +28,10 @@ export default class Profile extends React.Component {
 
     handleClick = (event) => {
         //it will true after line 35 but we want to download the data sooner
-        if(!this.state.show){
-            this.getAvgValues();
+        if (!this.state.show) {
+            if (this.props.logged) {
+                this.getAvgValues();
+            }
         }
         this.setState({
             show: !this.state.show,
@@ -120,21 +122,21 @@ export default class Profile extends React.Component {
                                 <Popover.Content>
                                     <div style={{ width: '100%' }}>
                                         <div >
-                                            <p style={{marginBottom:'0'}}>Ilość ukończonych lekcji</p>
+                                            <p style={{ marginBottom: '0' }}>Ilość ukończonych lekcji</p>
                                             <ProgressBar>
                                                 <ProgressBar variant="success" label={this.state.done_lesson_count} now={this.state.done_lesson_count * this.getLessonsNow()} key={1} />
                                                 <ProgressBar variant="danger" label={this.state.lesson_count - this.state.done_lesson_count} now={(this.state.lesson_count - this.state.done_lesson_count) * this.getLessonsNow()} key={2} />
                                             </ProgressBar>
                                         </div>
-                                        <br/>
+                                        <br />
                                         <div >
-                                            <p style={{marginBottom:'0'}}>Ilość ukończonych osiągnięć</p>
+                                            <p style={{ marginBottom: '0' }}>Ilość ukończonych osiągnięć</p>
                                             <ProgressBar>
                                                 <ProgressBar variant="success" label={this.state.done_achievement_count} now={this.state.done_achievement_count * this.getAchievementsNow()} key={1} />
                                                 <ProgressBar variant="danger" label={this.state.achievement_count - this.state.done_achievement_count} now={(this.state.achievement_count - this.state.done_achievement_count) * this.getAchievementsNow()} key={2} />
                                             </ProgressBar>
                                         </div>
-                                        <br/>
+                                        <br />
                                     </div>
                                 </Popover.Content>
                                 <ButtonGroup style={{ width: '100%' }}>
